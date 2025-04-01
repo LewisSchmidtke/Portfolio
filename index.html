@@ -1,0 +1,970 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Science Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Reset and base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Rajdhani', sans-serif;
+        }
+
+        :root {
+            --black: #000000;
+            --white: #FFFFFF;
+            --light-gray: #f2f2f2;
+            --mid-gray: #666666;
+            --chrome-purple: #4A0072; /* Deep chrome purple accent color */
+            --neon-green: #39FF14; /* Deep chrome purple accent color */
+        }
+
+        body {
+            background-color: var(--white);
+            color: var(--black);
+            line-height: 1.6;
+            padding: 40px;
+            max-width: 1600px;
+            margin: 0 auto;
+            letter-spacing: 0.5px;
+            position: relative; /* Added for absolute positioning of main button */
+        }
+
+        /* Main button styles removed */
+
+        /* Header area with about section */
+        .header {
+            margin-bottom: 20px; /* Reduced from 60px to accommodate divider */
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .about-section {
+            max-width: 1000px;
+        }
+
+        /* Modified name section to include the tech icons */
+        .name-section {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+        }
+
+        .about-section h1 {
+            font-size: 3.5rem;
+            color: var(--black);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-right: 20px;
+        }
+
+        .about-section p {
+            margin-bottom: 30px;
+            font-size: 1.4rem;
+            line-height: 1.6;
+            color: var(--black);
+            font-weight: 300;
+            text-align: justify; /* Added justified alignment */
+        }
+
+        /* Simple continuous divider line between intro and main content */
+        .elegant-divider {
+            height: 3px;
+            background-color: var(--chrome-purple);
+            margin: 40px auto;
+            width: 90%;
+            position: relative;
+        }
+
+        /* Section heading styles */
+        .section-heading {
+            font-size: 2.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 30px;
+            text-align: left;
+            position: relative;
+            width: 100%;
+            padding-left: 5%;
+        }
+
+        .section-heading:after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 5%;
+            width: 80px;
+            height: 3px;
+            background-color: var(--chrome-purple);
+        }
+
+        /* Button and tech icons layout */
+        .interactive-row {
+            display: flex;
+            align-items: center;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+
+        /* Button styles */
+        .buttons {
+            display: flex;
+            gap: 15px;
+            margin-right: 15px;
+        }
+
+        .button {
+            padding: 12px 24px;
+            border: 1px solid var(--chrome-purple);
+            background-color: var(--chrome-purple);
+            color: var(--white);
+            font-weight: 500;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .button:hover {
+            background-color: var(--neon-green);
+            color: var(--white);
+            border-color: var(--neon-green);
+            transform: scale(1.05) translateY(-3px); /* Added transform effect */
+            box-shadow: 0 5px 15px rgba(57, 255, 20, 0.2); /* Subtle shadow on hover */
+        }
+
+        /* Tech icons section - Updated for right alignment next to name */
+        .tech-icons-wrapper {
+            display: flex;
+            align-items: center;
+            height: 48px;
+            position: relative;
+        }
+
+        .tech-bracket {
+            font-size: 32px;
+            font-weight: bold;
+        }
+
+        #left-bracket {
+            transition: margin-right 0.18s ease-out; /* Even faster transition */
+        }
+
+        .tech-icons-container {
+            display: flex;
+            align-items: center;
+            height: 48px;
+            position: relative;
+            overflow: visible;
+        }
+
+        .tech-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            margin: 0 3px;
+            position: absolute;
+            right: 0; /* Position from right edge */
+            opacity: 0;
+            transform: scale(0);
+            transition: all 0.18s cubic-bezier(0.18, 1.25, 0.4, 1.1), right 0.18s ease-out; /* Even faster transitions */
+        }
+
+        .tech-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        /* Projects section with scrolling carousel */
+        .projects-carousel-container {
+            position: relative;
+            overflow: visible;
+            margin-top: 30px;
+            height: 700px;
+            padding: 0; /* Removed padding to align with header */
+        }
+
+        .projects-carousel {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+            height: 100%;
+            position: relative;
+        }
+
+        .project-card {
+            min-width: 90%; /* Increased width from 80% to 90% */
+            height: 100%;
+            background-color: var(--white);
+            border: 2px solid var(--black);
+            display: flex;
+            flex-direction: column;
+            transition: all 0.5s ease;
+            margin: 0 5%; /* Reduced margin to accommodate wider cards */
+            opacity: 0.4;
+            transform: scale(0.9);
+            filter: grayscale(1);
+            cursor: pointer; /* Added cursor pointer for better UX */
+        }
+
+        .project-card.active {
+            opacity: 1;
+            transform: scale(1);
+            filter: grayscale(0);
+            z-index: 2;
+        }
+
+        .project-card:hover {
+            border-color: var(--neon-green);
+        }
+
+        .project-image {
+            width: 100%;
+            height: 350px; /* Fixed height */
+            object-fit: cover; /* This will maintain aspect ratio while covering the area */
+            filter: grayscale(100%);
+            transition: filter 0.3s ease;
+            display: block; /* Ensures the image is a block element */
+        }
+
+        .project-card:hover .project-image {
+            filter: grayscale(0%);
+        }
+
+        .project-content {
+            padding: 35px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            justify-content: space-between;
+            height: calc(100% - 350px); /* Remaining height after image */
+        }
+
+        /* Project description */
+        .project-description {
+            margin-bottom: 15px;
+            overflow-y: auto;
+            max-height: calc(100% - 120px); /* Reserve space for title, badges and link */
+        }
+
+        /* Tech badges container */
+        .tech-badges-container {
+            margin: 15px 0;
+        }
+
+        .project-content h3 {
+            font-size: 2.2rem;
+            margin-bottom: 15px;
+            color: var(--black);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .project-content p {
+            color: var(--black);
+            margin-bottom: 20px;
+            font-weight: 300;
+            font-size: 1.3rem;
+        }
+
+        .tech-badge {
+            display: inline-block;
+            border: 1px solid var(--black);
+            background-color: transparent;
+            color: var(--black);
+            padding: 5px 10px;
+            font-size: 0.9rem;
+            margin-right: 8px;
+            margin-top: 8px;
+            margin-bottom: 4px; /* Add bottom margin to ensure border is visible */
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+        }
+
+        .project-card:hover .tech-badge {
+            background-color: var(--neon-green);
+            color: var(--white);
+            border-color: var(--neon-green);
+        }
+
+        .project-link {
+            display: inline-block;
+            margin-top: 15px; /* Fixed margin to create space between content and link */
+            color: var(--black);
+            text-decoration: none;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            transition: color 0.3s, transform 0.3s;
+            font-size: 1.1rem;
+            align-self: flex-start;
+            bottom: 0;
+        }
+
+        .project-card:hover .project-link {
+            color: var(--neon-green);
+        }
+
+        .project-link:after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--neon-green);
+            transform: scaleX(0);
+            transform-origin: bottom right;
+            transition: transform 0.3s;
+        }
+
+        .project-link:hover:after {
+            transform: scaleX(1);
+            transform-origin: bottom left;
+        }
+
+        /* Carousel navigation buttons */
+        .carousel-nav {
+            display: flex;
+            justify-content: center;
+            margin-top: 30px;
+            gap: 15px;
+            position: relative;
+            z-index: 5;
+        }
+
+        .carousel-dot {
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            border: 2px solid var(--chrome-purple);
+            background-color: transparent;
+            cursor: pointer;
+            transition: background-color 0.3s, border-color 0.3s;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .carousel-dot.active {
+            background-color: var(--chrome-purple);
+            transform: scale(1.2);
+        }
+
+        .carousel-dot:hover {
+            background-color: var(--neon-green);
+            border-color: var(--neon-green);
+        }
+
+        /* Timeline container styles */
+        .experience-section {
+            margin-bottom: 80px;
+            position: relative;
+        }
+
+        .timeline-container {
+            position: relative;
+            min-height: 900px;
+            padding-left: 40px; /* Space for the timeline on the left */
+        }
+
+        /* Vertical line */
+        .timeline-line {
+            position: absolute;
+            left: 0;
+            top: 10px;
+            bottom: 0;
+            width: 2px;
+            background-color: var(--black);
+            height: calc(100% - 10px);
+        }
+
+        /* Timeline entries */
+        .timeline-entry {
+            position: relative;
+            margin-bottom: 60px;
+        }
+
+        /* Timeline nodes (circles) */
+        .timeline-node {
+            position: absolute;
+            left: -51px; /* Position to the left of the entry */
+            top: 30px;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            background-color: var(--chrome-purple);
+            border: 2px solid var(--chrome-purple);
+            box-shadow: 0 0 0 4px var(--white);
+            z-index: 2;
+        }
+
+        /* Experience cards */
+        .experience-card {
+            border: 2px solid var(--black);
+            padding: 25px 30px;
+            transition: all 0.3s ease;
+            background-color: var(--white);
+        }
+
+        .experience-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--neon-green);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Make tech badges change color on hover, just like project cards */
+        .experience-card:hover .tech-badge {
+            background-color: var(--neon-green);
+            color: var(--white);
+            border-color: var(--neon-green);
+        }
+
+        /* Card header styles */
+        .experience-header {
+            margin-bottom: 15px;
+            border-bottom: 1px solid var(--light-gray);
+            padding-bottom: 15px;
+        }
+
+        .experience-title {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .experience-company {
+            font-size: 1.3rem;
+            font-weight: 500;
+            margin-bottom: 5px;
+            color: var(--black);
+        }
+
+        .experience-duration {
+            font-size: 1.1rem;
+            color: var(--mid-gray);
+            font-weight: 300;
+        }
+
+        /* Card content styles */
+        .experience-content p {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            margin-bottom: 15px;
+            font-weight: 300;
+        }
+
+        /* Education card styles */
+        .education-card {
+            border-color: var(--black);
+            background-color: var(--white);
+        }
+
+        .education-card:hover {
+            border-color: var(--neon-green);
+        }
+
+        /* Responsive design */
+        @media (max-width: 1200px) {
+            .header {
+                text-align: center;
+            }
+
+            .about-section {
+                margin: 0 auto;
+            }
+
+            .name-section {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .about-section h1 {
+                margin-right: 0;
+                margin-bottom: 15px;
+            }
+
+            .interactive-row {
+                justify-content: center;
+                flex-direction: column;
+            }
+
+            .buttons {
+                margin-right: 0;
+                margin-bottom: 20px;
+                justify-content: center;
+            }
+
+            .tech-icons-wrapper {
+                margin-bottom: 15px;
+            }
+
+            .section-heading {
+                text-align: center;
+                padding-left: 0;
+            }
+
+            .section-heading:after {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+
+            .main-button {
+                right: 20px;
+                top: 15px;
+            }
+
+            .projects-carousel-container {
+                height: 800px;
+            }
+
+            .project-image {
+                height: 300px; /* Slightly smaller on mobile */
+            }
+
+            .project-content {
+                height: calc(100% - 300px);
+            }
+
+            .elegant-divider {
+                width: 90%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .timeline-container {
+                padding-left: 30px;
+            }
+
+            .timeline-node {
+                left: -36px;
+            }
+
+            .experience-title {
+                font-size: 1.5rem;
+            }
+
+            .experience-company {
+                font-size: 1.2rem;
+            }
+
+            /* Simplified divider responsive styles */
+        }
+
+        @media (max-width: 480px) {
+            .timeline-container {
+                padding-left: 25px;
+            }
+
+            .timeline-node {
+                left: -31px;
+                width: 16px;
+                height: 16px;
+            }
+
+            .experience-card {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Main button removed to declutter the page -->
+
+    <!-- Header with about section -->
+    <div class="header">
+        <div class="about-section">
+            <div class="name-section">
+                <h1>Lewis M. Schmidtke</h1>
+                <!-- Tech icons with brackets moved next to name -->
+                <div class="tech-icons-wrapper">
+                    <span class="tech-bracket" id="left-bracket">[</span>
+                    <div class="tech-icons-container" id="tech-icons">
+                        <!-- Icons will be placed here by JavaScript -->
+                    </div>
+                    <span class="tech-bracket" id="right-bracket">]</span>
+                </div>
+            </div>
+            <p>Mechanical Engineer with a B.Sc. from RWTH Aachen and 2 years of professional experience as a
+                Machine Learning and Data Engineer in various industries. Having worked with Autoencoders, Transformers,
+                Computer Vision Algorithms and other Deep Learning Models, I am familiar with the current
+                state-of-the-art in the AI environment. I build solutions that turn data into insights and
+                actionable strategies.</p>
+
+            <div class="interactive-row">
+                <div class="buttons">
+                    <a href="https://www.linkedin.com/in/lewismaximilianschmidtke/" target="_blank" class="button">LinkedIn</a>
+                    <a href="https://github.com/LewisSchmidtke" target="_blank" class="button">GitHub</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Elegant divider added between intro and main content -->
+    <div class="elegant-divider"></div>
+
+    <!-- Projects heading -->
+    <h2 class="section-heading">Projects</h2>
+
+    <!-- Projects section with carousel -->
+    <div class="projects-carousel-container" style="padding: 0 5%;">
+        <div class="projects-carousel" id="projects-carousel">
+            <!-- Project 1 -->
+            <div class="project-card">
+                <img src="images/data-science.png" alt="Project 1" class="project-image">
+                <div class="project-content">
+                    <div>
+                        <h3>US Stock Market Analysis and Forecasting</h3>
+                        <p class="project-description">
+                            Analyzed US Stock market data from 2019-2024. Conducted a holistic price development
+                            analysis of multiple tech stocks, individual comparisons between trade volume and stock price
+                            of tech stocks, as well as a volatility analysis of financial markets and selected
+                            cryptocurrencies. Forecasted the NASDAQ 100 based on previous prices and trade volume.
+                        </p>
+                        <div class="tech-badges-container">
+                            <span class="tech-badge">Python</span>
+                            <span class="tech-badge">PyTorch</span>
+                            <span class="tech-badge">Seaborn</span>
+                            <span class="tech-badge">Data Science</span>
+                            <span class="tech-badge">Machine Learning</span>
+                        </div>
+                    </div>
+                    <a href="#" class="project-link">View Project →</a>
+                </div>
+            </div>
+
+            <!-- Project 2 -->
+            <div class="project-card">
+                <img src="images/CyberattackImpact.png" alt="Project 2" class="project-image">
+                <div class="project-content">
+                    <div>
+                        <h3>Worldwide Cyberattack Data Analysis</h3>
+                        <p class="project-description">Analyzed global cyberattack data from 2015 to 2019 to discover
+                            insights into the industry and user impact. Compared rolling averages across years for various
+                            attack types and created graphics showcasing the financial loss of cyberattacks based on the
+                            attack type and target industry, to gain insight and develop solutions for the industry.
+                        </p>
+                        <div class="tech-badges-container">
+                            <span class="tech-badge">Python</span>
+                            <span class="tech-badge">Seaborn</span>
+                            <span class="tech-badge">NumPy</span>
+                            <span class="tech-badge">Data Science</span>
+                        </div>
+                    </div>
+                    <a href="#" class="project-link">View Project →</a>
+                </div>
+            </div>
+
+            <!-- Project 3 -->
+            <div class="project-card">
+                <img src="images/neural-network.png" alt="Project 3" class="project-image">
+                <div class="project-content">
+                    <div>
+                        <h3>Mathematical Neural Network Implementation</h3>
+                        <p class="project-description">
+                            Developed a Feed Forward Neural Network, only utilizing maths and no higher
+                            machine learning libraries. Additionally implemented regularization techniques in the form
+                            of early stopping to prevent overfitting. The NN was developed to be used as a classifier on
+                            the MNIST dataset.
+                        </p>
+                        <div class="tech-badges-container">
+                            <span class="tech-badge">Math</span>
+                            <span class="tech-badge">Python</span>
+                            <span class="tech-badge">NumPy</span>
+                            <span class="tech-badge">Machine Learning</span>
+                        </div>
+                    </div>
+                    <a href="#" class="project-link">View Project →</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Carousel navigation dots -->
+        <div class="carousel-nav" id="carousel-nav">
+            <button class="carousel-dot active" data-index="0"></button>
+            <button class="carousel-dot" data-index="1"></button>
+            <button class="carousel-dot" data-index="2"></button>
+        </div>
+    </div>
+
+    <!-- Professional Experience heading -->
+    <h2 class="section-heading" style="margin-top: 60px;">Professional Experience</h2>
+
+    <!-- Professional Experience section with timeline -->
+    <div class="experience-section" style="padding: 0 5%;">
+        <!-- Timeline container -->
+        <div class="timeline-container">
+            <!-- Timeline line -->
+            <div class="timeline-line"></div>
+
+            <!-- Experience Entry 3 (Most recent) -->
+            <div class="timeline-entry">
+                <div class="timeline-node"></div>
+                <div class="experience-card">
+                    <div class="experience-header">
+                        <h3 class="experience-title">Artificial Intelligence Research Intern & Thesis | GRADE 1.0 / A+</h3>
+                        <p class="experience-company">Porsche AG</p>
+                        <p class="experience-duration">APR 2024 - OCT 2024</p>
+                    </div>
+                    <div class="experience-content">
+                        <p>Developed novel deep learning models and datasets for the processing of vehicular geometries
+                            and material properties, optimizing crash safety analysis and vehicle development processes.
+                            Engineered end-to-end machine learning pipelines using Python & PyTorch, ensuring
+                            high-performance data handling and model training.
+                        </p>
+                        <div class="tech-badges-container">
+                            <span class="tech-badge">PyTorch</span>
+                            <span class="tech-badge">Computer Vision</span>
+                            <span class="tech-badge">Azure ML</span>
+                            <span class="tech-badge">Data Science</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Experience Entry 2 -->
+            <div class="timeline-entry">
+                <div class="timeline-node"></div>
+                <div class="experience-card">
+                    <div class="experience-header">
+                        <h3 class="experience-title">Machine Learning Research Intern</h3>
+                        <p class="experience-company">Bosch Engineering GmbH</p>
+                        <p class="experience-duration">OCT 2023 - MAR 2024</p>
+                    </div>
+                    <div class="experience-content">
+                        <p>Developed AI models to analyze time-series data from vehicle sensors with enhanced code
+                            modularity and efficiency, improving computational performance and scalability in
+                            AI-driven vehicle analysis.</p>
+                        <div class="tech-badges-container">
+                            <span class="tech-badge">PyTorch</span>
+                            <span class="tech-badge">Matlab</span>
+                            <span class="tech-badge">Time-Series-Data</span>
+                            <span class="tech-badge">Autoencoders</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Experience Entry 1 (Oldest) -->
+            <div class="timeline-entry">
+                <div class="timeline-node"></div>
+                <div class="experience-card">
+                    <div class="experience-header">
+                        <h3 class="experience-title">Computer Vision Research Thesis | GRADE 1.3 / A</h3>
+                        <p class="experience-company">RWTH Aachen University</p>
+                        <p class="experience-duration">APR 2021 - SEP 2022</p>
+                    </div>
+                    <div class="experience-content">
+                        <p>
+                            Designed an AI-powered object detection system, improving robotic perception in industrial
+                            assembly by 30%. Developed path-planning algorithms in ROS, enabling collaborative robots
+                            to navigate complex environments with greater accuracy.
+                        </p>
+                        <div class="tech-badges-container">
+                            <span class="tech-badge">ONNX</span>
+                            <span class="tech-badge">Computer Vision</span>
+                            <span class="tech-badge">Robotic Systems</span>
+                            <span class="tech-badge">NumPy</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Education Section -->
+            <div class="timeline-entry">
+                <div class="timeline-node"></div>
+                <div class="experience-card education-card">
+                    <div class="experience-header">
+                        <h3 class="experience-title">B.Sc. Mechanical Engineering - Automotive Engineering</h3>
+                        <p class="experience-company">RWTH Aachen University</p>
+                        <p class="experience-duration">OCT 2019 - MAR 2025</p>
+                    </div>
+                    <div class="experience-content">
+                        <p>
+                            Software: Matlab, CAD-Software (Mainly NX), Dymola, Java
+                            </br>
+                            Relevant Courses: OOP Programming in Java, Simulation Theory and Control Theory
+                        </p>
+                        <div class="tech-badges-container">
+                            <span class="tech-badge">Computer-Aided-Design</span>
+                            <span class="tech-badge">Problem-Solving</span>
+                            <span class="tech-badge">High Level Mathematics</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Tech icons with local image paths
+        const techIcons = [
+            { name: 'Python', image: 'images/python-icon.png' },
+            { name: 'MATLAB', image: 'images/matlab-icon.png' },
+            { name: 'PyTorch', image: 'images/pytorch-icon.png' },
+            { name: 'TensorFlow', image: 'images/tensorflow-icon.png' },
+            { name: 'scikit-learn', image: 'images/scikit-learn-icon.png' },
+            { name: 'Pandas', image: 'images/pandas-icon.png' },
+            { name: 'NumPy', image: 'images/numpy-icon.png' },
+            { name: 'Azure', image: 'images/azure-icon.png' },
+        ];
+
+        // Function to create and animate tech icons with right-aligned start
+        function setupTechIcons() {
+            const container = document.getElementById('tech-icons');
+            const leftBracket = document.getElementById('left-bracket');
+            const rightBracket = document.getElementById('right-bracket');
+            const iconWidth = 46; // Icon width + margin
+
+            // Start with brackets close together
+            leftBracket.style.marginRight = '5px';
+
+            // Create icons but keep them invisible and at position 0
+            techIcons.forEach((icon, index) => {
+                const iconElement = document.createElement('div');
+                iconElement.className = 'tech-icon';
+
+                const img = document.createElement('img');
+                img.src = icon.image;
+                img.alt = icon.name;
+
+                iconElement.appendChild(img);
+                container.appendChild(iconElement);
+
+                // Set initial position - all stacked at the right
+                iconElement.style.right = '0px';
+            });
+
+            // Get all created icons
+            const iconElements = document.querySelectorAll('.tech-icon');
+
+            // Function to animate icons sequentially with faster animation
+            function animateNextIcon(index) {
+                if (index >= iconElements.length) return;
+
+                // Calculate new space needed for the bracket
+                const bracketOffset = (index + 1) * iconWidth;
+
+                // Make current icon visible with pop animation faster
+                setTimeout(() => {
+                    // Move left bracket to make space
+                    leftBracket.style.marginRight = bracketOffset + 'px';
+
+                    // Animate the icon
+                    iconElements[index].style.opacity = '1';
+                    iconElements[index].style.transform = 'scale(1.2)';
+
+                    // Settle back to normal size quicker
+                    setTimeout(() => {
+                        iconElements[index].style.transform = 'scale(1)';
+                    }, 70); // Further reduced from 100ms
+
+                    // Position all icons based on their index from the right
+                    for (let i = 0; i <= index; i++) {
+                        const position = (index - i) * iconWidth;
+                        iconElements[i].style.right = position + 'px';
+                    }
+
+                    // Animate the next icon after a shorter delay
+                    setTimeout(() => {
+                        animateNextIcon(index + 1);
+                    }, 150); // Further reduced from 200ms
+                }, 50); // Further reduced from 80ms
+            }
+
+            // Start the animation sequence with a shorter initial delay
+            setTimeout(() => {
+                animateNextIcon(0);
+            }, 200); // Further reduced from 300ms
+        }
+
+        // Carousel functionality
+        let currentIndex = 0;
+        const totalProjects = 3;
+
+        function setupCarousel() {
+            const carousel = document.getElementById('projects-carousel');
+            const dots = document.querySelectorAll('.carousel-dot');
+            const cards = document.querySelectorAll('.project-card');
+
+            // Start on the second project (index 1)
+            currentIndex = 1;
+
+            // Add active class to second card
+            cards[1].classList.add('active');
+
+            // Initialize carousel
+            updateCarousel();
+
+            // Set up dot navigation
+            dots.forEach(dot => {
+                dot.addEventListener('click', () => {
+                    currentIndex = parseInt(dot.getAttribute('data-index'));
+                    updateCarousel();
+                });
+            });
+
+            // Add click handlers to non-active projects
+            cards.forEach((card, index) => {
+                card.addEventListener('click', () => {
+                    // Only navigate if clicking on a non-active card
+                    if (index !== currentIndex) {
+                        currentIndex = index;
+                        updateCarousel();
+                    }
+                });
+            });
+        }
+
+        function updateCarousel() {
+            const carousel = document.getElementById('projects-carousel');
+            const cards = document.querySelectorAll('.project-card');
+            const dots = document.querySelectorAll('.carousel-dot');
+
+            // Calculate positions
+            const offset = currentIndex * -100;
+            carousel.style.transform = `translateX(${offset}%)`;
+
+            // Update active states
+            cards.forEach((card, index) => {
+                card.classList.remove('active');
+
+                // Handle wraparound for the visible side cards
+                if (index === currentIndex) {
+                    card.classList.add('active');
+                }
+            });
+
+            // Update active dot
+            dots.forEach((dot, index) => {
+                if (index === currentIndex) {
+                    dot.classList.add('active');
+                } else {
+                    dot.classList.remove('active');
+                }
+            });
+        }
+
+        // Run when DOM is loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            setupTechIcons();
+            setupCarousel();
+        });
+    </script>
+</body>
+</html>
