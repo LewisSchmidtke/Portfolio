@@ -1,0 +1,910 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>US Stock Market Analysis and Forecasting | Lewis M. Schmidtke</title>
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Reset and base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Rajdhani', sans-serif;
+        }
+
+        :root {
+            --black: #000000;
+            --white: #FFFFFF;
+            --light-gray: #f2f2f2;
+            --mid-gray: #666666;
+            --chrome-purple: #4A0072; /* Deep chrome purple accent color */
+            --neon-green: #39FF14; /* Neon green accent color */
+            --light-purple: #8a2be2; /* Light purple for accent */
+        }
+
+        body {
+            background-color: var(--white);
+            color: var(--black);
+            line-height: 1.6;
+            padding: 40px;
+            max-width: 1600px;
+            margin: 0 auto;
+            letter-spacing: 0.5px;
+            position: relative;
+        }
+        footer {
+            text-align: center;
+            font-size: 14px;
+            color: var(--chrome-purple); /* Light gray to keep it subtle */
+            padding: 10px;
+            position: relative;
+            bottom: 10px;
+            width: 100%;
+        }
+
+        /* Navigation and back button */
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+        }
+
+        .back-button {
+            padding: 12px 24px;
+            border: 1px solid var(--chrome-purple);
+            background-color: var(--chrome-purple);
+            color: var(--white);
+            font-weight: 500;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .back-button:hover {
+            background-color: var(--neon-green);
+            color: var(--white);
+            border-color: var(--neon-green);
+            transform: scale(1.05) translateY(-3px);
+            box-shadow: 0 5px 15px rgba(57, 255, 20, 0.2);
+        }
+
+        /* Hero section with image and title overlay */
+        .project-hero {
+            position: relative;
+            height: 500px;
+            margin-bottom: 60px;
+            overflow: hidden;
+            border: 2px solid var(--black);
+        }
+
+        .hero-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.7);
+            transition: all 0.5s ease;
+        }
+
+        .project-hero:hover .hero-image {
+            filter: brightness(0.8);
+            transform: scale(1.02);
+        }
+
+        .hero-content {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 40px;
+            background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 100%);
+            color: var(--white);
+        }
+
+        .project-title {
+            font-size: 3.5rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .project-subtitle {
+            font-size: 1.5rem;
+            font-weight: 300;
+            margin-bottom: 20px;
+            max-width: 800px;
+        }
+
+        /* Tech badges on hero */
+        .hero-badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .tech-badge {
+            display: inline-block;
+            border: 1px solid var(--white);
+            background-color: rgba(0,0,0,0.3);
+            color: var(--white);
+            padding: 8px 16px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .tech-badge:hover {
+            background-color: var(--neon-green);
+            color: var(--black);
+            border-color: var(--neon-green);
+            transform: translateY(-3px);
+        }
+
+        /* Main content layout */
+        .project-container {
+            display: grid;
+            grid-template-columns: 1fr 350px;
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+
+        /* Main content area */
+        .project-content {
+            padding-right: 20px;
+        }
+
+        .content-section {
+            margin-bottom: 50px;
+        }
+
+        .section-heading {
+            font-size: 2.5rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 25px;
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .section-heading:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 80px;
+            height: 3px;
+            background-color: var(--chrome-purple);
+        }
+
+        .content-text {
+            font-size: 1.2rem;
+            line-height: 1.7;
+            margin-bottom: 20px;
+            font-weight: 300;
+            text-align: justify;
+        }
+
+        /* Sidebar area */
+        .project-sidebar {
+            position: sticky;
+            top: 40px;
+            align-self: start;
+        }
+
+        .sidebar-box {
+            border: 2px solid var(--black);
+            padding: 25px;
+            margin-bottom: 30px;
+        }
+
+        .sidebar-heading {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .sidebar-list {
+            list-style-type: none;
+        }
+
+        .sidebar-list li {
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+            font-weight: 300;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .sidebar-list li:before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--chrome-purple);
+        }
+
+        /* Stats counter box */
+        .stats-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 15px 10px;
+            border: 1px solid var(--mid-gray);
+        }
+
+        .stat-number {
+            font-size: 2.2rem;
+            font-weight: 600;
+            color: var(--neon-green);
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            font-weight: 500;
+            text-transform: uppercase;
+        }
+
+        /* Data visualization gallery */
+        .viz-gallery {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-top: 40px;
+            margin-bottom: 50px;
+        }
+
+        .viz-item {
+            border: 2px solid var(--black);
+            transition: transform 0.3s ease, border-color 0.3s ease;
+            overflow: hidden;
+            position: relative;
+            height: 300px;
+        }
+
+        .viz-item-bottom {
+            grid-column: 1 / span 2;
+        }
+
+        .viz-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: all 0.5s ease;
+        }
+
+        .viz-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 15px;
+            background-color: rgba(0,0,0,0.7);
+            color: var(--white);
+            font-size: 1rem;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+
+        .viz-item:hover {
+            transform: translateY(-5px);
+            border-color: var(--neon-green);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        .viz-item:hover .viz-image {
+            transform: scale(1.05);
+        }
+
+        .viz-item:hover .viz-caption {
+            transform: translateY(0);
+        }
+
+        /* Key findings section with cards */
+        .findings-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .finding-card {
+            border: 2px solid var(--black);
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .finding-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--neon-green);
+            opacity: 1;
+            margin-bottom: 15px;
+        }
+
+        .finding-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+        }
+
+        .finding-text {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            font-weight: 300;
+        }
+
+        /* Methodology list */
+        .methodology-list {
+            font-size: 1.2rem;
+            margin-left: 40px;
+            margin-bottom: 30px;
+            font-weight: 300;
+        }
+
+        .methodology-list li {
+            margin-bottom: 10px;
+        }
+
+        /* Conclusion section */
+        .conclusion {
+            background-color: var(--light-gray);
+            padding: 40px;
+            margin: 60px 0;
+            border-left: 3px solid var(--chrome-purple);
+        }
+
+        .conclusion h3 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        /* Footer section */
+        .project-footer {
+            margin-top: 80px;
+            padding-top: 40px;
+            border-top: 1px solid var(--light-gray);
+            text-align: center;
+        }
+
+        .project-links {
+            margin-bottom: 30px;
+        }
+
+        .project-link-button {
+            padding: 12px 24px;
+            border: 1px solid var(--chrome-purple);
+            background-color: var(--chrome-purple);
+            color: var(--white);
+            font-weight: 500;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin: 0 10px;
+        }
+
+        .project-link-button:hover {
+            background-color: var(--neon-green);
+            color: var(--white);
+            border-color: var(--neon-green);
+            transform: scale(1.05) translateY(-3px);
+            box-shadow: 0 5px 15px rgba(57, 255, 20, 0.2);
+        }
+
+        .next-prev-navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+
+        .prev-project, .next-project {
+            display: inline-block;
+            color: var(--black);
+            text-decoration: none;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            transition: color 0.3s;
+            font-size: 1.2rem;
+        }
+
+        .prev-project:hover, .next-project:hover {
+            color: var(--neon-green);
+        }
+
+        .prev-project:after, .next-project:after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--neon-green);
+            transform: scaleX(0);
+            transform-origin: bottom right;
+            transition: transform 0.3s;
+        }
+
+        .prev-project:hover:after, .next-project:hover:after {
+            transform: scaleX(1);
+            transform-origin: bottom left;
+        }
+
+        /* Image lightbox styles */
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .lightbox.active {
+            display: flex;
+        }
+
+        .lightbox-image {
+            max-width: 90%;
+            max-height: 85vh;
+            object-fit: contain;
+            border: 2px solid var(--white);
+        }
+
+        .lightbox-caption {
+            color: var(--white);
+            font-size: 1.2rem;
+            margin-top: 20px;
+            max-width: 80%;
+            text-align: center;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            font-size: 2.5rem;
+            color: var(--white);
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .lightbox-close:hover {
+            color: var(--neon-green);
+        }
+
+        /* Responsive styles */
+        @media (max-width: 1200px) {
+            .project-container {
+                grid-template-columns: 1fr;
+            }
+
+            .project-sidebar {
+                position: static;
+                order: -1;
+            }
+
+            .sidebar-box {
+                margin-bottom: 30px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .project-hero {
+                height: 400px;
+            }
+
+            .project-title {
+                font-size: 2.8rem;
+            }
+
+            .findings-container {
+                grid-template-columns: 1fr;
+            }
+
+            .viz-gallery {
+                grid-template-columns: 1fr;
+            }
+
+            .viz-item-bottom {
+                grid-column: auto;
+            }
+
+            .next-prev-navigation {
+                flex-direction: column;
+                gap: 20px;
+                align-items: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 20px;
+            }
+
+            .project-hero {
+                height: 350px;
+            }
+
+            .project-title {
+                font-size: 2.2rem;
+            }
+
+            .hero-content {
+                padding: 20px;
+            }
+
+            .sidebar-box {
+                padding: 15px;
+            }
+
+            .stat-number {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <div class="navigation">
+        <a href="index.html" class="back-button">← Back to Portfolio</a>
+        <div class="social-links">
+            <!-- You can add social links here if needed -->
+        </div>
+    </div>
+
+    <!-- Hero section with image and overlay text -->
+    <section class="project-hero">
+        <img src="images/StockPriceRollingAVG(Tech).png" alt="US Stock Market Analysis and Forecasting" class="hero-image">
+        <div class="hero-content">
+            <h1 class="project-title">US Stock Market Analysis and Forecasting</h1>
+            <p class="project-subtitle">Analyzing and forecasting US stock market trends with a focus on tech stocks, market volatility, and price prediction</p>
+            <div class="hero-badges">
+                <span class="tech-badge">Python</span>
+                <span class="tech-badge">PyTorch</span>
+                <span class="tech-badge">Seaborn</span>
+                <span class="tech-badge">Data Science</span>
+                <span class="tech-badge">Machine Learning</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main content grid with sidebar -->
+    <div class="project-container">
+        <!-- Main content area -->
+        <div class="project-content">
+            <div class="content-section">
+                <h2 class="section-heading">Project Overview</h2>
+                <p class="content-text">
+                    This project explores US Stock market data from 2019-2024, focusing on in-depth analysis of tech stock performance, market trends, and future predictions. Using advanced data science techniques and machine learning models, I conducted holistic price development analyses of multiple tech stocks, individual comparisons between trade volume and stock prices, and volatility analyses of financial markets including selected cryptocurrencies.
+                </p>
+                <p class="content-text">
+                    The financial markets generate vast amounts of data every day, and making sense of these patterns requires both technical expertise and analytical insight. This project aimed to leverage data science and machine learning techniques to extract meaningful patterns from US stock market data, with a particular focus on technology stocks during the volatile 2019-2024 period.
+                </p>
+                <p class="content-text">
+                    By analyzing historical price movements, trading volumes, and market volatility across different sectors, I developed models that could identify correlations between different market behaviors and potentially predict future movements. This project demonstrates the power of data-driven approaches in understanding financial markets and making informed investment decisions.
+                </p>
+            </div>
+
+            <div class="content-section">
+                <h2 class="section-heading">Methodology</h2>
+                <p class="content-text">
+                    The analysis was conducted using Python with libraries including Pandas for data manipulation, Seaborn and Matplotlib for visualization, and PyTorch for building predictive models. The methodology included:
+                </p>
+                <ul class="methodology-list">
+                    <li>Data collection to gather historical stock prices, trading volumes, and market indices</li>
+                    <li>Exploratory data analysis to identify trends, correlations, and anomalies</li>
+                    <li>Data preprocessing for the machine learning applications</li>
+                    <li>Development of machine learning models for price forecasting using PyTorch - FFNN and LSTM</li>
+                </ul>
+            </div>
+
+            <!-- Data visualizations gallery -->
+            <div class="content-section">
+                <h2 class="section-heading">Key Visualizations</h2>
+                <p class="content-text">
+                    Visualizations played a crucial role in understanding market dynamics and communicating findings.
+                    The project produced several insightful visualizations that reveal patterns in stock market behavior.
+                </p>
+
+                <div class="viz-gallery">
+                    <div class="viz-item">
+                        <img src="images/Price_vs_Volume_(Tech).png" alt="Tech Stock Price Comparison" class="viz-image">
+                        <div class="viz-caption">Comparative analysis of major tech stock price and trade movements (2019-2024)</div>
+                    </div>
+                    <div class="viz-item">
+                        <img src="images/Volatility_Tech+Crypto.png" alt="Market Volatility Analysis" class="viz-image">
+                        <div class="viz-caption">Volatility analysis of traditional financial markets compared to cryptocurrencies</div>
+                    </div>
+                    <div class="viz-item viz-item-bottom">
+                        <img src="images/real_vs_predicted_price_nasdaq100.png" alt="NASDAQ 100 Forecast" class="viz-image">
+                        <div class="viz-caption">NASDAQ 100 forecasting model showing predicted vs. actual price movements</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content-section">
+                <h2 class="section-heading">Key Findings</h2>
+                <p class="content-text">
+                    The analysis revealed several key insights into market behavior during the 2019-2024 period:
+                </p>
+
+                <div class="findings-container">
+                    <div class="finding-card">
+                        <div class="finding-number">01</div>
+                        <h3 class="finding-title">Nvidia Growth</h3>
+                        <p class="finding-text">The Nvidia stock price has shown a noticeable increase since the pandemic,
+                            accompanied by a significantly higher trade volume, indicating increased public interest.
+                        </p>
+                    </div>
+                    <div class="finding-card">
+                        <div class="finding-number">02</div>
+                        <h3 class="finding-title">Market Volatility</h3>
+                        <p class="finding-text">Even though a general upwards trend in stock prices is noticeable,
+                            investing at the wrong time could lead to significant losses. Further underlining the
+                            importance of long term investments.
+                        </p>
+                    </div>
+                    <div class="finding-card">
+                        <div class="finding-number">03</div>
+                        <h3 class="finding-title">Cryptocurrency</h3>
+                        <p class="finding-text">Compared to traditional financial markets, cryptocurrencies have a
+                            considerably higher volatility making them higher risk investments.
+                        </p>
+                    </div>
+                    <div class="finding-card">
+                        <div class="finding-number">04</div>
+                        <h3 class="finding-title">Meta Rebranding</h3>
+                        <p class="finding-text">Shortly after rebranding from Facebook to Meta, company stock kept
+                            plummeting. This was further supported by weak earnings reports,
+                            higher competition through TikTok and privacy updates.
+                        </p>
+                    </div>
+                    <div class="finding-card">
+                        <div class="finding-number">05</div>
+                        <h3 class="finding-title">Machine Learning</h3>
+                        <p class="finding-text">Given the past prices and trade volumes of a stock or financial market,
+                            makes it possible to predict the following day to an acceptable accuracy.
+                            Further showing the improvements in the ML/AI space.
+                        </p>
+                    </div>
+                    <div class="finding-card">
+                        <div class="finding-number">06</div>
+                        <h3 class="finding-title">Apple stability</h3>
+                        <p class="finding-text">Apple has one of the least volatile stocks on the market.
+                            Low price fluctuations as well as low trade volumes indicate potential long-term investments.
+                            A steady price growth without major dips are key factors when looking at long-term holding.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="conclusion">
+                <h3>Conclusion</h3>
+                <p class="content-text" style="margin-bottom: 0;">
+                    This project demonstrates the value of applying data science techniques to financial market analysis.
+                    By combining statistical methods with machine learning approaches, it was possible to extract
+                    meaningful patterns from complex market data and build predictive models with practical applications.
+                    The insights gained from this analysis could help investors make more informed decisions and
+                    understand market dynamics in greater depth.
+                    Future work could expand this analysis to include sentiment data from news and social media to
+                    further enhance predictive capabilities.
+                </p>
+            </div>
+        </div>
+
+        <!-- Sidebar area -->
+        <div class="project-sidebar">
+            <div class="sidebar-box">
+                <h3 class="sidebar-heading">Project Stats</h3>
+                <div class="stats-container">
+                    <div class="stat-item">
+                        <div class="stat-number">4</div>
+                        <div class="stat-label">Years of Data</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">8</div>
+                        <div class="stat-label">Stocks Analyzed</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">45K+</div>
+                        <div class="stat-label">Data Points</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">76%</div>
+                        <div class="stat-label">Model Accuracy</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="sidebar-box">
+                <h3 class="sidebar-heading">Tools Used</h3>
+                <ul class="sidebar-list">
+                    <li>Programming Language: Python</li>
+                    <li>PyTorch for ML model development</li>
+                    <li>Pandas for data manipulation</li>
+                    <li>NumPy for numerical calculations</li>
+                    <li>Seaborn for statistical visualization</li>
+                    <li>Matplotlib for custom plotting</li>
+                </ul>
+            </div>
+
+            <div class="sidebar-box">
+                <h3 class="sidebar-heading">Focus Areas</h3>
+                <ul class="sidebar-list">
+                    <li>Tech Stock Performance Analysis</li>
+                    <li>Trade Volume Correlations</li>
+                    <li>Market Volatility</li>
+                    <li>Cryptocurrency Volatility</li>
+                    <li>Index Movement Forecasting</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Project footer with links -->
+    <div class="project-footer">
+        <div class="project-links">
+            <a href="https://github.com/LewisSchmidtke/DataScience_ML_Portfolio/blob/main/Stock_market.py" target="_blank" class="project-link-button">View Code on GitHub</a>
+        </div>
+        <div class="next-prev-navigation">
+            <a href="project2.html" class="prev-project">← Previous: Worldwide Cyberattack Data Analysis</a>
+            <a href="project3.html" class="next-project">Next: Mathematical Neural Network Implementation →</a>
+        </div>
+    </div>
+
+    <!-- Lightbox for enlarged images -->
+    <div class="lightbox" id="lightbox">
+        <div class="lightbox-close" id="lightbox-close">&times;</div>
+        <img src="" alt="" class="lightbox-image" id="lightbox-image">
+        <div class="lightbox-caption" id="lightbox-caption"></div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Lightbox functionality
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImage = document.getElementById('lightbox-image');
+            const lightboxCaption = document.getElementById('lightbox-caption');
+            const lightboxClose = document.getElementById('lightbox-close');
+
+            // Get all visualization images and hero image
+            const vizItems = document.querySelectorAll('.viz-item');
+            const heroSection = document.querySelector('.project-hero');
+
+            // Add click event to each visualization item
+            vizItems.forEach(item => {
+                item.addEventListener('click', () => {
+                    const img = item.querySelector('.viz-image');
+                    const caption = item.querySelector('.viz-caption').textContent;
+
+                    // Set lightbox content
+                    lightboxImage.src = img.src;
+                    lightboxImage.alt = img.alt;
+                    lightboxCaption.textContent = caption;
+
+                    // Show lightbox
+                    lightbox.classList.add('active');
+                    document.body.style.overflow = 'hidden'; // Prevent scrolling when lightbox is open
+                });
+            });
+
+            // Add click event for hero image
+            if (heroSection) {
+                heroSection.addEventListener('click', () => {
+                    const img = heroSection.querySelector('.hero-image');
+
+                    // Set lightbox content
+                    lightboxImage.src = img.src;
+                    lightboxImage.alt = img.alt;
+                    lightboxCaption.textContent = "US Stock Market Analysis Dashboard";
+
+                    // Show lightbox
+                    lightbox.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                });
+            }
+
+            // Close lightbox when clicking the close button
+            lightboxClose.addEventListener('click', () => {
+                lightbox.classList.remove('active');
+                document.body.style.overflow = ''; // Restore scrolling
+            });
+
+            // Close lightbox when clicking outside the image
+            lightbox.addEventListener('click', (e) => {
+                if (e.target === lightbox) {
+                    lightbox.classList.remove('active');
+                    document.body.style.overflow = ''; // Restore scrolling
+                }
+            });
+
+            // Close lightbox with Escape key
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && lightbox.classList.contains('active')) {
+                    lightbox.classList.remove('active');
+                    document.body.style.overflow = ''; // Restore scrolling
+                }
+            });
+
+            // Animate stats counting when they come into view
+            const statNumbers = document.querySelectorAll('.stat-number');
+
+            const animateValue = (obj, start, end, duration) => {
+                let startTimestamp = null;
+                const step = (timestamp) => {
+                    if (!startTimestamp) startTimestamp = timestamp;
+                    const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+
+                    let value = Math.floor(progress * (end - start) + start);
+
+                    // Add '+' to values that end with 'M' or 'K'
+                    if (obj.textContent.includes('M')) {
+                        obj.textContent = value + 'M+';
+                    } else if (obj.textContent.includes('K')) {
+                        obj.textContent = value + 'K+';
+                    } else if (obj.textContent.includes('%')) {
+                        obj.textContent = value + '%';
+                    } else {
+                        obj.textContent = value;
+                    }
+
+                    if (progress < 1) {
+                        window.requestAnimationFrame(step);
+                    }
+                };
+                window.requestAnimationFrame(step);
+            };
+
+            // Intersection Observer to trigger animations when the stats come into view
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        statNumbers.forEach(statNumber => {
+                            const endValue = parseInt(statNumber.textContent);
+                            animateValue(statNumber, 0, endValue, 1500);
+                        });
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.5 });
+
+            // Observe the stats container
+            const statsContainer = document.querySelector('.stats-container');
+            if (statsContainer) {
+                observer.observe(statsContainer);
+            }
+        });
+    </script>
+</body>
+<footer>
+    © 2025 Lewis M. Schmidtke. All Rights Reserved.
+</footer>
+</html>

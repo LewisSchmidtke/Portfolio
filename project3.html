@@ -1,0 +1,943 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mathematical Neural Network Implementation | Lewis M. Schmidtke</title>
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Reset and base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Rajdhani', sans-serif;
+        }
+
+        :root {
+            --black: #000000;
+            --white: #FFFFFF;
+            --light-gray: #f2f2f2;
+            --mid-gray: #666666;
+            --chrome-purple: #4A0072; /* Deep chrome purple accent color */
+            --neon-green: #39FF14; /* Neon green accent color */
+        }
+        footer {
+            text-align: center;
+            font-size: 14px;
+            color: var(--chrome-purple); /* Light gray to keep it subtle */
+            padding: 10px;
+            position: relative;
+            bottom: 10px;
+            width: 100%;
+        }
+
+        body {
+            background-color: var(--white);
+            color: var(--black);
+            line-height: 1.6;
+            padding: 40px;
+            max-width: 1600px;
+            margin: 0 auto;
+            letter-spacing: 0.5px;
+            position: relative;
+        }
+        footer {
+            text-align: center;
+            font-size: 14px;
+            color: var(--chrome-purple); /* Light gray to keep it subtle */
+            padding: 10px;
+            position: absolute;
+            bottom: 10px;
+            width: 100%;
+        }
+
+        /* Navigation and back button */
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+        }
+
+        .back-button {
+            padding: 12px 24px;
+            border: 1px solid var(--chrome-purple);
+            background-color: var(--chrome-purple);
+            color: var(--white);
+            font-weight: 500;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .back-button:hover {
+            background-color: var(--neon-green);
+            color: var(--white);
+            border-color: var(--neon-green);
+            transform: scale(1.05) translateY(-3px);
+            box-shadow: 0 5px 15px rgba(57, 255, 20, 0.2);
+        }
+
+
+        /* Project header */
+        .project-header {
+            text-align: center;
+            margin-bottom: 60px;
+            padding: 40px 0;
+            position: relative;
+        }
+
+        .project-title {
+            font-size: 4rem;
+            color: var(--black);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 30px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .project-title:after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: var(--chrome-purple);
+        }
+
+
+        /* Tech badges on hero */
+
+        .tech-badges-container {
+            margin: 30px 0;
+            text-align: center;
+        }
+
+        .tech-badge {
+            display: inline-block;
+            border: 1px solid var(--black);
+            background-color: transparent;
+            color: var(--black);
+            padding: 8px 16px;
+            font-size: 1.1rem;
+            margin-right: 10px;
+            margin-top: 10px;
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+        }
+
+        .tech-badge:hover {
+            background-color: var(--neon-green);
+            color: var(--white);
+            border-color: var(--neon-green);
+        }
+
+        /* Main content area */
+        .project-content {
+            max-width: 1200px;
+            margin: 0 auto 80px;
+        }
+
+        .content-section {
+            margin-bottom: 50px;
+        }
+
+        .section-heading {
+            font-size: 2.5rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 25px;
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .section-heading:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 80px;
+            height: 3px;
+            background-color: var(--chrome-purple);
+        }
+
+        .content-text {
+            font-size: 1.2rem;
+            line-height: 1.7;
+            margin-bottom: 20px;
+            font-weight: 300;
+            text-align: justify;
+        }
+
+        /* Sidebar area */
+        .project-sidebar {
+            position: sticky;
+            top: 40px;
+            align-self: start;
+        }
+
+        .sidebar-box {
+            border: 2px solid var(--black);
+            padding: 25px;
+            margin-bottom: 30px;
+        }
+
+        .sidebar-heading {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .sidebar-list {
+            list-style-type: none;
+        }
+
+        .sidebar-list li {
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+            font-weight: 300;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .sidebar-list li:before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--chrome-purple);
+        }
+
+        /* Stats counter box */
+        .stats-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 15px 10px;
+            border: 1px solid var(--mid-gray);
+        }
+
+        .stat-number {
+            font-size: 2.2rem;
+            font-weight: 600;
+            color: var(--chrome-purple);
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            font-weight: 500;
+            text-transform: uppercase;
+        }
+
+        /* Interactive NN container */
+        .neural-network-container {
+            width: 100%;
+            margin: 40px 0;
+            border: 2px solid var(--black);
+            padding: 20px;
+            position: relative;
+        }
+
+        /* Code sample styling */
+        .code-sample {
+            background-color: var(--light-gray);
+            padding: 20px;
+            margin: 20px 0;
+            border-left: 3px solid var(--chrome-purple);
+            overflow-x: auto;
+            font-family: monospace;
+            line-height: 1.5;
+        }
+
+        /* Formula styling */
+        .formula {
+            text-align: center;
+            margin: 30px 0;
+            font-size: 1.3rem;
+            font-style: italic;
+        }
+
+        /* Canvas for neural network */
+        #nn-canvas {
+            border: 1px solid var(--light-gray);
+            background-color: white;
+            display: block;
+            margin: 0 auto;
+        }
+
+        /* Controls for neural network */
+        .nn-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .nn-button {
+            padding: 10px 20px;
+            background-color: var(--chrome-purple);
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        .nn-button:hover {
+            background-color: var(--neon-green);
+            transform: translateY(-3px);
+        }
+
+        .nn-slider-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nn-slider {
+            width: 150px;
+        }
+
+        /* Training metrics */
+        .training-metrics {
+            display: flex;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .metric-box {
+            background-color: var(--light-gray);
+            padding: 10px 15px;
+            border-radius: 4px;
+        }
+
+        .metric-label {
+            font-weight: 600;
+            margin-right: 5px;
+        }
+
+        /* Conclusion section */
+        .conclusion {
+            background-color: var(--light-gray);
+            padding: 40px;
+            margin: 60px 0;
+            border-left: 3px solid var(--chrome-purple);
+        }
+
+        .conclusion h3 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        /* Footer section */
+        .project-footer {
+            margin-top: 80px;
+            padding-top: 40px;
+            border-top: 1px solid var(--light-gray);
+            text-align: center;
+        }
+
+        .project-links {
+            margin-bottom: 30px;
+        }
+
+        .project-link-button {
+            padding: 12px 24px;
+            border: 1px solid var(--chrome-purple);
+            background-color: var(--chrome-purple);
+            color: var(--white);
+            font-weight: 500;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin: 0 10px;
+        }
+
+        .project-link-button:hover {
+            background-color: var(--neon-green);
+            color: var(--white);
+            border-color: var(--neon-green);
+            transform: scale(1.05) translateY(-3px);
+            box-shadow: 0 5px 15px rgba(57, 255, 20, 0.2);
+        }
+
+        .next-prev-navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+
+        .prev-project, .next-project {
+            display: inline-block;
+            color: var(--black);
+            text-decoration: none;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            transition: color 0.3s;
+            font-size: 1.2rem;
+        }
+
+        .prev-project:hover, .next-project:hover {
+            color: var(--neon-green);
+        }
+
+        .prev-project:after, .next-project:after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--neon-green);
+            transform: scaleX(0);
+            transform-origin: bottom right;
+            transition: transform 0.3s;
+        }
+
+        .prev-project:hover:after, .next-project:hover:after {
+            transform: scaleX(1);
+            transform-origin: bottom left;
+        }
+
+        /* Responsive styles */
+        @media (max-width: 1200px) {
+            .project-container {
+                grid-template-columns: 1fr;
+            }
+
+            .project-sidebar {
+                position: static;
+                order: -1;
+            }
+
+            .sidebar-box {
+                margin-bottom: 30px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .project-hero {
+                height: 400px;
+            }
+
+            .project-title {
+                font-size: 2.8rem;
+            }
+
+            .nn-controls {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .nn-slider-container {
+                width: 100%;
+                justify-content: space-between;
+            }
+
+            .training-metrics {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .next-prev-navigation {
+                flex-direction: column;
+                gap: 20px;
+                align-items: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 20px;
+            }
+
+            .project-hero {
+                height: 350px;
+            }
+
+            .project-title {
+                font-size: 2.2rem;
+            }
+
+            .hero-content {
+                padding: 20px;
+            }
+
+            .sidebar-box {
+                padding: 15px;
+            }
+
+            .stat-number {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <div class="navigation">
+        <a href="index.html" class="back-button">← Back to Portfolio</a>
+    </div>
+    <!-- Project header -->
+    <header class="project-header">
+        <h1 class="project-title">Mathematical Neural Network</h1>
+        <div class="tech-badges-container">
+            <span class="tech-badge">Math</span>
+            <span class="tech-badge">Python</span>
+            <span class="tech-badge">NumPy</span>
+            <span class="tech-badge">Machine Learning</span>
+        </div>
+    </header>
+    <!-- Main content container -->
+        <div class="project-content">
+            <!-- Project Overview Section -->
+            <div class="content-section">
+                <h2 class="section-heading">Project Overview</h2>
+                <p class="content-text">
+                    In this project, I developed a Feed Forward Neural Network from scratch using only fundamental mathematical principles, without relying on high-level machine learning libraries. By implementing the mathematical foundations of neural networks directly, I gained a deep understanding of how these models work at their core. The network was built to classify images from the MNIST dataset with impressive accuracy.
+                </p>
+                <p class="content-text">
+                    Instead of using abstracted APIs provided by libraries like TensorFlow or PyTorch, I implemented each component of the neural network myself: forward propagation, backpropagation, gradient descent, activation functions, and weight initialization. This approach required a thorough understanding of linear algebra, calculus, and optimization techniques.
+                </p>
+                <p class="content-text">
+                    The project also included the implementation of regularization techniques such as early stopping to prevent overfitting and ensure the model generalizes well to unseen data. By focusing on the fundamental mathematics, I was able to create a transparent neural network where every operation was explicitly defined and understandable.
+                </p>
+            </div>
+
+            <!-- Interactive Visualization Section -->
+            <div class="content-section">
+                <h2 class="section-heading">Interactive Visualization</h2>
+                <p class="content-text">
+                    Below is an interactive visualization of a simple feed-forward neural network with one hidden layer. You can start the training simulation to see how data flows through the network and how weights are updated during the learning process.
+                </p>
+
+                <div id="react-neural-network-container"></div>
+            </div>
+
+            <!-- Conclusion Section -->
+            <div class="content-section">
+                <div class="conclusion">
+                    <h3>Conclusion</h3>
+                    <p class="content-text" style="margin-bottom: 0;">
+                        This project demonstrated that understanding the mathematical foundations of neural networks is crucial for effective implementation and optimization. By building a neural network from scratch, I gained deep insights into how these models learn and make predictions. The performance achieved on the MNIST dataset validates that even without using high-level libraries, a well-implemented neural network based on sound mathematical principles can achieve excellent results.
+                    </p>
+                    <p class="content-text" style="margin-bottom: 0;">
+                        The knowledge gained from this project has been invaluable for my work with more complex models and has given me the ability to debug and optimize neural networks at a fundamental level. It also provides a strong foundation for understanding more advanced deep learning concepts and architectures.
+                    </p>
+                </div>
+            </div>
+
+    </div>
+
+    <!-- Project footer with links -->
+    <div class="project-footer">
+        <div class="project-links">
+            <a href="https://github.com/LewisSchmidtke/NeuralNetworkFromScratch" target="_blank" class="project-link-button">View Code on GitHub</a>
+        </div>
+        <div class="next-prev-navigation">
+            <a href="project1.html" class="prev-project">← Previous: US Stock Market Analysis and Forecasting</a>
+            <a href="index.html" class="next-project">Back to Portfolio →</a>
+        </div>
+    </div>
+
+    <!-- Lightbox and scripts remain the same -->
+    <!-- Existing scripts and lightbox HTML -->
+
+    <!-- JavaScript for Neural Network Visualization -->
+    <script>
+        // Helper function to mount React component once loaded
+        function mountNeuralNetworkAnimation() {
+            const container = document.getElementById('react-neural-network-container');
+            if (container && window.ReactNeuralNetworkAnimation) {
+                const root = ReactDOM.createRoot(container);
+                root.render(React.createElement(NeuralNetworkAnimation));
+            } else {
+                setTimeout(mountNeuralNetworkAnimation, 100);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // Neural Network Animation implementation
+            class NeuralNetwork {
+                constructor(canvas) {
+                    this.canvas = canvas;
+                    this.ctx = canvas.getContext('2d');
+                    this.width = canvas.width;
+                    this.height = canvas.height;
+                    this.neurons = [];
+                    this.connections = [];
+                    this.signals = [];
+                    this.isTraining = false;
+                    this.epoch = 0;
+                    this.accuracy = 85;
+                    this.learningRate = 0.1;
+
+                    // Network architecture [inputs, hidden, outputs]
+                    this.layers = [4, 2, 1];
+
+                    this.initNetwork();
+                    this.animate();
+                }
+
+                initNetwork() {
+                    // Calculate positions for neurons
+                    this.neurons = [];
+                    const horizontalGap = this.width / (this.layers.length + 1);
+
+                    this.layers.forEach((layerSize, layerIndex) => {
+                        const verticalGap = this.height / (layerSize + 1);
+                        const layerX = horizontalGap * (layerIndex + 1);
+
+                        // Create neurons for this layer
+                        for (let i = 0; i < layerSize; i++) {
+                            const neuronY = verticalGap * (i + 1);
+                            this.neurons.push({
+                                x: layerX,
+                                y: neuronY,
+                                layer: layerIndex,
+                                index: i,
+                                value: Math.random()  // Random activation for visualization
+                            });
+                        }
+                    });
+
+                    // Create connections between neurons
+                    this.connections = [];
+
+                    for (let l = 0; l < this.layers.length - 1; l++) {
+                        const currentLayerNeurons = this.neurons.filter(n => n.layer === l);
+                        const nextLayerNeurons = this.neurons.filter(n => n.layer === l + 1);
+
+                        currentLayerNeurons.forEach(source => {
+                            nextLayerNeurons.forEach(target => {
+                                this.connections.push({
+                                    source,
+                                    target,
+                                    weight: Math.random() * 2 - 1  // Random weight between -1 and 1
+                                });
+                            });
+                        });
+                    }
+                }
+
+                animate() {
+                    // Clear canvas
+                    this.ctx.clearRect(0, 0, this.width, this.height);
+
+                    // Update simulation if training
+                    if (this.isTraining) {
+                        this.updateTraining();
+                    }
+
+                    // Draw connections
+                    this.drawConnections();
+
+                    // Draw neurons
+                    this.drawNeurons();
+
+                    // Continue animation
+                    requestAnimationFrame(() => this.animate());
+                }
+
+                drawConnections() {
+                    this.connections.forEach(conn => {
+                        // Line width based on weight strength
+                        const lineWidth = Math.abs(conn.weight) * 3;
+
+                        // Line color based on weight sign
+                        const color = conn.weight > 0 ? '#4A0072' : '#FF5E5B';
+
+                        // Draw connection
+                        this.ctx.beginPath();
+                        this.ctx.moveTo(conn.source.x, conn.source.y);
+                        this.ctx.lineTo(conn.target.x, conn.target.y);
+                        this.ctx.strokeStyle = color;
+                        this.ctx.lineWidth = lineWidth;
+                        this.ctx.globalAlpha = 0.5;
+                        this.ctx.stroke();
+                        this.ctx.globalAlpha = 1;
+                    });
+
+                    // Draw signals if training
+                    if (this.isTraining) {
+                        this.drawSignals();
+                    }
+                }
+
+                drawSignals() {
+                    // Update existing signals
+                    this.signals = this.signals.filter(signal => {
+                        // Update signal position
+                        signal.progress += signal.speed;
+
+                        // Remove if it reached destination
+                        if (signal.progress >= 1) return false;
+
+                        // Calculate current position
+                        const dx = signal.connection.target.x - signal.connection.source.x;
+                        const dy = signal.connection.target.y - signal.connection.source.y;
+                        signal.x = signal.connection.source.x + dx * signal.progress;
+                        signal.y = signal.connection.source.y + dy * signal.progress;
+
+                        // Draw signal
+                        this.ctx.beginPath();
+                        this.ctx.arc(signal.x, signal.y, 4, 0, Math.PI * 2);
+                        this.ctx.fillStyle = signal.connection.weight > 0 ? '#39FF14' : '#FF5E5B';
+                        this.ctx.fill();
+
+                        return true;
+                    });
+
+                    // Randomly create new signals
+                    if (Math.random() < 0.1) {
+                        const randomConnection = this.connections[Math.floor(Math.random() * this.connections.length)];
+                        this.signals.push({
+                            connection: randomConnection,
+                            progress: 0,
+                            speed: 0.02 + Math.random() * 0.03,
+                            x: randomConnection.source.x,
+                            y: randomConnection.source.y
+                        });
+                    }
+                }
+
+                drawNeurons() {
+                    this.neurons.forEach(neuron => {
+                        // Neuron size based on layer
+                        let radius = 15;
+                        if (neuron.layer === 0 || neuron.layer === this.layers.length - 1) {
+                            radius = 18;
+                        }
+
+                        // Draw neuron circle
+                        this.ctx.beginPath();
+                        this.ctx.arc(neuron.x, neuron.y, radius, 0, Math.PI * 2);
+                        this.ctx.fillStyle = '#4A0072';
+                        this.ctx.fill();
+
+                        // Draw border
+                        this.ctx.lineWidth = 2;
+                        this.ctx.strokeStyle = '#000000';
+                        this.ctx.stroke();
+
+                        // Light effect for active neurons
+                        if (this.isTraining) {
+                            // Random activation for visualization
+                            if (Math.random() < 0.05) {
+                                neuron.value = Math.random();
+                            }
+
+                            // Add light effect based on activation
+                            this.ctx.beginPath();
+                            this.ctx.arc(neuron.x - radius/3, neuron.y - radius/3, radius/3, 0, Math.PI * 2);
+                            this.ctx.fillStyle = `rgba(255, 255, 255, ${neuron.value * 0.8})`;
+                            this.ctx.fill();
+                        }
+                    });
+                }
+
+                updateTraining() {
+                    // Update epoch count
+                    this.epoch += 0.05;
+
+                    // Simulate accuracy changes
+                    this.accuracy = 85 + 10 * Math.sin(this.epoch / 30) + 5 * Math.random();
+
+                    // Randomly update weights to simulate learning
+                    if (Math.random() < 0.01) {
+                        const randomConnection = this.connections[Math.floor(Math.random() * this.connections.length)];
+                        randomConnection.weight += (Math.random() * 2 - 1) * this.learningRate;
+                        // Clamp weight
+                        randomConnection.weight = Math.max(-1, Math.min(1, randomConnection.weight));
+                    }
+
+                    // Update UI if available
+                    const epochElement = document.getElementById('epoch-value');
+                    const accuracyElement = document.getElementById('accuracy-value');
+
+                    if (epochElement) epochElement.textContent = Math.floor(this.epoch);
+                    if (accuracyElement) accuracyElement.textContent = this.accuracy.toFixed(2) + '%';
+                }
+
+                toggleTraining() {
+                    this.isTraining = !this.isTraining;
+                    if (!this.isTraining) {
+                        this.signals = [];  // Clear signals when stopping
+                    } else {
+                        this.epoch = 0;  // Reset epoch when starting
+                        this.accuracy = 85;
+                    }
+
+                    // Update button text
+                    const button = document.getElementById('train-button');
+                    if (button) {
+                        button.textContent = this.isTraining ? 'Stop Training' : 'Start Training';
+                    }
+
+                    // Show/hide metrics
+                    const metrics = document.getElementById('training-metrics');
+                    if (metrics) {
+                        metrics.style.display = this.isTraining ? 'flex' : 'none';
+                    }
+                }
+
+                setLearningRate(rate) {
+                    this.learningRate = rate;
+                }
+            }
+
+            // Set up canvas and neural network
+            const setupNeuralNetwork = () => {
+                const canvas = document.getElementById('nn-canvas');
+                if (!canvas) return;
+
+                const network = new NeuralNetwork(canvas);
+
+                // Set up UI controls
+                const trainButton = document.getElementById('train-button');
+                const learningRateSlider = document.getElementById('learning-rate');
+                const learningRateValue = document.getElementById('learning-rate-value');
+
+                if (trainButton) {
+                    trainButton.addEventListener('click', () => {
+                        network.toggleTraining();
+                    });
+                }
+
+                if (learningRateSlider && learningRateValue) {
+                    learningRateSlider.addEventListener('input', () => {
+                        const rate = parseFloat(learningRateSlider.value);
+                        network.setLearningRate(rate);
+                        learningRateValue.textContent = rate.toFixed(2);
+                    });
+                }
+            };
+
+            // Create neural network visualization container if react component isn't available
+            const createNativeVisualization = () => {
+                const container = document.getElementById('react-neural-network-container');
+                if (!container) return;
+
+                // Create UI elements
+                container.innerHTML = `
+                    <div class="neural-network-container">
+                        <div class="nn-controls">
+                            <button id="train-button" class="nn-button">Start Training</button>
+                            <div class="nn-slider-container">
+                                <span>Learning Rate:</span>
+                                <input type="range" id="learning-rate" class="nn-slider" min="0.01" max="0.5" step="0.01" value="0.1">
+                                <span id="learning-rate-value">0.10</span>
+                            </div>
+                        </div>
+
+                        <div id="training-metrics" class="training-metrics" style="display: none;">
+                            <div class="metric-box">
+                                <span class="metric-label">Epoch:</span>
+                                <span id="epoch-value">0</span>
+                            </div>
+                            <div class="metric-box">
+                                <span class="metric-label">Accuracy:</span>
+                                <span id="accuracy-value">85.00%</span>
+                            </div>
+                        </div>
+
+                        <canvas id="nn-canvas" width="800" height="400"></canvas>
+
+                        <div class="mt-4 text-sm text-gray-600">
+                            <p>This visualization demonstrates a simple 4-2-1 neural network with weighted connections.</p>
+                            <p>Purple nodes represent neurons, with line thickness indicating weight strength.</p>
+                            <p>When training, green signals show positive weights and red signals show negative weights.</p>
+                        </div>
+                    </div>
+                `;
+
+                // Initialize the visualization
+                setupNeuralNetwork();
+            };
+
+            // Try to load React component, fall back to native implementation
+            if (window.React && window.ReactDOM) {
+                mountNeuralNetworkAnimation();
+            } else {
+                createNativeVisualization();
+            }
+
+            // Animate stats counting when they come into view
+            const statNumbers = document.querySelectorAll('.stat-number');
+
+            const animateValue = (obj, start, end, duration) => {
+                let startTimestamp = null;
+                const step = (timestamp) => {
+                    if (!startTimestamp) startTimestamp = timestamp;
+                    const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+
+                    let value = Math.floor(progress * (end - start) + start);
+
+                    // Add '+' to values that end with 'M' or 'K'
+                    if (obj.textContent.includes('M')) {
+                        obj.textContent = value + 'M+';
+                    } else if (obj.textContent.includes('K')) {
+                        obj.textContent = value + 'K+';
+                    } else if (obj.textContent.includes('%')) {
+                        obj.textContent = value + '%';
+                    } else {
+                        obj.textContent = value;
+                    }
+
+                    if (progress < 1) {
+                        window.requestAnimationFrame(step);
+                    }
+                };
+                window.requestAnimationFrame(step);
+            };
+
+            // Intersection Observer to trigger animations when the stats come into view
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        statNumbers.forEach(statNumber => {
+                            const endValue = parseInt(statNumber.textContent);
+                            animateValue(statNumber, 0, endValue, 1500);
+                        });
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.5 });
+
+            // Observe the stats container
+            const statsContainer = document.querySelector('.stats-container');
+            if (statsContainer) {
+                observer.observe(statsContainer);
+            }
+        });
+    </script>
+</body>
+<footer>
+    © 2025 Lewis M. Schmidtke. All Rights Reserved.
+</footer>
+</html>
+
