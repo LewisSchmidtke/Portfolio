@@ -205,7 +205,7 @@
             overflow: visible;
             margin-top: 30px;
             height: 700px;
-            padding: 0; /* Removed padding to align with header */
+            padding: 0;
         }
 
         .projects-carousel {
@@ -226,6 +226,7 @@
             margin: 0 5%; /* Reduced margin to accommodate wider cards */
             opacity: 0.4;
             transform: scale(0.9);
+            transform-origin: center;
             filter: grayscale(1);
             cursor: pointer; /* Added cursor pointer for better UX */
         }
@@ -531,15 +532,6 @@
             .section-heading:after {
                 left: 50%;
                 transform: translateX(-50%);
-            }
-
-            .main-button {
-                right: 20px;
-                top: 15px;
-            }
-
-            .projects-carousel-container {
-                height: 800px;
             }
 
             .project-image {
