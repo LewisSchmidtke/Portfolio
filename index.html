@@ -199,25 +199,20 @@
             object-fit: contain;
         }
 
-        /* Projects section with scrolling carousel */
-        .projects-carousel-container {
-            position: relative;
-            overflow: visible;
-            margin-top: 30px;
-            height: 700px;
-            padding: 0;
-        }
 
         .projects-carousel {
             display: flex;
             transition: transform 0.5s ease-in-out;
             height: 100%;
             position: relative;
+            width: 80%;
+            margin: 0 auto;
         }
 
+        /* Updated Project Card Styles */
         .project-card {
             min-width: 90%; /* Increased width from 80% to 90% */
-            height: 100%;
+            height: 600px; /* Set fixed height for project cards */
             background-color: var(--white);
             border: 2px solid var(--black);
             display: flex;
@@ -229,6 +224,8 @@
             transform-origin: center;
             filter: grayscale(1);
             cursor: pointer; /* Added cursor pointer for better UX */
+            position: relative; /* For absolute positioning of link */
+            overflow: hidden;
         }
 
         .project-card.active {
@@ -244,7 +241,7 @@
 
         .project-image {
             width: 100%;
-            height: 350px; /* Fixed height */
+            height: 300px; /* Slightly reduced fixed height */
             object-fit: cover; /* This will maintain aspect ratio while covering the area */
             filter: grayscale(100%);
             transition: filter 0.3s ease;
@@ -255,41 +252,45 @@
             filter: grayscale(0%);
         }
 
+        /* Updated project content styles */
         .project-content {
-            padding: 35px;
+            padding: 25px;
             display: flex;
             flex-direction: column;
             flex-grow: 1;
-            justify-content: space-between;
-            height: calc(100% - 350px); /* Remaining height after image */
+            height: calc(100% - 300px); /* Remaining height after image */
+            position: relative; /* For absolute position of link */
         }
 
-        /* Project description */
-        .project-description {
-            margin-bottom: 15px;
-            overflow-y: auto;
-            max-height: calc(100% - 120px); /* Reserve space for title, badges and link */
-        }
-
-        /* Tech badges container */
-        .tech-badges-container {
-            margin: 15px 0;
-        }
-
+        /* Project title */
         .project-content h3 {
-            font-size: 2.2rem;
+            font-size: 2rem;
             margin-bottom: 15px;
             color: var(--black);
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 1px;
+            flex-shrink: 0; /* Title should not shrink */
+            line-height: 1.2; /* Tighter line height for better space usage */
         }
 
-        .project-content p {
-            color: var(--black);
-            margin-bottom: 20px;
-            font-weight: 300;
-            font-size: 1.3rem;
+        /* Project description */
+        .project-description {
+            margin-bottom: 15px;
+            max-height: 140px; /* Fixed height for description */
+            font-size: 1.2rem;
+            flex-grow: 1;
+            overflow-y: auto; /* Make description scrollable if needed */
+            transition: max-height 0.3s ease;
+        }
+
+        /* Tech badges container */
+        .tech-badges-container {
+            margin: 10px 0;
+            flex-shrink: 0;
+            margin-top: auto;
+            margin-bottom: 40px; /* Make space for the link */
+            transition: all 0.3s ease;
         }
 
         .tech-badge {
@@ -305,6 +306,12 @@
             transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
         }
 
+        /* Special styling for the "more" badge */
+        .tech-badge.more-badge {
+            background-color: var(--light-gray);
+            cursor: pointer;
+        }
+
         .project-card:hover .tech-badge {
             background-color: var(--neon-green);
             color: var(--white);
@@ -313,17 +320,16 @@
 
         .project-link {
             display: inline-block;
-            margin-top: 15px; /* Fixed margin to create space between content and link */
             color: var(--black);
             text-decoration: none;
             font-weight: 500;
             text-transform: uppercase;
             letter-spacing: 1px;
-            position: relative;
+            position: absolute; /* Make link position absolute */
+            bottom: 25px; /* Position from bottom of content area */
+            left: 25px;
             transition: color 0.3s, transform 0.3s;
             font-size: 1.1rem;
-            align-self: flex-start;
-            bottom: 0;
         }
 
         .project-card:hover .project-link {
@@ -534,12 +540,25 @@
                 transform: translateX(-50%);
             }
 
+            .project-card {
+                height: 550px; /* Slightly smaller on medium screens */
+            }
+
             .project-image {
-                height: 300px; /* Slightly smaller on mobile */
+                height: 250px; /* Slightly smaller on medium screens */
             }
 
             .project-content {
-                height: calc(100% - 300px);
+                height: calc(100% - 250px);
+            }
+
+            .project-description {
+                max-height: 120px; /* Smaller max height for description */
+                font-size: 1.1rem;
+            }
+
+            .project-content h3 {
+                font-size: 1.8rem;
             }
 
             .elegant-divider {
@@ -564,7 +583,48 @@
                 font-size: 1.2rem;
             }
 
-            /* Simplified divider responsive styles */
+            .project-card {
+                height: 500px; /* Smaller on smaller screens */
+            }
+
+            .project-image {
+                height: 200px; /* Smaller on smaller screens */
+            }
+
+            .project-content {
+                height: calc(100% - 200px);
+                padding: 20px;
+            }
+
+            .project-description {
+                max-height: 100px;
+                font-size: 1rem;
+            }
+
+            .project-content h3 {
+                font-size: 1.6rem;
+                margin-bottom: 10px;
+            }
+
+            .project-link {
+                bottom: 15px;
+                left: 15px;
+            }
+
+            .tech-badges-container {
+                margin-bottom: 30px;
+            }
+
+            .tech-badge {
+                padding: 3px 8px;
+                margin-right: 5px;
+                margin-top: 5px;
+                font-size: 0.85rem;
+            }
+
+            body {
+                padding: 20px;
+            }
         }
 
         @media (max-width: 480px) {
@@ -580,6 +640,50 @@
 
             .experience-card {
                 padding: 20px;
+            }
+
+            .project-card {
+                height: 450px; /* Even smaller for mobile */
+            }
+
+            .project-image {
+                height: 180px; /* Even smaller for mobile */
+            }
+
+            .project-content {
+                height: calc(100% - 180px);
+                padding: 15px;
+            }
+
+            .project-description {
+                max-height: 80px;
+                font-size: 0.9rem;
+            }
+
+            .project-content h3 {
+                font-size: 1.4rem;
+                margin-bottom: 8px;
+            }
+
+            .tech-badge {
+                padding: 2px 6px;
+                margin-right: 4px;
+                margin-top: 4px;
+                font-size: 0.8rem;
+            }
+
+            .project-link {
+                font-size: 0.9rem;
+                bottom: 12px;
+                left: 12px;
+            }
+
+            .tech-badges-container {
+                margin-bottom: 25px;
+            }
+
+            body {
+                padding: 10px;
             }
         }
     </style>
@@ -628,17 +732,15 @@
         <div class="project-card">
             <img src="images/CyberattackImpact.png" alt="Project 2" class="project-image">
             <div class="project-content">
-                <div>
-                    <h3>Worldwide Cyberattack Data Analysis</h3>
-                    <p class="project-description">Analyzed global cyberattack data from 2015 to 2019 to discover
-                        insights into the industry- and user impact to gain insight and develop solutions for the industry.
-                    </p>
-                    <div class="tech-badges-container">
-                        <span class="tech-badge">Python</span>
-                        <span class="tech-badge">Seaborn</span>
-                        <span class="tech-badge">NumPy</span>
-                        <span class="tech-badge">Data Science</span>
-                    </div>
+                <h3>Worldwide Cyberattack Data Analysis</h3>
+                <p class="project-description">Analyzed global cyberattack data from 2015 to 2019 to discover
+                    insights into the industry- and user impact to gain insight and develop solutions for the industry.
+                </p>
+                <div class="tech-badges-container">
+                    <span class="tech-badge">Python</span>
+                    <span class="tech-badge">Seaborn</span>
+                    <span class="tech-badge">NumPy</span>
+                    <span class="tech-badge">Data Science</span>
                 </div>
                 <a href="project2.html" class="project-link">View Project →</a>
             </div>
@@ -648,20 +750,18 @@
         <div class="project-card">
             <img src="images/data-science.png" alt="Project 1" class="project-image">
             <div class="project-content">
-                <div>
-                    <h3>US Stock Market Analysis and Forecasting</h3>
-                    <p class="project-description">
-                        Analyzed US Stock market data from 2019-2024. Conducted a holistic price development
-                        analysis of multiple tech stocks, individual comparisons of tech stocks, as well as a volatility
-                        analysis. Forecasted the NASDAQ 100 based on previous prices and trade volume.
-                    </p>
-                    <div class="tech-badges-container">
-                        <span class="tech-badge">Python</span>
-                        <span class="tech-badge">PyTorch</span>
-                        <span class="tech-badge">Seaborn</span>
-                        <span class="tech-badge">Data Science</span>
-                        <span class="tech-badge">Machine Learning</span>
-                    </div>
+                <h3>US Stock Market Analysis and Forecasting</h3>
+                <p class="project-description">
+                    Analyzed US Stock market data from 2019-2024. Conducted a holistic price development
+                    analysis of multiple tech stocks, individual comparisons of tech stocks, as well as a volatility
+                    analysis. Forecasted the NASDAQ 100 based on prices and volume.
+                </p>
+                <div class="tech-badges-container">
+                    <span class="tech-badge">Python</span>
+                    <span class="tech-badge">PyTorch</span>
+                    <span class="tech-badge">Seaborn</span>
+                    <span class="tech-badge">Data Science</span>
+                    <span class="tech-badge">Machine Learning</span>
                 </div>
                 <a href="project1.html" class="project-link">View Project →</a>
             </div>
@@ -671,19 +771,17 @@
         <div class="project-card">
             <img src="images/neural-network.png" alt="Project 3" class="project-image">
             <div class="project-content">
-                <div>
-                    <h3>Mathematical Neural Network Implementation</h3>
-                    <p class="project-description">
-                        Developed a Feed Forward Neural Network, only utilizing pure mathematics and no higher
-                        machine learning libraries. The NN was developed to be used as a classifier on
-                        the MNIST dataset.
-                    </p>
-                    <div class="tech-badges-container">
-                        <span class="tech-badge">Math</span>
-                        <span class="tech-badge">Python</span>
-                        <span class="tech-badge">NumPy</span>
-                        <span class="tech-badge">Machine Learning</span>
-                    </div>
+                <h3>Mathematical Neural Network Implementation</h3>
+                <p class="project-description">
+                    Developed a Feed Forward Neural Network, only utilizing pure mathematics and no higher
+                    machine learning libraries. The NN was developed to be used as a classifier on
+                    the MNIST dataset.
+                </p>
+                <div class="tech-badges-container">
+                    <span class="tech-badge">Math</span>
+                    <span class="tech-badge">Python</span>
+                    <span class="tech-badge">NumPy</span>
+                    <span class="tech-badge">Machine Learning</span>
                 </div>
                 <a href="project3.html" class="project-link">View Project →</a>
             </div>
@@ -952,10 +1050,20 @@
             cards.forEach((card, index) => {
                 card.classList.remove('active');
 
-                // Handle wraparound for the visible side cards
+                // Apply active class to current card
                 if (index === currentIndex) {
                     card.classList.add('active');
                 }
+
+                // Always show content elements by default
+                const description = card.querySelector('.project-description');
+                const badgesContainer = card.querySelector('.tech-badges-container');
+                const projectLink = card.querySelector('.project-link');
+
+                // Reset visibility - all elements should be visible by default
+                if (description) description.style.display = 'block';
+                if (badgesContainer) badgesContainer.style.display = 'block';
+                if (projectLink) projectLink.style.display = 'block';
             });
 
             // Update active dot
@@ -966,13 +1074,234 @@
                     dot.classList.remove('active');
                 }
             });
+
+            // After carousel update, check all cards for content visibility
+            setTimeout(() => {
+                cards.forEach(card => {
+                    manageProjectCardContent(card);
+                });
+                manageTechBadges();
+            }, 100);
+        }
+        // Function to check and manage content visibility in project cards
+        function manageProjectCardContent(specificCard = null) {
+            // If a specific card is provided, only process that card
+            // Otherwise, process all project cards
+            const projectCards = specificCard ? [specificCard] : document.querySelectorAll('.project-card');
+
+            projectCards.forEach(card => {
+                const contentContainer = card.querySelector('.project-content');
+                const title = card.querySelector('h3');
+                const description = card.querySelector('.project-description');
+                const badgesContainer = card.querySelector('.tech-badges-container');
+                const projectLink = card.querySelector('.project-link');
+
+                // Reset visibility first - all elements should be visible by default
+                if (description) description.style.display = 'block';
+                if (badgesContainer) badgesContainer.style.display = 'block';
+                if (projectLink) projectLink.style.display = 'block';
+
+                // Calculate available space
+                const containerRect = contentContainer.getBoundingClientRect();
+                const containerHeight = containerRect.height;
+                const paddingTop = parseInt(window.getComputedStyle(contentContainer).paddingTop);
+                const paddingBottom = parseInt(window.getComputedStyle(contentContainer).paddingBottom);
+                const availableHeight = containerHeight - paddingTop - paddingBottom;
+
+                // Calculate required heights
+                const titleHeight = title ? title.offsetHeight : 0;
+                const descriptionHeight = description ? description.offsetHeight : 0;
+                const badgesHeight = badgesContainer ? badgesContainer.offsetHeight : 0;
+                const linkHeight = projectLink ? projectLink.offsetHeight : 0;
+
+                // Total content height
+                const totalContentHeight = titleHeight + descriptionHeight + badgesHeight + linkHeight + 20; // Margin
+
+                // Only hide elements if total content height exceeds available space
+                if (totalContentHeight > availableHeight) {
+                    // Hide elements in priority order
+                    if (description) {
+                        description.style.display = 'none';
+
+                        // Check if hiding description creates enough space
+                        const updatedHeight = titleHeight + badgesHeight + linkHeight + 20;
+                        if (updatedHeight > availableHeight) {
+                            // Still not enough space, hide badges
+                            if (badgesContainer) {
+                                badgesContainer.style.display = 'none';
+
+                                // Check again
+                                const finalHeight = titleHeight + linkHeight + 10;
+                                if (finalHeight > availableHeight) {
+                                    // Last resort, hide link
+                                    if (projectLink) {
+                                        projectLink.style.display = 'none';
+                                    }
+                                }
+                            }
+                        }
+                    }
+                } else {
+                    // All content fits, optimize description height
+                    if (description) {
+                        const maxDescriptionHeight = availableHeight - (titleHeight + badgesHeight + linkHeight + 20);
+                        description.style.maxHeight = maxDescriptionHeight + 'px';
+                    }
+                }
+            });
+        }
+
+        // Function to manage tech badges when space is limited
+        function manageTechBadges() {
+          const badgeContainers = document.querySelectorAll('.tech-badges-container');
+
+          badgeContainers.forEach(container => {
+            const parentCard = container.closest('.project-card');
+            if (!parentCard) return;
+
+            const contentDiv = parentCard.querySelector('.project-content');
+            if (!contentDiv) return;
+
+            // Get available width
+            const contentWidth = contentDiv.clientWidth;
+            const containerPadding = parseInt(window.getComputedStyle(contentDiv).paddingLeft) * 2;
+            const availableWidth = contentWidth - containerPadding;
+
+            // Get all badges
+            const badges = Array.from(container.querySelectorAll('.tech-badge'));
+
+            // Reset all badges to visible
+            badges.forEach(badge => {
+              if (!badge.classList.contains('more-badge')) {
+                badge.style.display = 'inline-block';
+              }
+            });
+
+            // Get "more" badge if it exists, or create one
+            let moreBadge = container.querySelector('.more-badge');
+            if (!moreBadge) {
+              moreBadge = document.createElement('span');
+              moreBadge.className = 'tech-badge more-badge';
+              moreBadge.style.display = 'none';
+              container.appendChild(moreBadge);
+            }
+
+            // Check if badges fit in container
+            let totalWidth = 0;
+            let hiddenCount = 0;
+            let visibleBadges = [];
+
+            badges.forEach(badge => {
+              if (badge.classList.contains('more-badge')) return;
+
+              const badgeWidth = badge.offsetWidth;
+              totalWidth += badgeWidth + 8; // Add some margin
+
+              if (totalWidth > availableWidth) {
+                badge.style.display = 'none';
+                hiddenCount++;
+              } else {
+                visibleBadges.push(badge);
+              }
+            });
+
+            // If we have hidden badges, show the "more" badge
+            if (hiddenCount > 0) {
+              moreBadge.textContent = `+${hiddenCount} more`;
+              moreBadge.style.display = 'inline-block';
+
+              // Check if adding the "more" badge causes overflow
+              totalWidth = moreBadge.offsetWidth + 8; // More badge width + margin
+
+              for (let i = visibleBadges.length - 1; i >= 0; i--) {
+                const badge = visibleBadges[i];
+                totalWidth += badge.offsetWidth + 8;
+
+                if (totalWidth > availableWidth) {
+                  badge.style.display = 'none';
+                  hiddenCount++;
+                  moreBadge.textContent = `+${hiddenCount} more`;
+                }
+              }
+            } else {
+              moreBadge.style.display = 'none';
+            }
+
+            // Add tooltip to more badge to show all hidden technologies
+            if (hiddenCount > 0) {
+              const hiddenBadges = badges.filter(badge =>
+                badge.style.display === 'none' && !badge.classList.contains('more-badge')
+              );
+
+              const hiddenTechs = hiddenBadges.map(badge => badge.textContent.trim()).join(', ');
+              moreBadge.title = hiddenTechs;
+
+              // Set up click handler to show all badges
+              moreBadge.onclick = function(e) {
+                e.stopPropagation(); // Prevent card click
+
+                // Toggle between showing all and collapsed
+                const isShowingAll = moreBadge.classList.contains('showing-all');
+
+                if (isShowingAll) {
+                  // Revert to collapsed state
+                  manageTechBadges();
+                  moreBadge.classList.remove('showing-all');
+                } else {
+                  // Show all badges
+                  badges.forEach(badge => {
+                    if (!badge.classList.contains('more-badge')) {
+                      badge.style.display = 'inline-block';
+                    }
+                  });
+                  moreBadge.style.display = 'none';
+                  moreBadge.classList.add('showing-all');
+                }
+              };
+            }
+          });
         }
 
         // Run when DOM is loaded
         document.addEventListener('DOMContentLoaded', () => {
             setupTechIcons();
             setupCarousel();
+
+            // Apply content management to all cards after initial load
+            const allCards = document.querySelectorAll('.project-card');
+            allCards.forEach(card => {
+                manageProjectCardContent(card);
+            });
+            manageTechBadges();
         });
+
+        // Add resize event listener
+        let resizeTimeout;
+        window.addEventListener('resize', function() {
+            // Clear the timeout if it exists
+            if (resizeTimeout) {
+                clearTimeout(resizeTimeout);
+            }
+
+            // Set a new timeout
+            resizeTimeout = setTimeout(function() {
+                const allCards = document.querySelectorAll('.project-card');
+                allCards.forEach(card => {
+                    manageProjectCardContent(card);
+                });
+                manageTechBadges();
+            }, 100); // 100ms debounce
+        });
+        const carousel = document.getElementById('projects-carousel');
+        if (carousel) {
+            carousel.addEventListener('transitionend', function() {
+                const allCards = document.querySelectorAll('.project-card');
+                allCards.forEach(card => {
+                    manageProjectCardContent(card);
+                });
+                manageTechBadges();
+            });
+        }
     </script>
 </body>
 <footer>

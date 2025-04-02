@@ -47,7 +47,7 @@
             font-size: 14px;
             color: var(--chrome-purple); /* Light gray to keep it subtle */
             padding: 10px;
-            position: absolute;
+            position: relative;
             bottom: 10px;
             width: 100%;
         }
@@ -178,31 +178,6 @@
             text-align: justify;
         }
 
-        /* Sidebar area */
-        .project-sidebar {
-            position: sticky;
-            top: 40px;
-            align-self: start;
-        }
-
-        .sidebar-box {
-            border: 2px solid var(--black);
-            padding: 25px;
-            margin-bottom: 30px;
-        }
-
-        .sidebar-heading {
-            font-size: 1.8rem;
-            font-weight: 600;
-            margin-bottom: 15px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .sidebar-list {
-            list-style-type: none;
-        }
-
         .sidebar-list li {
             margin-bottom: 10px;
             font-size: 1.1rem;
@@ -218,58 +193,15 @@
             color: var(--chrome-purple);
         }
 
-        /* Stats counter box */
-        .stats-container {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-        }
-
-        .stat-item {
-            text-align: center;
-            padding: 15px 10px;
-            border: 1px solid var(--mid-gray);
-        }
-
-        .stat-number {
-            font-size: 2.2rem;
-            font-weight: 600;
-            color: var(--chrome-purple);
-            margin-bottom: 5px;
-        }
-
-        .stat-label {
-            font-size: 0.9rem;
-            font-weight: 500;
-            text-transform: uppercase;
-        }
-
         /* Interactive NN container */
         .neural-network-container {
-            width: 100%;
+            width: 80%;
             margin: 40px 0;
             border: 2px solid var(--black);
-            padding: 20px;
+            padding: 20px 10px; /* Reduced horizontal padding */
             position: relative;
-        }
-
-        /* Code sample styling */
-        .code-sample {
-            background-color: var(--light-gray);
-            padding: 20px;
-            margin: 20px 0;
-            border-left: 3px solid var(--chrome-purple);
-            overflow-x: auto;
-            font-family: monospace;
-            line-height: 1.5;
-        }
-
-        /* Formula styling */
-        .formula {
-            text-align: center;
-            margin: 30px 0;
-            font-size: 1.3rem;
-            font-style: italic;
+            max-width: 100%; /* Ensure it doesn't exceed parent width */
+            margin: 0 auto;
         }
 
         /* Canvas for neural network */
@@ -278,16 +210,21 @@
             background-color: white;
             display: block;
             margin: 0 auto;
+            width: 95%; /* Make canvas use more of the available width */
+            max-width: 1100px; /* Set a max-width for larger screens */
         }
 
         /* Controls for neural network */
         .nn-controls {
             display: flex;
+            align-items: center;
+        }
+
+        .nn-header {
+            display: flex;
             justify-content: space-between;
             align-items: center;
             margin-bottom: 20px;
-            flex-wrap: wrap;
-            gap: 15px;
         }
 
         .nn-button {
@@ -305,27 +242,24 @@
             transform: translateY(-3px);
         }
 
-        .nn-slider-container {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .nn-slider {
-            width: 150px;
-        }
-
         /* Training metrics */
         .training-metrics {
             display: flex;
-            gap: 20px;
-            margin-top: 20px;
+            gap: 15px;
         }
 
         .metric-box {
             background-color: var(--light-gray);
             padding: 10px 15px;
             border-radius: 4px;
+            /* Add fixed width to prevent layout shifts */
+            min-width: 120px;
+            text-align: left;
+        }
+        .metric-value {
+            display: inline-block;
+            min-width: 60px; /* Adjust based on your longest expected value */
+            text-align: right;
         }
 
         .metric-label {
@@ -423,26 +357,7 @@
             transform-origin: bottom left;
         }
 
-        /* Responsive styles */
-        @media (max-width: 1200px) {
-            .project-container {
-                grid-template-columns: 1fr;
-            }
-
-            .project-sidebar {
-                position: static;
-                order: -1;
-            }
-
-            .sidebar-box {
-                margin-bottom: 30px;
-            }
-        }
-
         @media (max-width: 768px) {
-            .project-hero {
-                height: 400px;
-            }
 
             .project-title {
                 font-size: 2.8rem;
@@ -453,14 +368,14 @@
                 align-items: flex-start;
             }
 
-            .nn-slider-container {
-                width: 100%;
-                justify-content: space-between;
+            .training-metrics {
+                flex-direction: row; /* Keep as row even on mobile */
+                flex-wrap: wrap;
+                justify-content: center;
             }
 
-            .training-metrics {
-                flex-direction: column;
-                gap: 10px;
+            .metric-box {
+                margin-bottom: 10px;
             }
 
             .next-prev-navigation {
@@ -475,25 +390,10 @@
                 padding: 20px;
             }
 
-            .project-hero {
-                height: 350px;
-            }
-
             .project-title {
                 font-size: 2.2rem;
             }
 
-            .hero-content {
-                padding: 20px;
-            }
-
-            .sidebar-box {
-                padding: 15px;
-            }
-
-            .stat-number {
-                font-size: 1.8rem;
-            }
         }
     </style>
 </head>
@@ -779,8 +679,16 @@
                     const epochElement = document.getElementById('epoch-value');
                     const accuracyElement = document.getElementById('accuracy-value');
 
-                    if (epochElement) epochElement.textContent = Math.floor(this.epoch);
-                    if (accuracyElement) accuracyElement.textContent = this.accuracy.toFixed(2) + '%';
+                    if (epochElement) {
+                        // Format with leading zeros and fixed width
+                        const epochValue = Math.floor(this.epoch);
+                        epochElement.textContent = epochValue;
+                    }
+
+                    if (accuracyElement) {
+                        // Fix to exactly 2 decimal places
+                        accuracyElement.textContent = this.accuracy.toFixed(2) + '%';
+                    }
                 }
 
                 toggleTraining() {
@@ -819,59 +727,56 @@
 
                 // Set up UI controls
                 const trainButton = document.getElementById('train-button');
-                const learningRateSlider = document.getElementById('learning-rate');
-                const learningRateValue = document.getElementById('learning-rate-value');
 
                 if (trainButton) {
                     trainButton.addEventListener('click', () => {
                         network.toggleTraining();
                     });
                 }
+            };
+            const resizeCanvas = () => {
+                const canvas = document.getElementById('nn-canvas');
+                if (!canvas) return;
 
-                if (learningRateSlider && learningRateValue) {
-                    learningRateSlider.addEventListener('input', () => {
-                        const rate = parseFloat(learningRateSlider.value);
-                        network.setLearningRate(rate);
-                        learningRateValue.textContent = rate.toFixed(2);
-                    });
+                const container = canvas.parentElement;
+                const containerWidth = container.clientWidth;
+
+                // Adjust canvas size but keep aspect ratio
+                if (containerWidth < 1100) {
+                    canvas.width = containerWidth - 20; // 10px padding on each side
+                    canvas.height = (canvas.width * 400) / 1100; // Keep aspect ratio
                 }
             };
 
+            // Call resize on load and window resize
+            resizeCanvas();
+            window.addEventListener('resize', resizeCanvas);
+
             // Create neural network visualization container if react component isn't available
-            const createNativeVisualization = () => {
+            createNativeVisualization = () => {
                 const container = document.getElementById('react-neural-network-container');
                 if (!container) return;
 
                 // Create UI elements
                 container.innerHTML = `
                     <div class="neural-network-container">
-                        <div class="nn-controls">
-                            <button id="train-button" class="nn-button">Start Training</button>
-                            <div class="nn-slider-container">
-                                <span>Learning Rate:</span>
-                                <input type="range" id="learning-rate" class="nn-slider" min="0.01" max="0.5" step="0.01" value="0.1">
-                                <span id="learning-rate-value">0.10</span>
+                        <div class="nn-header">
+                            <div class="nn-controls">
+                                <button id="train-button" class="nn-button">Start Training</button>
+                            </div>
+                            <div id="training-metrics" class="training-metrics" style="display: none;">
+                                <div class="metric-box">
+                                    <span class="metric-label">Epoch:</span>
+                                    <span id="epoch-value" class="metric-value">0</span>
+                                </div>
+                                <div class="metric-box">
+                                    <span class="metric-label">Accuracy:</span>
+                                    <span id="accuracy-value" class="metric-value">85.00%</span>
+                                </div>
                             </div>
                         </div>
 
-                        <div id="training-metrics" class="training-metrics" style="display: none;">
-                            <div class="metric-box">
-                                <span class="metric-label">Epoch:</span>
-                                <span id="epoch-value">0</span>
-                            </div>
-                            <div class="metric-box">
-                                <span class="metric-label">Accuracy:</span>
-                                <span id="accuracy-value">85.00%</span>
-                            </div>
-                        </div>
-
-                        <canvas id="nn-canvas" width="800" height="400"></canvas>
-
-                        <div class="mt-4 text-sm text-gray-600">
-                            <p>This visualization demonstrates a simple 4-2-1 neural network with weighted connections.</p>
-                            <p>Purple nodes represent neurons, with line thickness indicating weight strength.</p>
-                            <p>When training, green signals show positive weights and red signals show negative weights.</p>
-                        </div>
+                        <canvas id="nn-canvas" width="800" height="300"></canvas>
                     </div>
                 `;
 
