@@ -274,6 +274,7 @@
             overflow: hidden;
             position: relative;
             height: 300px;
+            filter: grayscale(1);
         }
 
         .viz-item-bottom {
@@ -304,6 +305,7 @@
             transform: translateY(-5px);
             border-color: var(--neon-green);
             box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            filter: grayscale(0);
         }
 
         .viz-item:hover .viz-image {
@@ -644,6 +646,14 @@
                         <div class="viz-caption">Volatility analysis of traditional financial markets compared to cryptocurrencies</div>
                     </div>
                     <div class="viz-item viz-item-bottom">
+                        <img src="images/risk-return_comparison.png" alt="Riks-Return Analysis" class="viz-image">
+                        <div class="viz-caption">Risk-Return analysis of all major assets in 6 month periods</div>
+                    </div>
+                    <div class="viz-item viz-item-bottom">
+                        <img src="images/S&P500_Market_Composition.png" alt="S&P Market Composition" class="viz-image">
+                        <div class="viz-caption">Price and composition analysis of the S&P 500 and the top 8 tech stocks</div>
+                    </div>
+                    <div class="viz-item viz-item-bottom">
                         <img src="images/real_vs_predicted_price_nasdaq100.png" alt="NASDAQ 100 Forecast" class="viz-image">
                         <div class="viz-caption">NASDAQ 100 forecasting model showing predicted vs. actual price movements</div>
                     </div>
@@ -660,8 +670,8 @@
                     <div class="finding-card">
                         <div class="finding-number">01</div>
                         <h3 class="finding-title">Nvidia Growth</h3>
-                        <p class="finding-text">The Nvidia stock price has shown a noticeable increase since the pandemic,
-                            accompanied by a significantly higher trade volume, indicating increased public interest.
+                        <p class="finding-text">The Nvidia stock has yielded high returns without major risks in the analyzed time period.
+                            An increased trade volume shows the public's interest in the company.
                         </p>
                     </div>
                     <div class="finding-card">
@@ -681,24 +691,22 @@
                     </div>
                     <div class="finding-card">
                         <div class="finding-number">04</div>
-                        <h3 class="finding-title">Meta Rebranding</h3>
-                        <p class="finding-text">Shortly after rebranding from Facebook to Meta, company stock kept
-                            plummeting. This was further supported by weak earnings reports,
-                            higher competition through TikTok and privacy updates.
+                        <h3 class="finding-title">Market Composition</h3>
+                        <p class="finding-text">The S&P 500 has become more dependent on the performance of the top 8 tech stocks.
+                            The top 8 tech stocks make up 55% of the price, while only representing 1.6% of companies in the S&P500.
                         </p>
                     </div>
                     <div class="finding-card">
                         <div class="finding-number">05</div>
-                        <h3 class="finding-title">Machine Learning</h3>
-                        <p class="finding-text">Given the past prices and trade volumes of a stock or financial market,
-                            makes it possible to predict the following day to an acceptable accuracy.
-                            Further showing the improvements in the ML/AI space.
+                        <h3 class="finding-title">Physical Assets</h3>
+                        <p class="finding-text">Investing in physical assets can yield constant and risk-free returns.
+                            Gold and silver showed promising returns, while copper and platinum were bad investment options.
                         </p>
                     </div>
                     <div class="finding-card">
                         <div class="finding-number">06</div>
                         <h3 class="finding-title">Apple stability</h3>
-                        <p class="finding-text">Apple has one of the least volatile stocks on the market.
+                        <p class="finding-text">Apple has one of the least volatile stocks on the market, while also having valuable returns.
                             Low price fluctuations as well as low trade volumes indicate potential long-term investments.
                             A steady price growth without major dips are key factors when looking at long-term holding.
                         </p>
