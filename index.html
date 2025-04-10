@@ -1011,6 +1011,27 @@
                 <div class="timeline-node"></div>
                 <div class="experience-card education-card">
                     <div class="experience-header">
+                        <h3 class="experience-title">M.Sc. Mechanical Engineering | ONGOING</h3>
+                        <p class="experience-company">RWTH Aachen University</p>
+                        <p class="experience-duration">APR 2025 - OCT 2026</p>
+                    </div>
+                    <div class="experience-content">
+                        <p>
+                            Specialization: Automotive Engineering, Aerodynamics and Management
+                        </p>
+                        <div class="tech-badges-container">
+                            <span class="tech-badge">Aerodynamics</span>
+                            <span class="tech-badge">Problem-Solving</span>
+                            <span class="tech-badge">Automotive Engineering</span>
+                            <span class="tech-badge">Management</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="timeline-entry">
+                <div class="timeline-node"></div>
+                <div class="experience-card education-card">
+                    <div class="experience-header">
                         <h3 class="experience-title">B.Sc. Mechanical Engineering - Automotive Engineering</h3>
                         <p class="experience-company">RWTH Aachen University</p>
                         <p class="experience-duration">OCT 2019 - MAR 2025</p>
@@ -1102,6 +1123,10 @@
                             Siemens NX CAD, and Dymola for system modeling.</p>
                             <p>Completed coursework in advanced mathematics, thermodynamics, fluid dynamics and
                             materials science, creating a strong foundation for engineering applications.</p>
+                        `;
+                    } else if (titleText.includes('M.Sc. Mechanical Engineering')) {
+                        detailedDesc.innerHTML = `
+                            <p>Detailed Description will follow.</p>
                         `;
                     } else {
                         detailedDesc.innerHTML = `
