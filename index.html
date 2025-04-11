@@ -19,8 +19,8 @@
             --white: #FFFFFF;
             --light-gray: #f2f2f2;
             --mid-gray: #666666;
-            --chrome-purple: #4A0072; /* Deep chrome purple accent color */
-            --neon-green: #39FF14; /* Deep chrome purple accent color */
+            --chrome-purple: #4A0072;
+            --neon-green: #39FF14;
         }
 
         body {
@@ -31,8 +31,9 @@
             max-width: 1600px;
             margin: 0 auto;
             letter-spacing: 0.5px;
-            position: relative; /* Added for absolute positioning of main button */
+            position: relative;
         }
+
         footer {
             text-align: center;
             font-size: 14px;
@@ -43,12 +44,11 @@
             width: 100%;
         }
 
-        /* Main button styles removed */
-
-        /* Header area with about section */
+        /* Header and About section */
         .header {
-            margin-bottom: 20px; /* Reduced from 60px to accommodate divider */
-            padding: 20px;
+            margin-top: 0;
+            margin-bottom: 20px;
+            padding: 40px 20px 20px 20px; /* Increased top padding */
             display: flex;
             justify-content: center;
         }
@@ -57,7 +57,6 @@
             max-width: 1000px;
         }
 
-        /* Modified name section to include the tech icons */
         .name-section {
             display: flex;
             align-items: center;
@@ -81,19 +80,49 @@
             line-height: 1.6;
             color: var(--black);
             font-weight: 300;
-            text-align: justify; /* Added justified alignment */
+            text-align: justify;
         }
 
-        /* Simple continuous divider line between intro and main content */
+        /* Dividers */
         .elegant-divider {
             height: 3px;
             background-color: var(--chrome-purple);
-            margin: 40px auto;
+            margin: 20px auto 40px auto; /* Adjusted top margin */
             width: 90%;
             position: relative;
         }
 
-        /* Section heading styles */
+        .education-divider {
+            position: relative;
+            margin: 40px 0;
+            text-align: right;
+            padding-right: 40px;
+        }
+
+        .education-divider::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            width: calc(100% - 130px);
+            height: 1px;
+            background: linear-gradient(to right, var(--black) 0%, var(--chrome-purple) 100%);
+        }
+
+        .education-divider-label {
+            display: inline-block;
+            background-color: var(--white);
+            color: var(--chrome-purple);
+            padding: 5px 10px;
+            font-size: 1rem;
+            font-weight: 500;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            border: 1px solid var(--chrome-purple);
+            position: relative;
+        }
+
+        /* Section Headings */
         .section-heading {
             font-size: 2.8rem;
             font-weight: 600;
@@ -116,7 +145,7 @@
             background-color: var(--chrome-purple);
         }
 
-        /* Button and tech icons layout */
+        /* Button styles */
         .interactive-row {
             display: flex;
             align-items: center;
@@ -124,7 +153,6 @@
             flex-wrap: wrap;
         }
 
-        /* Button styles */
         .buttons {
             display: flex;
             gap: 15px;
@@ -150,11 +178,11 @@
             background-color: var(--neon-green);
             color: var(--white);
             border-color: var(--neon-green);
-            transform: scale(1.05) translateY(-3px); /* Added transform effect */
-            box-shadow: 0 5px 15px rgba(57, 255, 20, 0.2); /* Subtle shadow on hover */
+            transform: scale(1.05) translateY(-3px);
+            box-shadow: 0 5px 15px rgba(57, 255, 20, 0.2);
         }
 
-        /* Tech icons section - Updated for right alignment next to name */
+        /* Tech icons */
         .tech-icons-wrapper {
             display: flex;
             align-items: center;
@@ -168,7 +196,7 @@
         }
 
         #left-bracket {
-            transition: margin-right 0.18s ease-out; /* Even faster transition */
+            transition: margin-right 0.18s ease-out;
         }
 
         .tech-icons-container {
@@ -187,10 +215,10 @@
             height: 40px;
             margin: 0 3px;
             position: absolute;
-            right: 0; /* Position from right edge */
+            right: 0;
             opacity: 0;
             transform: scale(0);
-            transition: all 0.18s cubic-bezier(0.18, 1.25, 0.4, 1.1), right 0.18s ease-out; /* Even faster transitions */
+            transition: all 0.18s cubic-bezier(0.18, 1.25, 0.4, 1.1), right 0.18s ease-out;
         }
 
         .tech-icon img {
@@ -199,6 +227,40 @@
             object-fit: contain;
         }
 
+        /* Tech badges */
+        .tech-badges-container {
+            margin: 10px 0;
+            flex-shrink: 0;
+            margin-top: auto;
+            margin-bottom: 40px;
+            transition: all 0.3s ease;
+        }
+
+        .tech-badge {
+            display: inline-block;
+            border: 1px solid var(--black);
+            background-color: transparent;
+            color: var(--black);
+            padding: 5px 10px;
+            font-size: 0.9rem;
+            margin-right: 8px;
+            margin-top: 8px;
+            margin-bottom: 4px;
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+        }
+
+        .tech-badge.more-badge {
+            background-color: var(--light-gray);
+            cursor: pointer;
+        }
+
+        /* Project carousel */
+        .carousel-container {
+            width: 100%;
+            position: relative;
+            overflow: hidden;
+            margin: 0 auto;
+        }
 
         .projects-carousel {
             display: flex;
@@ -209,16 +271,16 @@
             margin: 0 auto;
         }
 
-        /* Updated Project Card Styles */
+        /* Project cards */
         .project-card {
-            min-width: 90%; /* Use 90% of the carousel width */
+            min-width: 90%;
             height: 600px;
             background-color: var(--white);
             border: 2px solid var(--black);
             display: flex;
             flex-direction: column;
             transition: all 0.5s ease;
-            margin: 0 5%; /* Keep 5% margins on each side */
+            margin: 0 5%;
             opacity: 0.4;
             transform: scale(0.9);
             transform-origin: center;
@@ -240,30 +302,35 @@
             border-color: var(--neon-green);
         }
 
+        .project-card:hover .tech-badge {
+            background-color: var(--neon-green);
+            color: var(--white);
+            border-color: var(--neon-green);
+        }
+
         .project-image {
             width: 100%;
-            height: 300px; /* Slightly reduced fixed height */
-            object-fit: cover; /* This will maintain aspect ratio while covering the area */
+            height: 300px;
+            object-fit: cover;
             filter: grayscale(100%);
             transition: filter 0.3s ease;
-            display: block; /* Ensures the image is a block element */
+            display: block;
         }
 
         .project-card:hover .project-image {
             filter: grayscale(0%);
         }
 
-        /* Updated project content styles */
+        /* Project content */
         .project-content {
             padding: 25px;
             display: flex;
             flex-direction: column;
             flex-grow: 1;
-            height: calc(100% - 300px); /* Remaining height after image */
-            position: relative; /* For absolute position of link */
+            height: calc(100% - 300px);
+            position: relative;
         }
 
-        /* Project title */
         .project-content h3 {
             font-size: 2rem;
             margin-bottom: 15px;
@@ -271,52 +338,17 @@
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 1px;
-            flex-shrink: 0; /* Title should not shrink */
-            line-height: 1.2; /* Tighter line height for better space usage */
+            flex-shrink: 0;
+            line-height: 1.2;
         }
 
-        /* Project description */
         .project-description {
             margin-bottom: 15px;
-            max-height: 140px; /* Fixed height for description */
+            max-height: 140px;
             font-size: 1.2rem;
             flex-grow: 1;
-            overflow-y: auto; /* Make description scrollable if needed */
+            overflow-y: auto;
             transition: max-height 0.3s ease;
-        }
-
-        /* Tech badges container */
-        .tech-badges-container {
-            margin: 10px 0;
-            flex-shrink: 0;
-            margin-top: auto;
-            margin-bottom: 40px; /* Make space for the link */
-            transition: all 0.3s ease;
-        }
-
-        .tech-badge {
-            display: inline-block;
-            border: 1px solid var(--black);
-            background-color: transparent;
-            color: var(--black);
-            padding: 5px 10px;
-            font-size: 0.9rem;
-            margin-right: 8px;
-            margin-top: 8px;
-            margin-bottom: 4px; /* Add bottom margin to ensure border is visible */
-            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
-        }
-
-        /* Special styling for the "more" badge */
-        .tech-badge.more-badge {
-            background-color: var(--light-gray);
-            cursor: pointer;
-        }
-
-        .project-card:hover .tech-badge {
-            background-color: var(--neon-green);
-            color: var(--white);
-            border-color: var(--neon-green);
         }
 
         .project-link {
@@ -326,8 +358,8 @@
             font-weight: 500;
             text-transform: uppercase;
             letter-spacing: 1px;
-            position: absolute; /* Make link position absolute */
-            bottom: 25px; /* Position from bottom of content area */
+            position: absolute;
+            bottom: 25px;
             left: 25px;
             transition: color 0.3s, transform 0.3s;
             font-size: 1.1rem;
@@ -355,7 +387,7 @@
             transform-origin: bottom left;
         }
 
-        /* Carousel navigation buttons */
+        /* Carousel navigation */
         .carousel-nav {
             display: flex;
             justify-content: center;
@@ -387,14 +419,7 @@
             border-color: var(--neon-green);
         }
 
-        .carousel-container {
-            width: 100%;
-            position: relative;
-            overflow: hidden; /* This is crucial for preventing scroll */
-            margin: 0 auto;
-        }
-
-        /* Timeline container styles */
+        /* Experience section */
         .experience-section {
             margin-bottom: 80px;
             position: relative;
@@ -403,10 +428,9 @@
         .timeline-container {
             position: relative;
             min-height: 900px;
-            padding-left: 40px; /* Space for the timeline on the left */
+            padding-left: 40px;
         }
 
-        /* Vertical line */
         .timeline-line {
             position: absolute;
             left: 0;
@@ -417,16 +441,14 @@
             height: calc(100% - 10px);
         }
 
-        /* Timeline entries */
         .timeline-entry {
             position: relative;
             margin-bottom: 60px;
         }
 
-        /* Timeline nodes (circles) */
         .timeline-node {
             position: absolute;
-            left: -51px; /* Position to the left of the entry */
+            left: -51px;
             top: 30px;
             width: 25px;
             height: 25px;
@@ -443,6 +465,9 @@
             padding: 25px 30px;
             transition: all 0.3s ease;
             background-color: var(--white);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
         }
 
         .experience-card:hover {
@@ -451,14 +476,18 @@
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
         }
 
-        /* Make tech badges change color on hover, just like project cards */
         .experience-card:hover .tech-badge {
             background-color: var(--neon-green);
             color: var(--white);
             border-color: var(--neon-green);
         }
 
-        /* Card header styles */
+        .experience-card.expanded {
+            transform: translateY(-5px) scale(1.02);
+            border-color: var(--neon-green);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
         .experience-header {
             margin-bottom: 15px;
             border-bottom: 1px solid var(--light-gray);
@@ -486,7 +515,6 @@
             font-weight: 300;
         }
 
-        /* Card content styles */
         .experience-content p {
             font-size: 1.2rem;
             line-height: 1.6;
@@ -494,30 +522,7 @@
             font-weight: 300;
         }
 
-        /* Education card styles */
-        .education-card {
-            border-color: var(--black);
-            background-color: var(--white);
-        }
-
-        .education-card:hover {
-            border-color: var(--neon-green);
-        }
-        .experience-card {
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
-            transition: all 0.4s ease;
-        }
-
-        /* Expanded state for experience cards */
-        .experience-card.expanded {
-            transform: translateY(-5px) scale(1.02);
-            border-color: var(--neon-green);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
-        }
-
-        /* Hide detailed description by default */
+        /* Expand/collapse for experience cards */
         .detailed-description {
             max-height: 0;
             opacity: 0;
@@ -528,14 +533,12 @@
             border-left: 3px solid var(--neon-green);
         }
 
-        /* Show detailed description when expanded */
         .experience-card.expanded .detailed-description {
             max-height: 500px;
             opacity: 1;
             padding: 10px 15px;
         }
 
-        /* Visual indicator for expandable cards */
         .expand-indicator {
             position: absolute;
             right: 20px;
@@ -574,37 +577,205 @@
         .experience-card:hover .expand-indicator:after {
             background-color: var(--neon-green);
         }
-        .education-divider {
-            position: relative;
-            margin: 40px 0;
-            text-align: right;
-            padding-right: 40px;
-        }
 
-        .education-divider::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 50%;
-            width: calc(100% - 130px);
-            height: 1px;
-            background: linear-gradient(to right, var(--black) 0%, var(--chrome-purple) 100%);
-        }
-
-        .education-divider-label {
-            display: inline-block;
+        /* Education cards */
+        .education-card {
+            border-color: var(--black);
             background-color: var(--white);
-            color: var(--chrome-purple);
-            padding: 5px 10px;
-            font-size: 1rem;
-            font-weight: 500;
-            letter-spacing: 1px;
+        }
+
+        .education-card:hover {
+            border-color: var(--neon-green);
+        }
+
+        /* Hero Landing/Intro Section */
+        .hero-landing {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background-color: #000000;
+            color: #FFFFFF;
+            z-index: 999;
+            will-change: transform, opacity;
+        }
+
+        .hero-content {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 0 40px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            z-index: 10;
+        }
+
+        .grid-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image:
+                linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+            background-size: 20px 20px;
+            opacity: 0.2;
+        }
+
+        .hero-orb-1 {
+            position: absolute;
+            top: 33%;
+            left: 25%;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background-color: #4A0072;
+            filter: blur(80px);
+            opacity: 0.1;
+        }
+
+        .hero-orb-2 {
+            position: absolute;
+            bottom: 33%;
+            right: 25%;
+            width: 400px;
+            height: 400px;
+            border-radius: 50%;
+            background-color: #39FF14;
+            filter: blur(80px);
+            opacity: 0.05;
+        }
+
+        .hero-name {
+            font-size: 3.5rem;
+            font-weight: 600;
             text-transform: uppercase;
-            border: 1px solid var(--chrome-purple);
+            letter-spacing: 2px;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .hero-tagline {
+            font-size: 1.5rem;
+            color: #CCCCCC;
+            margin-bottom: 4rem;
+            text-align: center;
+            max-width: 800px;
+            font-weight: 300;
+        }
+
+        .skills-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 4rem;
+        }
+
+        .skill-item {
+            padding: 0 2rem;
             position: relative;
         }
 
-        /* Responsive design */
+        .skill-glow {
+            position: absolute;
+            inset: 0;
+            filter: blur(20px);
+            background: linear-gradient(45deg, #4A0072, #39FF14);
+            opacity: 0.7;
+        }
+
+        .skill-text {
+            position: relative;
+            z-index: 10;
+            font-size: 3rem;
+            font-weight: 700;
+            text-align: center;
+            color: #FFFFFF;
+            text-shadow: 0 0 15px currentColor;
+        }
+        .skill-text.single-line {
+            line-height: 6rem; /* Adjust to vertically center the text */
+        }
+
+        .skill-item:has(.single-line) .skill-glow {
+            height: 150%; /* Make the glow height more comparable to the multi-line items */
+            top: -30%; /* Center it vertically */
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 3rem;
+            left: 0;
+            right: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .scroll-text {
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2rem;
+            margin-bottom: 1rem;
+            color: #999999;
+        }
+
+        .scroll-icon {
+            width: 1.5rem;
+            height: 2.5rem;
+            border: 2px solid #666666;
+            border-radius: 1rem;
+            display: flex;
+            justify-content: center;
+        }
+
+        .scroll-dot {
+            width: 0.25rem;
+            height: 0.5rem;
+            background-color: #FFFFFF;
+            border-radius: 50%;
+            margin-top: 0.5rem;
+            animation: scrollAnimation 2s infinite;
+        }
+
+        @keyframes scrollAnimation {
+            0% { transform: translateY(0); opacity: 1; }
+            75% { transform: translateY(0.6rem); opacity: 0; }
+            100% { transform: translateY(0); opacity: 0; }
+        }
+
+        .main-content {
+            background-color: #FFFFFF;
+            position: relative;
+            z-index: 990;
+            will-change: transform;
+            padding-top: 0;
+            margin-top: 0;
+        }
+
+        body {
+            overflow-x: hidden; /* Prevent horizontal scrolling */
+        }
+
+        #main-content {
+            position: relative;
+            z-index: 990;
+            background-color: #FFFFFF;
+            margin-top: 0;
+        }
+
+        .scroll-spacer {
+            height: 500vh;
+            visibility: hidden;
+        }
+
+        /* Media Queries */
         @media (max-width: 1200px) {
             .header {
                 text-align: center;
@@ -650,11 +821,11 @@
             }
 
             .project-card {
-                height: 550px; /* Slightly smaller on medium screens */
+                height: 550px;
             }
 
             .project-image {
-                height: 250px; /* Slightly smaller on medium screens */
+                height: 250px;
             }
 
             .project-content {
@@ -662,20 +833,40 @@
             }
 
             .project-description {
-                max-height: 120px; /* Smaller max height for description */
+                max-height: 120px;
                 font-size: 1.1rem;
             }
 
             .project-content h3 {
                 font-size: 1.8rem;
             }
-
-            .elegant-divider {
-                width: 90%;
-            }
         }
 
         @media (max-width: 768px) {
+            body {
+                padding: 20px;
+            }
+
+            .hero-name {
+                font-size: 2.5rem;
+            }
+
+            .hero-tagline {
+                font-size: 1.2rem;
+            }
+
+            .skills-container {
+                flex-direction: column;
+            }
+
+            .skill-item {
+                margin-bottom: 1.5rem;
+            }
+
+            .skill-text {
+                font-size: 2.5rem;
+            }
+
             .timeline-container {
                 padding-left: 30px;
             }
@@ -693,11 +884,11 @@
             }
 
             .project-card {
-                height: 500px; /* Smaller on smaller screens */
+                height: 500px;
             }
 
             .project-image {
-                height: 200px; /* Smaller on smaller screens */
+                height: 200px;
             }
 
             .project-content {
@@ -730,13 +921,13 @@
                 margin-top: 5px;
                 font-size: 0.85rem;
             }
-
-            body {
-                padding: 20px;
-            }
         }
 
         @media (max-width: 480px) {
+            body {
+                padding: 10px;
+            }
+
             .timeline-container {
                 padding-left: 25px;
             }
@@ -752,11 +943,11 @@
             }
 
             .project-card {
-                height: 450px; /* Even smaller for mobile */
+                height: 450px;
             }
 
             .project-image {
-                height: 180px; /* Even smaller for mobile */
+                height: 180px;
             }
 
             .project-content {
@@ -790,260 +981,308 @@
             .tech-badges-container {
                 margin-bottom: 25px;
             }
-
-            body {
-                padding: 10px;
-            }
         }
     </style>
 </head>
 <body>
-    <!-- Main button removed to declutter the page -->
+<!-- Hero Landing (Skills Showcase) -->
+    <div id="hero-landing" class="hero-landing">
+        <!-- Background grid -->
+        <div class="grid-bg"></div>
 
+        <!-- Glowing orbs -->
+        <div class="hero-orb-1"></div>
+        <div class="hero-orb-2"></div>
+
+        <!-- Content container -->
+        <div class="hero-content">
+            <!-- Name and title -->
+            <h1 class="hero-name">Lewis M. Schmidtke</h1>
+            <p class="hero-tagline">
+                Mechanical Engineer with expertise in Machine Learning and Data Science
+            </p>
+
+            <!-- Skills display -->
+            <div class="skills-container">
+                <div class="skill-item">
+                    <div class="skill-glow" style="color: #4A0072;"></div>
+                    <div class="skill-text single-line">
+                        Python
+                    </div>
+                </div>
+
+                <div class="skill-item">
+                    <div class="skill-glow" style="color: #39FF14;"></div>
+                    <div class="skill-text">
+                        Machine<br>Learning
+                    </div>
+                </div>
+
+                <div class="skill-item">
+                    <div class="skill-glow" style="color: #4A0072;"></div>
+                    <div class="skill-text">
+                        Data<br>Science
+                    </div>
+                </div>
+            </div>
+
+            <!-- Scroll indicator -->
+            <div class="scroll-indicator">
+                <p class="scroll-text">Scroll to explore</p>
+                <div class="scroll-icon">
+                    <div class="scroll-dot"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main content -->
+    <div id="main-content" class="main-content">
     <!-- Header with about section -->
-    <div class="header">
-        <div class="about-section">
-            <div class="name-section">
-                <h1>Lewis M. Schmidtke</h1>
-                <!-- Tech icons with brackets moved next to name -->
-                <div class="tech-icons-wrapper">
-                    <span class="tech-bracket" id="left-bracket">[</span>
-                    <div class="tech-icons-container" id="tech-icons">
-                        <!-- Icons will be placed here by JavaScript -->
+        <div class="header">
+            <div class="about-section">
+                <div class="name-section">
+                    <h1>Lewis M. Schmidtke</h1>
+                    <!-- Tech icons with brackets moved next to name -->
+                    <div class="tech-icons-wrapper">
+                        <span class="tech-bracket" id="left-bracket">[</span>
+                        <div class="tech-icons-container" id="tech-icons">
+                            <!-- Icons will be placed here by JavaScript -->
+                        </div>
+                        <span class="tech-bracket" id="right-bracket">]</span>
                     </div>
-                    <span class="tech-bracket" id="right-bracket">]</span>
                 </div>
-            </div>
-            <p>Mechanical Engineer with a B.Sc. from RWTH Aachen and 2 years of professional experience as a
-                Machine Learning and Data Engineer in various industries. Having worked with Autoencoders, Transformers,
-                Computer Vision Algorithms and other Deep Learning Models, I am familiar with the current
-                state-of-the-art in the AI environment. I build solutions that turn data into insights and
-                actionable strategies.</p>
+                <p>Mechanical Engineer with a B.Sc. from RWTH Aachen and 2 years of professional experience as a
+                    Machine Learning and Data Engineer in various industries. Having worked with Autoencoders, Transformers,
+                    Computer Vision Algorithms and other Deep Learning Models, I am familiar with the current
+                    state-of-the-art in the AI environment. I build solutions that turn data into insights and
+                    actionable strategies.</p>
 
-            <div class="interactive-row">
-                <div class="buttons">
-                    <a href="https://www.linkedin.com/in/lewismaximilianschmidtke/" target="_blank" class="button">LinkedIn</a>
-                    <a href="https://github.com/LewisSchmidtke" target="_blank" class="button">GitHub</a>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Elegant divider added between intro and main content -->
-    <div class="elegant-divider"></div>
-
-    <!-- Projects heading -->
-    <h2 class="section-heading">Projects</h2>
-
-    <div class="carousel-container">
-        <!-- Projects section with carousel -->
-        <div class="projects-carousel" id="projects-carousel">
-            <!-- Project 2  -->
-            <div class="project-card">
-                <img src="images/CyberattackImpact.png" alt="Project 2" class="project-image">
-                <div class="project-content">
-                    <h3>Worldwide Cyberattack Data Analysis</h3>
-                    <p class="project-description">Analyzed global cyberattack data from 2015 to 2019 to discover
-                        insights into the industry- and user impact to gain insight and develop solutions for the industry.
-                    </p>
-                    <div class="tech-badges-container">
-                        <span class="tech-badge">Python</span>
-                        <span class="tech-badge">Seaborn</span>
-                        <span class="tech-badge">NumPy</span>
-                        <span class="tech-badge">Data Science</span>
+                <div class="interactive-row">
+                    <div class="buttons">
+                        <a href="https://www.linkedin.com/in/lewismaximilianschmidtke/" target="_blank" class="button">LinkedIn</a>
+                        <a href="https://github.com/LewisSchmidtke" target="_blank" class="button">GitHub</a>
                     </div>
-                    <a href="project2.html" class="project-link">View Project →</a>
-                </div>
-            </div>
-
-            <!-- Project 1 -->
-            <div class="project-card">
-                <img src="images/data-science.png" alt="Project 1" class="project-image">
-                <div class="project-content">
-                    <h3>US Stock Market Analysis and Forecasting</h3>
-                    <p class="project-description">
-                        Analyzed US Stock market data from 2019-2024. Conducted a holistic price development
-                        analysis of multiple tech stocks, individual comparisons of tech stocks, as well as a volatility
-                        analysis. Forecasted the NASDAQ 100 based on prices and volume.
-                    </p>
-                    <div class="tech-badges-container">
-                        <span class="tech-badge">Python</span>
-                        <span class="tech-badge">PyTorch</span>
-                        <span class="tech-badge">Seaborn</span>
-                        <span class="tech-badge">Data Science</span>
-                        <span class="tech-badge">Machine Learning</span>
-                    </div>
-                    <a href="project1.html" class="project-link">View Project →</a>
-                </div>
-            </div>
-
-            <!-- Project 3 (Remains in third position) -->
-            <div class="project-card">
-                <img src="images/neural-network.png" alt="Project 3" class="project-image">
-                <div class="project-content">
-                    <h3>Mathematical Neural Network Implementation</h3>
-                    <p class="project-description">
-                        Developed a Feed Forward Neural Network, only utilizing pure mathematics and no higher
-                        machine learning libraries. The NN was developed to be used as a classifier on
-                        the MNIST dataset.
-                    </p>
-                    <div class="tech-badges-container">
-                        <span class="tech-badge">Math</span>
-                        <span class="tech-badge">Python</span>
-                        <span class="tech-badge">NumPy</span>
-                        <span class="tech-badge">Machine Learning</span>
-                    </div>
-                    <a href="project3.html" class="project-link">View Project →</a>
                 </div>
             </div>
         </div>
 
-        <!-- Carousel navigation dots -->
-        <div class="carousel-nav" id="carousel-nav">
-            <button class="carousel-dot active" data-index="0"></button>
-            <button class="carousel-dot" data-index="1"></button>
-            <button class="carousel-dot" data-index="2"></button>
-        </div>
-    </div>
+        <!-- Elegant divider added between intro and main content -->
+        <div class="elegant-divider"></div>
 
-    <!-- Professional Experience heading -->
-    <h2 class="section-heading" style="margin-top: 60px;">Professional Experience</h2>
+        <!-- Projects heading -->
+        <h2 class="section-heading">Projects</h2>
 
-    <!-- Professional Experience section with timeline -->
-    <div class="experience-section" style="padding: 0 5%;">
-        <!-- Timeline container -->
-        <div class="timeline-container">
-            <!-- Timeline line -->
-            <div class="timeline-line"></div>
-
-            <!-- Experience Entry 4 (Most recent) -->
-            <div class="timeline-entry">
-                <div class="timeline-node"></div>
-                <div class="experience-card">
-                    <div class="experience-header">
-                        <h3 class="experience-title">AI & Data Business Analyst - Student Assistant</h3>
-                        <p class="experience-company">Laboratory for Machine Tools and Production Engineering - RWTH Aachen University</p>
-                        <p class="experience-duration">MAR 2025 - MAY 2025</p>
-                    </div>
-                    <div class="experience-content">
-                        <p>Analyzed data to gain insights into the production process and identify opportunities for the employment of Artificial Intelligence.
+        <div class="carousel-container">
+            <!-- Projects section with carousel -->
+            <div class="projects-carousel" id="projects-carousel">
+                <!-- Project 2  -->
+                <div class="project-card">
+                    <img src="images/CyberattackImpact.png" alt="Project 2" class="project-image">
+                    <div class="project-content">
+                        <h3>Worldwide Cyberattack Data Analysis</h3>
+                        <p class="project-description">Analyzed global cyberattack data from 2015 to 2019 to discover
+                            insights into the industry- and user impact to gain insight and develop solutions for the industry.
                         </p>
                         <div class="tech-badges-container">
                             <span class="tech-badge">Python</span>
-                            <span class="tech-badge">Microsoft Office</span>
-                            <span class="tech-badge">Artificial Intelligence</span>
-                            <span class="tech-badge">Machine Learning</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Experience Entry 3 -->
-            <div class="timeline-entry">
-                <div class="timeline-node"></div>
-                <div class="experience-card">
-                    <div class="experience-header">
-                        <h3 class="experience-title">Artificial Intelligence Research Intern & Thesis | GRADE 1.0 / A+</h3>
-                        <p class="experience-company">Porsche AG</p>
-                        <p class="experience-duration">APR 2024 - OCT 2024</p>
-                    </div>
-                    <div class="experience-content">
-                        <p>Researched the current state of the art in the field of AI in automotive safety and developed novel methods for safety analysis.
-                        </p>
-                        <div class="tech-badges-container">
-                            <span class="tech-badge">PyTorch</span>
-                            <span class="tech-badge">Computer Vision</span>
-                            <span class="tech-badge">Azure ML</span>
+                            <span class="tech-badge">Seaborn</span>
+                            <span class="tech-badge">NumPy</span>
                             <span class="tech-badge">Data Science</span>
                         </div>
+                        <a href="project2.html" class="project-link">View Project →</a>
                     </div>
                 </div>
-            </div>
 
-            <!-- Experience Entry 2 -->
-            <div class="timeline-entry">
-                <div class="timeline-node"></div>
-                <div class="experience-card">
-                    <div class="experience-header">
-                        <h3 class="experience-title">Machine Learning Research Intern</h3>
-                        <p class="experience-company">Bosch Engineering GmbH</p>
-                        <p class="experience-duration">OCT 2023 - MAR 2024</p>
-                    </div>
-                    <div class="experience-content">
-                        <p>Conducted Research, engineered ML architectures and analyzed data, closely working with multiple departments.</p>
+                <!-- Project 1 -->
+                <div class="project-card">
+                    <img src="images/data-science.png" alt="Project 1" class="project-image">
+                    <div class="project-content">
+                        <h3>US Stock Market Analysis and Forecasting</h3>
+                        <p class="project-description">
+                            Analyzed US Stock market data from 2019-2024. Conducted a holistic price development
+                            analysis of multiple tech stocks, individual comparisons of tech stocks, as well as a volatility
+                            analysis. Forecasted the NASDAQ 100 based on prices and volume.
+                        </p>
                         <div class="tech-badges-container">
+                            <span class="tech-badge">Python</span>
                             <span class="tech-badge">PyTorch</span>
-                            <span class="tech-badge">Matlab</span>
-                            <span class="tech-badge">Time-Series-Data</span>
-                            <span class="tech-badge">Autoencoders</span>
+                            <span class="tech-badge">Seaborn</span>
+                            <span class="tech-badge">Data Science</span>
+                            <span class="tech-badge">Machine Learning</span>
                         </div>
+                        <a href="project1.html" class="project-link">View Project →</a>
+                    </div>
+                </div>
+
+                <!-- Project 3 (Remains in third position) -->
+                <div class="project-card">
+                    <img src="images/neural-network.png" alt="Project 3" class="project-image">
+                    <div class="project-content">
+                        <h3>Mathematical Neural Network Implementation</h3>
+                        <p class="project-description">
+                            Developed a Feed Forward Neural Network, only utilizing pure mathematics and no higher
+                            machine learning libraries. The NN was developed to be used as a classifier on
+                            the MNIST dataset.
+                        </p>
+                        <div class="tech-badges-container">
+                            <span class="tech-badge">Math</span>
+                            <span class="tech-badge">Python</span>
+                            <span class="tech-badge">NumPy</span>
+                            <span class="tech-badge">Machine Learning</span>
+                        </div>
+                        <a href="project3.html" class="project-link">View Project →</a>
                     </div>
                 </div>
             </div>
 
-            <!-- Experience Entry 1 (Oldest) -->
-            <div class="timeline-entry">
-                <div class="timeline-node"></div>
-                <div class="experience-card">
-                    <div class="experience-header">
-                        <h3 class="experience-title">Computer Vision Research Thesis | GRADE 1.3 / A</h3>
-                        <p class="experience-company">Laboratory for Machine Tools and Production Engineering - RWTH Aachen University</p>
-                        <p class="experience-duration">APR 2021 - SEP 2022</p>
-                    </div>
-                    <div class="experience-content">
-                        <p>
-                            Improved the current state of the robotic assembly environment by 30%, working together in a team of 3.
-                        </p>
-                        <div class="tech-badges-container">
-                            <span class="tech-badge">ONNX</span>
-                            <span class="tech-badge">Computer Vision</span>
-                            <span class="tech-badge">Robotic Systems</span>
-                            <span class="tech-badge">NumPy</span>
+            <!-- Carousel navigation dots -->
+            <div class="carousel-nav" id="carousel-nav">
+                <button class="carousel-dot active" data-index="0"></button>
+                <button class="carousel-dot" data-index="1"></button>
+                <button class="carousel-dot" data-index="2"></button>
+            </div>
+        </div>
+
+        <!-- Professional Experience heading -->
+        <h2 class="section-heading" style="margin-top: 60px;">Professional Experience</h2>
+
+        <!-- Professional Experience section with timeline -->
+        <div class="experience-section" style="padding: 0 5%;">
+            <!-- Timeline container -->
+            <div class="timeline-container">
+                <!-- Timeline line -->
+                <div class="timeline-line"></div>
+
+                <!-- Experience Entry 4 (Most recent) -->
+                <div class="timeline-entry">
+                    <div class="timeline-node"></div>
+                    <div class="experience-card">
+                        <div class="experience-header">
+                            <h3 class="experience-title">AI & Data Business Analyst - Student Assistant</h3>
+                            <p class="experience-company">Laboratory for Machine Tools and Production Engineering - RWTH Aachen University</p>
+                            <p class="experience-duration">MAR 2025 - MAY 2025</p>
+                        </div>
+                        <div class="experience-content">
+                            <p>Analyzed data to gain insights into the production process and identify opportunities for the employment of Artificial Intelligence.
+                            </p>
+                            <div class="tech-badges-container">
+                                <span class="tech-badge">Python</span>
+                                <span class="tech-badge">Microsoft Office</span>
+                                <span class="tech-badge">Artificial Intelligence</span>
+                                <span class="tech-badge">Machine Learning</span>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="education-divider">
-                <span class="education-divider-label">Education</span>
-            </div>
-            <!-- Education Section -->
-            <div class="timeline-entry">
-                <div class="timeline-node"></div>
-                <div class="experience-card education-card">
-                    <div class="experience-header">
-                        <h3 class="experience-title">M.Sc. Mechanical Engineering | ONGOING</h3>
-                        <p class="experience-company">RWTH Aachen University</p>
-                        <p class="experience-duration">APR 2025 - OCT 2026</p>
-                    </div>
-                    <div class="experience-content">
-                        <p>
-                            Specialization: Automotive Engineering, Aerodynamics and Management
-                        </p>
-                        <div class="tech-badges-container">
-                            <span class="tech-badge">Aerodynamics</span>
-                            <span class="tech-badge">Problem-Solving</span>
-                            <span class="tech-badge">Automotive Engineering</span>
-                            <span class="tech-badge">Management</span>
+
+                <!-- Experience Entry 3 -->
+                <div class="timeline-entry">
+                    <div class="timeline-node"></div>
+                    <div class="experience-card">
+                        <div class="experience-header">
+                            <h3 class="experience-title">Artificial Intelligence Research Intern & Thesis | GRADE 1.0 / A+</h3>
+                            <p class="experience-company">Porsche AG</p>
+                            <p class="experience-duration">APR 2024 - OCT 2024</p>
+                        </div>
+                        <div class="experience-content">
+                            <p>Researched the current state of the art in the field of AI in automotive safety and developed novel methods for safety analysis.
+                            </p>
+                            <div class="tech-badges-container">
+                                <span class="tech-badge">PyTorch</span>
+                                <span class="tech-badge">Computer Vision</span>
+                                <span class="tech-badge">Azure ML</span>
+                                <span class="tech-badge">Data Science</span>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="timeline-entry">
-                <div class="timeline-node"></div>
-                <div class="experience-card education-card">
-                    <div class="experience-header">
-                        <h3 class="experience-title">B.Sc. Mechanical Engineering - Automotive Engineering</h3>
-                        <p class="experience-company">RWTH Aachen University</p>
-                        <p class="experience-duration">OCT 2019 - MAR 2025</p>
+
+                <!-- Experience Entry 2 -->
+                <div class="timeline-entry">
+                    <div class="timeline-node"></div>
+                    <div class="experience-card">
+                        <div class="experience-header">
+                            <h3 class="experience-title">Machine Learning Research Intern</h3>
+                            <p class="experience-company">Bosch Engineering GmbH</p>
+                            <p class="experience-duration">OCT 2023 - MAR 2024</p>
+                        </div>
+                        <div class="experience-content">
+                            <p>Conducted Research, engineered ML architectures and analyzed data, closely working with multiple departments.</p>
+                            <div class="tech-badges-container">
+                                <span class="tech-badge">PyTorch</span>
+                                <span class="tech-badge">Matlab</span>
+                                <span class="tech-badge">Time-Series-Data</span>
+                                <span class="tech-badge">Autoencoders</span>
+                            </div>
+                        </div>
                     </div>
-                    <div class="experience-content">
-                        <p>
-                            Software: Matlab, CAD, Dymola, Java | Relevant Courses: Java, Simulation Theory and Control Theory
-                        </p>
-                        <div class="tech-badges-container">
-                            <span class="tech-badge">Computer-Aided-Design</span>
-                            <span class="tech-badge">Problem-Solving</span>
-                            <span class="tech-badge">High Level Mathematics</span>
+                </div>
+
+                <!-- Experience Entry 1 (Oldest) -->
+                <div class="timeline-entry">
+                    <div class="timeline-node"></div>
+                    <div class="experience-card">
+                        <div class="experience-header">
+                            <h3 class="experience-title">Computer Vision Research Thesis | GRADE 1.3 / A</h3>
+                            <p class="experience-company">Laboratory for Machine Tools and Production Engineering - RWTH Aachen University</p>
+                            <p class="experience-duration">APR 2021 - SEP 2022</p>
+                        </div>
+                        <div class="experience-content">
+                            <p>
+                                Improved the current state of the robotic assembly environment by 30%, working together in a team of 3.
+                            </p>
+                            <div class="tech-badges-container">
+                                <span class="tech-badge">ONNX</span>
+                                <span class="tech-badge">Computer Vision</span>
+                                <span class="tech-badge">Robotic Systems</span>
+                                <span class="tech-badge">NumPy</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="education-divider">
+                    <span class="education-divider-label">Education</span>
+                </div>
+                <!-- Education Section -->
+                <div class="timeline-entry">
+                    <div class="timeline-node"></div>
+                    <div class="experience-card education-card">
+                        <div class="experience-header">
+                            <h3 class="experience-title">M.Sc. Mechanical Engineering | ONGOING</h3>
+                            <p class="experience-company">RWTH Aachen University</p>
+                            <p class="experience-duration">APR 2025 - OCT 2026</p>
+                        </div>
+                        <div class="experience-content">
+                            <p>
+                                Specialization: Automotive Engineering, Aerodynamics and Management
+                            </p>
+                            <div class="tech-badges-container">
+                                <span class="tech-badge">Aerodynamics</span>
+                                <span class="tech-badge">Problem-Solving</span>
+                                <span class="tech-badge">Automotive Engineering</span>
+                                <span class="tech-badge">Management</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="timeline-entry">
+                    <div class="timeline-node"></div>
+                    <div class="experience-card education-card">
+                        <div class="experience-header">
+                            <h3 class="experience-title">B.Sc. Mechanical Engineering - Automotive Engineering</h3>
+                            <p class="experience-company">RWTH Aachen University</p>
+                            <p class="experience-duration">OCT 2019 - MAR 2025</p>
+                        </div>
+                        <div class="experience-content">
+                            <p>
+                                Software: Matlab, CAD, Dymola, Java | Relevant Courses: Java, Simulation Theory and Control Theory
+                            </p>
+                            <div class="tech-badges-container">
+                                <span class="tech-badge">Computer-Aided-Design</span>
+                                <span class="tech-badge">Problem-Solving</span>
+                                <span class="tech-badge">High Level Mathematics</span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -1051,14 +1290,134 @@
         </div>
     </div>
 
+    <div class="scroll-spacer"></div>
+
     <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize all main components
+            setupHeroLandingAnimation();
+            setupTimelineEntries();
+            setupTechIcons();
+            setupCarousel();
+
+            // Initial content management
+            const allCards = document.querySelectorAll('.project-card');
+            allCards.forEach(manageProjectCardContent);
+            manageTechBadges();
+
+            // Add resize event listener with debounce
+            let resizeTimeout;
+            window.addEventListener('resize', function() {
+                clearTimeout(resizeTimeout);
+                resizeTimeout = setTimeout(function() {
+                    document.querySelectorAll('.project-card').forEach(manageProjectCardContent);
+                    manageTechBadges();
+                }, 100);
+            });
+
+            // Add transition end listener to carousel
+            const carousel = document.getElementById('projects-carousel');
+            if (carousel) {
+                carousel.addEventListener('transitionend', function() {
+                    document.querySelectorAll('.project-card').forEach(manageProjectCardContent);
+                    manageTechBadges();
+                });
+            }
+        });
+
+        function setupHeroLandingAnimation() {
+            const heroLanding = document.getElementById('hero-landing');
+            const mainContent = document.getElementById('main-content');
+            const scrollSpacer = document.querySelector('.scroll-spacer');
+
+            if (!heroLanding || !mainContent) return;
+
+            // Remove the scroll spacer
+            if (scrollSpacer) {
+                scrollSpacer.style.display = 'none';
+                scrollSpacer.style.height = '0';
+            }
+
+            // Set initial positions
+            heroLanding.style.transform = 'translateY(0)';
+            mainContent.style.transform = 'translateY(100vh)';
+            heroLanding.style.position = 'fixed';
+            mainContent.style.position = 'relative';
+            mainContent.style.top = '0';
+            mainContent.style.marginTop = '0';
+            mainContent.style.paddingTop = '0';
+
+            // Define transition points
+            const transitionStart = 0; // Start immediately
+            const transitionLength = window.innerHeight;
+
+            // Scroll handler with improved stability
+            function handleScroll() {
+                const scrollPosition = window.scrollY;
+
+                // Calculate progress
+                const progress = Math.min(scrollPosition / transitionLength, 1);
+
+                // Apply the fade out effect to both hero background and its content
+                const opacity = Math.max(0, 1 - progress * 2.3).toFixed(2);
+                heroLanding.style.opacity = opacity;
+
+                // Ensure all hero content follows the same opacity
+                const heroContent = heroLanding.querySelector('.hero-content');
+                if (heroContent) {
+                    heroContent.style.opacity = opacity;
+                }
+
+                // Main content follows directly underneath hero
+                if (progress < 1) {
+                    // Hero moves up based on scroll
+                    heroLanding.style.transform = `translateY(0)`;
+                    // Content stays at bottom of viewport until hero is gone
+                    mainContent.style.transform = `translateY(${(1 - progress) * 100}vh)`;
+                } else {
+                    // Once hero is gone, fix content at top
+                    heroLanding.style.visibility = 'hidden';
+                    mainContent.style.transform = 'translateY(0)';
+                }
+
+                if (progress >= 0.7) {
+                    heroLanding.style.visibility = 'hidden';
+                } else {
+                    heroLanding.style.visibility = 'visible';
+                }
+            }
+
+            // Throttled scroll event
+            let ticking = false;
+            window.addEventListener('scroll', function() {
+                if (!ticking) {
+                    window.requestAnimationFrame(function() {
+                        handleScroll();
+                        ticking = false;
+                    });
+                    ticking = true;
+                }
+            });
+
+            // Handle window resize
+            window.addEventListener('resize', function() {
+                // Recalculate transition points
+                transitionLength = window.innerHeight;
+                handleScroll();
+            });
+
+            // Initialize on page load
+            handleScroll();
+        }
+
+        /**
+         * Setup expandable timeline entries
+         */
         function setupTimelineEntries() {
             const timelineEntries = document.querySelectorAll('.timeline-entry');
 
             timelineEntries.forEach(entry => {
                 const card = entry.querySelector('.experience-card');
-
-                // Skip if no card found
                 if (!card) return;
 
                 // Create detailed description element if it doesn't exist
@@ -1080,59 +1439,7 @@
                     const title = card.querySelector('.experience-title');
                     const titleText = title ? title.textContent.trim() : '';
 
-                    // Populate with detailed content
-                    if (titleText.includes('AI & Data Business Analyst')) {
-                        detailedDesc.innerHTML = `
-                            <p>Conducted data analysis on manufacturing datasets, analyzing over 100k data points.</p>
-                            <p>Identified key areas for AI implementation, resulting in comprehensive reports and presentations.</p>
-                        `;
-                    } else if (titleText.includes('Artificial Intelligence Research Intern & Thesis')) {
-                        detailedDesc.innerHTML = `
-                            <p>Engineered a novel deep learning architectures for processing vehicular geometries and
-                            properties, optimizing crash safety analysis.</p>
-                            <p>Engineered End-to-End machine learning pipelines using PyTorch and Python,
-                            ensuring high performance data handling and model training.</p>
-                            <p>Created new data formats to improve computational efficiency in safety simulations.</p>
-                            <p>Applied data visualization techniques (Matplotlib, Seaborn) to derive insights from
-                            large-scale vehicle safety datasets.</p>
-                        `;
-                    } else if (titleText.includes('Machine Learning Research Intern')) {
-                        detailedDesc.innerHTML = `
-                            <p>Developed AI models to analyze time-series data from vehicle sensors, identifying critical
-                            patterns in yaw-, pitch-, slip angle and acceleration metrics.</p>
-                            <p>Enhanced code modularity and efficiency, improving computational performance and
-                            scalability in AI-driven vehicle analysis</p>
-                            <p>Implemented and optimized deep learning and tree-based models (Autencoders,
-                            Random Forest, etc.).</p>
-                            <p>Conducted vehicle simulations in IPGCarMaker.</p>
-                        `;
-                    } else if (titleText.includes('Computer Vision Research Thesis')) {
-                        detailedDesc.innerHTML = `
-                            <p>Designed an AI-powered object detection system for industrial assembly robots, improving
-                            robotic object perception by 30%.</p>
-                            <p>Developed path-planning algorithms in ROS, enabling collaborative robots to navigate
-                            complex environments with greater accuracy.</p>
-                            <p>Integrated depth-sensing and 3D perception into robotic systems, optimizing real-time
-                            object tracking for semi-automated manufacturing.</p>
-                        `;
-                    } else if (titleText.includes('B.Sc. Mechanical Engineering')) {
-                        detailedDesc.innerHTML = `
-                            <p>Completed a rigorous engineering curriculum with special focus on automotive systems,
-                            </p>
-                            <p>Developed proficiency in industry-standard engineering software including MATLAB, Simulink,
-                            Siemens NX CAD, and Dymola for system modeling.</p>
-                            <p>Completed coursework in advanced mathematics, thermodynamics, fluid dynamics and
-                            materials science, creating a strong foundation for engineering applications.</p>
-                        `;
-                    } else if (titleText.includes('M.Sc. Mechanical Engineering')) {
-                        detailedDesc.innerHTML = `
-                            <p>Detailed Description will follow.</p>
-                        `;
-                    } else {
-                        detailedDesc.innerHTML = `
-                            <p>Detailed description not available for this entry.</p>
-                        `;
-                    }
+                    detailedDesc.innerHTML = getJobDescriptionHTML(titleText);
 
                     // Append detailed description to content section
                     contentSection.appendChild(detailedDesc);
@@ -1140,10 +1447,9 @@
 
                 // Add click handler to toggle expanded state
                 card.addEventListener('click', function() {
-                    // Toggle expanded class
                     this.classList.toggle('expanded');
 
-                    // Scroll element into view if expanded
+                    // If expanded, close others and scroll into view
                     if (this.classList.contains('expanded')) {
                         // Close any other expanded cards
                         document.querySelectorAll('.experience-card.expanded').forEach(expandedCard => {
@@ -1161,7 +1467,67 @@
             });
         }
 
-        // Tech icons with local image paths
+        /**
+         * Get HTML description based on job title
+         * @param {string} titleText - The job title
+         * @return {string} HTML content
+         */
+        function getJobDescriptionHTML(titleText) {
+            if (titleText.includes('AI & Data Business Analyst')) {
+                return `
+                    <p>Conducted data analysis on manufacturing datasets, analyzing over 100k data points.</p>
+                    <p>Identified key areas for AI implementation, resulting in comprehensive reports and presentations.</p>
+                `;
+            } else if (titleText.includes('Artificial Intelligence Research Intern & Thesis')) {
+                return `
+                    <p>Engineered a novel deep learning architectures for processing vehicular geometries and
+                    properties, optimizing crash safety analysis.</p>
+                    <p>Engineered End-to-End machine learning pipelines using PyTorch and Python,
+                    ensuring high performance data handling and model training.</p>
+                    <p>Created new data formats to improve computational efficiency in safety simulations.</p>
+                    <p>Applied data visualization techniques (Matplotlib, Seaborn) to derive insights from
+                    large-scale vehicle safety datasets.</p>
+                `;
+            } else if (titleText.includes('Machine Learning Research Intern')) {
+                return `
+                    <p>Developed AI models to analyze time-series data from vehicle sensors, identifying critical
+                    patterns in yaw-, pitch-, slip angle and acceleration metrics.</p>
+                    <p>Enhanced code modularity and efficiency, improving computational performance and
+                    scalability in AI-driven vehicle analysis</p>
+                    <p>Implemented and optimized deep learning and tree-based models (Autencoders,
+                    Random Forest, etc.).</p>
+                    <p>Conducted vehicle simulations in IPGCarMaker.</p>
+                `;
+            } else if (titleText.includes('Computer Vision Research Thesis')) {
+                return `
+                    <p>Designed an AI-powered object detection system for industrial assembly robots, improving
+                    robotic object perception by 30%.</p>
+                    <p>Developed path-planning algorithms in ROS, enabling collaborative robots to navigate
+                    complex environments with greater accuracy.</p>
+                    <p>Integrated depth-sensing and 3D perception into robotic systems, optimizing real-time
+                    object tracking for semi-automated manufacturing.</p>
+                `;
+            } else if (titleText.includes('B.Sc. Mechanical Engineering')) {
+                return `
+                    <p>Completed a rigorous engineering curriculum with special focus on automotive systems,
+                    </p>
+                    <p>Developed proficiency in industry-standard engineering software including MATLAB, Simulink,
+                    Siemens NX CAD, and Dymola for system modeling.</p>
+                    <p>Completed coursework in advanced mathematics, thermodynamics, fluid dynamics and
+                    materials science, creating a strong foundation for engineering applications.</p>
+                `;
+            } else if (titleText.includes('M.Sc. Mechanical Engineering')) {
+                return `
+                    <p>Detailed Description will follow.</p>
+                `;
+            } else {
+                return `
+                    <p>Detailed description not available for this entry.</p>
+                `;
+            }
+        }
+
+        // Tech icons configuration
         const techIcons = [
             { name: 'Python', image: 'images/python-icon.png' },
             { name: 'MATLAB', image: 'images/matlab-icon.png' },
@@ -1173,18 +1539,21 @@
             { name: 'Azure', image: 'images/azure-icon.png' },
         ];
 
-        // Function to create and animate tech icons with right-aligned start
+        /**
+         * Set up animated tech icons
+         */
         function setupTechIcons() {
             const container = document.getElementById('tech-icons');
             const leftBracket = document.getElementById('left-bracket');
-            const rightBracket = document.getElementById('right-bracket');
+            if (!container || !leftBracket) return;
+
             const iconWidth = 46; // Icon width + margin
 
             // Start with brackets close together
             leftBracket.style.marginRight = '5px';
 
             // Create icons but keep them invisible and at position 0
-            techIcons.forEach((icon, index) => {
+            techIcons.forEach(icon => {
                 const iconElement = document.createElement('div');
                 iconElement.className = 'tech-icon';
 
@@ -1202,14 +1571,14 @@
             // Get all created icons
             const iconElements = document.querySelectorAll('.tech-icon');
 
-            // Function to animate icons sequentially with faster animation
+            // Function to animate icons sequentially
             function animateNextIcon(index) {
                 if (index >= iconElements.length) return;
 
                 // Calculate new space needed for the bracket
                 const bracketOffset = (index + 1) * iconWidth;
 
-                // Make current icon visible with pop animation faster
+                // Make current icon visible with pop animation
                 setTimeout(() => {
                     // Move left bracket to make space
                     leftBracket.style.marginRight = bracketOffset + 'px';
@@ -1218,10 +1587,10 @@
                     iconElements[index].style.opacity = '1';
                     iconElements[index].style.transform = 'scale(1.2)';
 
-                    // Settle back to normal size quicker
+                    // Settle back to normal size
                     setTimeout(() => {
                         iconElements[index].style.transform = 'scale(1)';
-                    }, 70); // Further reduced from 100ms
+                    }, 70);
 
                     // Position all icons based on their index from the right
                     for (let i = 0; i <= index; i++) {
@@ -1229,27 +1598,31 @@
                         iconElements[i].style.right = position + 'px';
                     }
 
-                    // Animate the next icon after a shorter delay
+                    // Animate the next icon after a delay
                     setTimeout(() => {
                         animateNextIcon(index + 1);
-                    }, 150); // Further reduced from 200ms
-                }, 50); // Further reduced from 80ms
+                    }, 150);
+                }, 50);
             }
 
-            // Start the animation sequence with a shorter initial delay
+            // Start the animation sequence with a delay
             setTimeout(() => {
                 animateNextIcon(0);
-            }, 200); // Further reduced from 300ms
+            }, 200);
         }
 
-        // Carousel functionality
+        // Carousel state
         let currentIndex = 0;
-        const totalProjects = 3;
 
+        /**
+         * Set up projects carousel functionality
+         */
         function setupCarousel() {
             const carousel = document.getElementById('projects-carousel');
             const dots = document.querySelectorAll('.carousel-dot');
             const cards = document.querySelectorAll('.project-card');
+
+            if (!carousel || !cards.length) return;
 
             // Start on the second project (index 1)
             currentIndex = 1;
@@ -1268,7 +1641,7 @@
                 });
             });
 
-            // Add click handlers to project cards to navigate to project pages
+            // Add click handlers to project cards
             cards.forEach((card, index) => {
                 // Find the project link within the card
                 const projectLink = card.querySelector('.project-link');
@@ -1276,7 +1649,7 @@
 
                 card.addEventListener('click', (e) => {
                     // If clicking on the link itself, let the default action happen
-                    if (e.target === projectLink || projectLink.contains(e.target)) {
+                    if (e.target === projectLink || (projectLink && projectLink.contains(e.target))) {
                         return;
                     }
 
@@ -1292,57 +1665,56 @@
             });
         }
 
+        /**
+         * Update carousel position and active states
+         */
         function updateCarousel() {
             const carousel = document.getElementById('projects-carousel');
             const cards = document.querySelectorAll('.project-card');
             const dots = document.querySelectorAll('.carousel-dot');
 
-            // Calculate positions - offset calculation adjusted for proper visibility
+            if (!carousel) return;
+
+            // Calculate positions
             const cardWidth = 100; // Full width of each card (including margins)
             const offset = currentIndex * -cardWidth;
             carousel.style.transform = `translateX(${offset}%)`;
 
-            // Update active states
+            // Update active states for cards
             cards.forEach((card, index) => {
-                card.classList.remove('active');
-
-                // Apply active class to current card
-                if (index === currentIndex) {
-                    card.classList.add('active');
-                }
+                card.classList.toggle('active', index === currentIndex);
             });
 
             // Update active dot
             dots.forEach((dot, index) => {
-                if (index === currentIndex) {
-                    dot.classList.add('active');
-                } else {
-                    dot.classList.remove('active');
-                }
+                dot.classList.toggle('active', index === currentIndex);
             });
 
-            // After carousel update, check all cards for content visibility
+            // After carousel update, check content visibility
             setTimeout(() => {
-                cards.forEach(card => {
-                    manageProjectCardContent(card);
-                });
+                cards.forEach(manageProjectCardContent);
                 manageTechBadges();
             }, 100);
         }
-        // Function to check and manage content visibility in project cards
-        function manageProjectCardContent(specificCard = null) {
-            // If a specific card is provided, only process that card
-            // Otherwise, process all project cards
-            const projectCards = specificCard ? [specificCard] : document.querySelectorAll('.project-card');
 
-            projectCards.forEach(card => {
-                const contentContainer = card.querySelector('.project-content');
-                const title = card.querySelector('h3');
-                const description = card.querySelector('.project-description');
-                const badgesContainer = card.querySelector('.tech-badges-container');
-                const projectLink = card.querySelector('.project-link');
+        /**
+         * Manage content visibility in project cards
+         * @param {HTMLElement} card - The card to manage (optional)
+         */
+        function manageProjectCardContent(card) {
+            // If no specific card is provided, process all project cards
+            const cardsToProcess = card ? [card] : document.querySelectorAll('.project-card');
 
-                // Reset visibility first - all elements should be visible by default
+            cardsToProcess.forEach(currentCard => {
+                const contentContainer = currentCard.querySelector('.project-content');
+                if (!contentContainer) return;
+
+                const title = currentCard.querySelector('h3');
+                const description = currentCard.querySelector('.project-description');
+                const badgesContainer = currentCard.querySelector('.tech-badges-container');
+                const projectLink = currentCard.querySelector('.project-link');
+
+                // Reset visibility first
                 if (description) description.style.display = 'block';
                 if (badgesContainer) badgesContainer.style.display = 'block';
                 if (projectLink) projectLink.style.display = 'block';
@@ -1360,10 +1732,10 @@
                 const badgesHeight = badgesContainer ? badgesContainer.offsetHeight : 0;
                 const linkHeight = projectLink ? projectLink.offsetHeight : 0;
 
-                // Total content height
-                const totalContentHeight = titleHeight + descriptionHeight + badgesHeight + linkHeight + 20; // Margin
+                // Total content height with margins
+                const totalContentHeight = titleHeight + descriptionHeight + badgesHeight + linkHeight + 20;
 
-                // Only hide elements if total content height exceeds available space
+                // Hide elements if total content height exceeds available space
                 if (totalContentHeight > availableHeight) {
                     // Hide elements in priority order
                     if (description) {
@@ -1376,13 +1748,10 @@
                             if (badgesContainer) {
                                 badgesContainer.style.display = 'none';
 
-                                // Check again
+                                // Check again for link
                                 const finalHeight = titleHeight + linkHeight + 10;
-                                if (finalHeight > availableHeight) {
-                                    // Last resort, hide link
-                                    if (projectLink) {
-                                        projectLink.style.display = 'none';
-                                    }
+                                if (finalHeight > availableHeight && projectLink) {
+                                    projectLink.style.display = 'none';
                                 }
                             }
                         }
@@ -1397,156 +1766,116 @@
             });
         }
 
-        // Function to manage tech badges when space is limited
+        /**
+         * Manage tech badges when space is limited
+         */
         function manageTechBadges() {
-          const badgeContainers = document.querySelectorAll('.tech-badges-container');
+            const badgeContainers = document.querySelectorAll('.tech-badges-container');
 
-          badgeContainers.forEach(container => {
-            const parentCard = container.closest('.project-card');
-            if (!parentCard) return;
+            badgeContainers.forEach(container => {
+                const parentCard = container.closest('.project-card');
+                if (!parentCard) return;
 
-            const contentDiv = parentCard.querySelector('.project-content');
-            if (!contentDiv) return;
+                const contentDiv = parentCard.querySelector('.project-content');
+                if (!contentDiv) return;
 
-            // Get available width
-            const contentWidth = contentDiv.clientWidth;
-            const containerPadding = parseInt(window.getComputedStyle(contentDiv).paddingLeft) * 2;
-            const availableWidth = contentWidth - containerPadding;
+                // Get available width
+                const contentWidth = contentDiv.clientWidth;
+                const containerPadding = parseInt(window.getComputedStyle(contentDiv).paddingLeft) * 2;
+                const availableWidth = contentWidth - containerPadding;
 
-            // Get all badges
-            const badges = Array.from(container.querySelectorAll('.tech-badge'));
+                // Get all badges
+                const badges = Array.from(container.querySelectorAll('.tech-badge'));
 
-            // Reset all badges to visible
-            badges.forEach(badge => {
-              if (!badge.classList.contains('more-badge')) {
-                badge.style.display = 'inline-block';
-              }
-            });
-
-            // Get "more" badge if it exists, or create one
-            let moreBadge = container.querySelector('.more-badge');
-            if (!moreBadge) {
-              moreBadge = document.createElement('span');
-              moreBadge.className = 'tech-badge more-badge';
-              moreBadge.style.display = 'none';
-              container.appendChild(moreBadge);
-            }
-
-            // Check if badges fit in container
-            let totalWidth = 0;
-            let hiddenCount = 0;
-            let visibleBadges = [];
-
-            badges.forEach(badge => {
-              if (badge.classList.contains('more-badge')) return;
-
-              const badgeWidth = badge.offsetWidth;
-              totalWidth += badgeWidth + 8; // Add some margin
-
-              if (totalWidth > availableWidth) {
-                badge.style.display = 'none';
-                hiddenCount++;
-              } else {
-                visibleBadges.push(badge);
-              }
-            });
-
-            // If we have hidden badges, show the "more" badge
-            if (hiddenCount > 0) {
-              moreBadge.textContent = `+${hiddenCount} more`;
-              moreBadge.style.display = 'inline-block';
-
-              // Check if adding the "more" badge causes overflow
-              totalWidth = moreBadge.offsetWidth + 8; // More badge width + margin
-
-              for (let i = visibleBadges.length - 1; i >= 0; i--) {
-                const badge = visibleBadges[i];
-                totalWidth += badge.offsetWidth + 8;
-
-                if (totalWidth > availableWidth) {
-                  badge.style.display = 'none';
-                  hiddenCount++;
-                  moreBadge.textContent = `+${hiddenCount} more`;
-                }
-              }
-            } else {
-              moreBadge.style.display = 'none';
-            }
-
-            // Add tooltip to more badge to show all hidden technologies
-            if (hiddenCount > 0) {
-              const hiddenBadges = badges.filter(badge =>
-                badge.style.display === 'none' && !badge.classList.contains('more-badge')
-              );
-
-              const hiddenTechs = hiddenBadges.map(badge => badge.textContent.trim()).join(', ');
-              moreBadge.title = hiddenTechs;
-
-              // Set up click handler to show all badges
-              moreBadge.onclick = function(e) {
-                e.stopPropagation(); // Prevent card click
-
-                // Toggle between showing all and collapsed
-                const isShowingAll = moreBadge.classList.contains('showing-all');
-
-                if (isShowingAll) {
-                  // Revert to collapsed state
-                  manageTechBadges();
-                  moreBadge.classList.remove('showing-all');
-                } else {
-                  // Show all badges
-                  badges.forEach(badge => {
+                // Reset all badges to visible
+                badges.forEach(badge => {
                     if (!badge.classList.contains('more-badge')) {
-                      badge.style.display = 'inline-block';
+                        badge.style.display = 'inline-block';
                     }
-                  });
-                  moreBadge.style.display = 'none';
-                  moreBadge.classList.add('showing-all');
+                });
+
+                // Get "more" badge if it exists, or create one
+                let moreBadge = container.querySelector('.more-badge');
+                if (!moreBadge) {
+                    moreBadge = document.createElement('span');
+                    moreBadge.className = 'tech-badge more-badge';
+                    moreBadge.style.display = 'none';
+                    container.appendChild(moreBadge);
                 }
-              };
-            }
-          });
-        }
 
-        // Run when DOM is loaded
-        document.addEventListener('DOMContentLoaded', () => {
-            setupTimelineEntries();
-            setupTechIcons();
-            setupCarousel();
+                // Check if badges fit in container
+                let totalWidth = 0;
+                let hiddenCount = 0;
+                let visibleBadges = [];
 
-            // Apply content management to all cards after initial load
-            const allCards = document.querySelectorAll('.project-card');
-            allCards.forEach(card => {
-                manageProjectCardContent(card);
-            });
-            manageTechBadges();
-        });
+                badges.forEach(badge => {
+                    if (badge.classList.contains('more-badge')) return;
 
-        // Add resize event listener
-        let resizeTimeout;
-        window.addEventListener('resize', function() {
-            // Clear the timeout if it exists
-            if (resizeTimeout) {
-                clearTimeout(resizeTimeout);
-            }
+                    const badgeWidth = badge.offsetWidth;
+                    totalWidth += badgeWidth + 8; // Add margin
 
-            // Set a new timeout
-            resizeTimeout = setTimeout(function() {
-                const allCards = document.querySelectorAll('.project-card');
-                allCards.forEach(card => {
-                    manageProjectCardContent(card);
+                    if (totalWidth > availableWidth) {
+                        badge.style.display = 'none';
+                        hiddenCount++;
+                    } else {
+                        visibleBadges.push(badge);
+                    }
                 });
-                manageTechBadges();
-            }, 100); // 100ms debounce
-        });
-        const carousel = document.getElementById('projects-carousel');
-        if (carousel) {
-            carousel.addEventListener('transitionend', function() {
-                const allCards = document.querySelectorAll('.project-card');
-                allCards.forEach(card => {
-                    manageProjectCardContent(card);
-                });
-                manageTechBadges();
+
+                // If we have hidden badges, show the "more" badge
+                if (hiddenCount > 0) {
+                    moreBadge.textContent = `+${hiddenCount} more`;
+                    moreBadge.style.display = 'inline-block';
+
+                    // Check if adding the "more" badge causes overflow
+                    totalWidth = moreBadge.offsetWidth + 8;
+
+                    for (let i = visibleBadges.length - 1; i >= 0; i--) {
+                        const badge = visibleBadges[i];
+                        totalWidth += badge.offsetWidth + 8;
+
+                        if (totalWidth > availableWidth) {
+                            badge.style.display = 'none';
+                            hiddenCount++;
+                            moreBadge.textContent = `+${hiddenCount} more`;
+                        }
+                    }
+                } else {
+                    moreBadge.style.display = 'none';
+                }
+
+                // Add tooltip and click handler if badges are hidden
+                if (hiddenCount > 0) {
+                    const hiddenBadges = badges.filter(badge =>
+                        badge.style.display === 'none' && !badge.classList.contains('more-badge')
+                    );
+
+                    const hiddenTechs = hiddenBadges.map(badge => badge.textContent.trim()).join(', ');
+                    moreBadge.title = hiddenTechs;
+
+                    // Set up click handler to show all badges
+                    moreBadge.onclick = function(e) {
+                        e.stopPropagation(); // Prevent card click
+
+                        // Toggle between showing all and collapsed
+                        const isShowingAll = moreBadge.classList.contains('showing-all');
+
+                        if (isShowingAll) {
+                            // Revert to collapsed state
+                            manageTechBadges();
+                            moreBadge.classList.remove('showing-all');
+                        } else {
+                            // Show all badges
+                            badges.forEach(badge => {
+                                if (!badge.classList.contains('more-badge')) {
+                                    badge.style.display = 'inline-block';
+                                }
+                            });
+                            moreBadge.style.display = 'none';
+                            moreBadge.classList.add('showing-all');
+                        }
+                    };
+                }
             });
         }
     </script>
