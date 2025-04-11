@@ -21,8 +21,11 @@
             --mid-gray: #666666;
             --chrome-purple: #4A0072;
             --neon-green: #39FF14;
+            --purple-glow: #9C27B0;
+            --dark-green: #006400;
         }
 
+        /* Base layout */
         body {
             background-color: var(--white);
             color: var(--black);
@@ -32,6 +35,7 @@
             margin: 0 auto;
             letter-spacing: 0.5px;
             position: relative;
+            overflow-x: hidden; /* Prevent horizontal scrolling */
         }
 
         footer {
@@ -44,11 +48,69 @@
             width: 100%;
         }
 
+        /* Common elements - dividers, buttons, badges */
+        .elegant-divider {
+            height: 3px;
+            background-color: var(--chrome-purple);
+            margin: 20px auto 40px auto;
+            width: 90%;
+            position: relative;
+        }
+
+        .button {
+            padding: 12px 24px;
+            border: 1px solid var(--chrome-purple);
+            background-color: var(--chrome-purple);
+            color: var(--white);
+            font-weight: 500;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .button:hover {
+            background-color: var(--neon-green);
+            color: var(--white);
+            border-color: var(--neon-green);
+            transform: scale(1.05) translateY(-3px);
+            box-shadow: 0 5px 15px rgba(57, 255, 20, 0.2);
+        }
+
+        .tech-badge {
+            display: inline-block;
+            border: 1px solid var(--black);
+            background-color: transparent;
+            color: var(--black);
+            padding: 5px 10px;
+            font-size: 0.9rem;
+            margin-right: 8px;
+            margin-top: 8px;
+            margin-bottom: 4px;
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+        }
+
+        .tech-badge.more-badge {
+            background-color: var(--light-gray);
+            cursor: pointer;
+        }
+
+        .tech-badges-container {
+            margin: 10px 0;
+            flex-shrink: 0;
+            margin-top: auto;
+            margin-bottom: 40px;
+            transition: all 0.3s ease;
+        }
+
         /* Header and About section */
         .header {
             margin-top: 0;
             margin-bottom: 20px;
-            padding: 40px 20px 20px 20px; /* Increased top padding */
+            padding: 40px 20px 20px 20px;
             display: flex;
             justify-content: center;
         }
@@ -83,46 +145,21 @@
             text-align: justify;
         }
 
-        /* Dividers */
-        .elegant-divider {
-            height: 3px;
-            background-color: var(--chrome-purple);
-            margin: 20px auto 40px auto; /* Adjusted top margin */
-            width: 90%;
-            position: relative;
+        /* Interactive elements row */
+        .interactive-row {
+            display: flex;
+            align-items: center;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
         }
 
-        .education-divider {
-            position: relative;
-            margin: 40px 0;
-            text-align: right;
-            padding-right: 40px;
+        .buttons {
+            display: flex;
+            gap: 15px;
+            margin-right: 15px;
         }
 
-        .education-divider::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 50%;
-            width: calc(100% - 130px);
-            height: 1px;
-            background: linear-gradient(to right, var(--black) 0%, var(--chrome-purple) 100%);
-        }
-
-        .education-divider-label {
-            display: inline-block;
-            background-color: var(--white);
-            color: var(--chrome-purple);
-            padding: 5px 10px;
-            font-size: 1rem;
-            font-weight: 500;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            border: 1px solid var(--chrome-purple);
-            position: relative;
-        }
-
-        /* Section Headings */
+        /* Section headings */
         .section-heading {
             font-size: 2.8rem;
             font-weight: 600;
@@ -145,44 +182,7 @@
             background-color: var(--chrome-purple);
         }
 
-        /* Button styles */
-        .interactive-row {
-            display: flex;
-            align-items: center;
-            margin-bottom: 40px;
-            flex-wrap: wrap;
-        }
-
-        .buttons {
-            display: flex;
-            gap: 15px;
-            margin-right: 15px;
-        }
-
-        .button {
-            padding: 12px 24px;
-            border: 1px solid var(--chrome-purple);
-            background-color: var(--chrome-purple);
-            color: var(--white);
-            font-weight: 500;
-            font-size: 1.1rem;
-            cursor: pointer;
-            transition: all 0.3s;
-            text-decoration: none;
-            display: inline-block;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .button:hover {
-            background-color: var(--neon-green);
-            color: var(--white);
-            border-color: var(--neon-green);
-            transform: scale(1.05) translateY(-3px);
-            box-shadow: 0 5px 15px rgba(57, 255, 20, 0.2);
-        }
-
-        /* Tech icons */
+        /* Tech icons animation */
         .tech-icons-wrapper {
             display: flex;
             align-items: center;
@@ -227,34 +227,7 @@
             object-fit: contain;
         }
 
-        /* Tech badges */
-        .tech-badges-container {
-            margin: 10px 0;
-            flex-shrink: 0;
-            margin-top: auto;
-            margin-bottom: 40px;
-            transition: all 0.3s ease;
-        }
-
-        .tech-badge {
-            display: inline-block;
-            border: 1px solid var(--black);
-            background-color: transparent;
-            color: var(--black);
-            padding: 5px 10px;
-            font-size: 0.9rem;
-            margin-right: 8px;
-            margin-top: 8px;
-            margin-bottom: 4px;
-            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
-        }
-
-        .tech-badge.more-badge {
-            background-color: var(--light-gray);
-            cursor: pointer;
-        }
-
-        /* Project carousel */
+        /* Projects carousel */
         .carousel-container {
             width: 100%;
             position: relative;
@@ -459,8 +432,8 @@
             z-index: 2;
         }
 
-        /* Experience cards */
-        .experience-card {
+        /* Experience and education cards */
+        .experience-card, .education-card {
             border: 2px solid var(--black);
             padding: 25px 30px;
             transition: all 0.3s ease;
@@ -470,13 +443,13 @@
             overflow: hidden;
         }
 
-        .experience-card:hover {
+        .experience-card:hover, .education-card:hover {
             transform: translateY(-5px);
             border-color: var(--neon-green);
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
         }
 
-        .experience-card:hover .tech-badge {
+        .experience-card:hover .tech-badge, .education-card:hover .tech-badge {
             background-color: var(--neon-green);
             color: var(--white);
             border-color: var(--neon-green);
@@ -578,14 +551,35 @@
             background-color: var(--neon-green);
         }
 
-        /* Education cards */
-        .education-card {
-            border-color: var(--black);
-            background-color: var(--white);
+        /* Education divider */
+        .education-divider {
+            position: relative;
+            margin: 40px 0;
+            text-align: right;
+            padding-right: 40px;
         }
 
-        .education-card:hover {
-            border-color: var(--neon-green);
+        .education-divider::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            width: calc(100% - 130px);
+            height: 1px;
+            background: linear-gradient(to right, var(--black) 0%, var(--chrome-purple) 100%);
+        }
+
+        .education-divider-label {
+            display: inline-block;
+            background-color: var(--white);
+            color: var(--chrome-purple);
+            padding: 5px 10px;
+            font-size: 1rem;
+            font-weight: 500;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            border: 1px solid var(--chrome-purple);
+            position: relative;
         }
 
         /* Hero Landing/Intro Section */
@@ -614,6 +608,7 @@
             z-index: 10;
         }
 
+        /* Background elements */
         .grid-bg {
             position: absolute;
             top: 0;
@@ -627,30 +622,15 @@
             opacity: 0.2;
         }
 
-        .hero-orb-1 {
+        .particle {
             position: absolute;
-            top: 33%;
-            left: 25%;
-            width: 300px;
-            height: 300px;
             border-radius: 50%;
-            background-color: #4A0072;
-            filter: blur(80px);
-            opacity: 0.1;
+            z-index: 0;
+            pointer-events: none;
+            transition: all 1.2s cubic-bezier(0.19, 1, 0.22, 1);
         }
 
-        .hero-orb-2 {
-            position: absolute;
-            bottom: 33%;
-            right: 25%;
-            width: 400px;
-            height: 400px;
-            border-radius: 50%;
-            background-color: #39FF14;
-            filter: blur(80px);
-            opacity: 0.05;
-        }
-
+        /* Hero content elements */
         .hero-name {
             font-size: 3.5rem;
             font-weight: 600;
@@ -689,68 +669,53 @@
             opacity: 0.7;
         }
 
-        .skill-text {
-            position: relative;
-            z-index: 10;
-            font-size: 3rem;
-            font-weight: 700;
-            text-align: center;
-            color: #FFFFFF;
-            text-shadow: 0 0 15px currentColor;
-        }
-        .skill-text.single-line {
-            line-height: 6rem; /* Adjust to vertically center the text */
-        }
-
         .skill-item:has(.single-line) .skill-glow {
-            height: 150%; /* Make the glow height more comparable to the multi-line items */
-            top: -30%; /* Center it vertically */
+            height: 150%;
+            top: -30%;
         }
 
-        .scroll-indicator {
+        /* Scroll indicators */
+        .scroll-indicator, .new-scroll-indicator {
             position: absolute;
-            bottom: 3rem;
+            bottom: 48px;
             left: 0;
             right: 0;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
+            z-index: 10;
         }
 
-        .scroll-text {
-            font-size: 0.875rem;
+        .scroll-text, .scroll-text-new {
+            font-size: 12px;
             text-transform: uppercase;
-            letter-spacing: 0.2rem;
-            margin-bottom: 1rem;
-            color: #999999;
+            letter-spacing: 3px;
+            margin-bottom: 16px;
+            color: #757575;
+            font-weight: 300;
         }
 
-        .scroll-icon {
-            width: 1.5rem;
-            height: 2.5rem;
-            border: 2px solid #666666;
-            border-radius: 1rem;
+        .scroll-indicator-container, .scroll-icon {
+            width: 24px;
+            height: 40px;
+            border: 1px solid #424242;
+            border-radius: 12px;
             display: flex;
             justify-content: center;
         }
 
-        .scroll-dot {
-            width: 0.25rem;
-            height: 0.5rem;
-            background-color: #FFFFFF;
+        .scroll-dot-new, .scroll-dot {
+            width: 4px;
+            height: 8px;
+            background-color: white;
             border-radius: 50%;
-            margin-top: 0.5rem;
-            animation: scrollAnimation 2s infinite;
+            margin-top: 8px;
+            animation: bounce 1.5s infinite;
         }
 
-        @keyframes scrollAnimation {
-            0% { transform: translateY(0); opacity: 1; }
-            75% { transform: translateY(0.6rem); opacity: 0; }
-            100% { transform: translateY(0); opacity: 0; }
-        }
-
-        .main-content {
+        /* Main content container */
+        .main-content, #main-content {
             background-color: #FFFFFF;
             position: relative;
             z-index: 990;
@@ -759,24 +724,229 @@
             margin-top: 0;
         }
 
-        body {
-            overflow-x: hidden; /* Prevent horizontal scrolling */
-        }
-
-        #main-content {
-            position: relative;
-            z-index: 990;
-            background-color: #FFFFFF;
-            margin-top: 0;
-        }
-
         .scroll-spacer {
-            height: 500vh;
+            height: 0;
             visibility: hidden;
         }
 
-        /* Media Queries */
+        /* Animated skill panels */
+        .skill-panel {
+            width: 270px;
+            height: 320px;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.7), rgba(0,0,0,0.5));
+            border: 1px solid rgba(104, 30, 184, 0.2);
+            border-radius: 4px;
+            overflow: hidden;
+            position: relative;
+            transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+            cursor: pointer;
+            z-index: 10;
+        }
+
+        .skill-panel.green-theme {
+            border: 1px solid rgba(57, 255, 20, 0.2);
+        }
+
+        .skill-panel:hover {
+            box-shadow: 0 0 25px rgba(104, 30, 184, 0.3);
+        }
+
+        .skill-panel.green-theme:hover {
+            box-shadow: 0 0 25px rgba(57, 255, 20, 0.3);
+        }
+
+        .skill-panel-inner {
+            position: absolute;
+            inset: 0;
+            overflow: hidden;
+        }
+
+        /* Panel illuminated edges */
+        .edge-top, .edge-left, .edge-bottom {
+            position: absolute;
+            background-color: var(--purple-glow);
+        }
+
+        .edge-top {
+            top: 0;
+            left: 10px;
+            right: 10px;
+            height: 1px;
+            opacity: 0.8;
+        }
+
+        .edge-left {
+            top: 10px;
+            left: 0;
+            width: 1px;
+            height: 40px;
+            opacity: 0.7;
+        }
+
+        .edge-bottom {
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            opacity: 0.5;
+        }
+
+        .green-theme .edge-top,
+        .green-theme .edge-left,
+        .green-theme .edge-bottom {
+            background-color: var(--neon-green);
+        }
+
+        /* Panel content */
+        .panel-content {
+            padding: 8px;
+            flex-direction: column;
+            height: 100%;
+            position: relative;
+            z-index: 10;
+            display: flex;
+        }
+
+        .panel-expertise {
+            margin-bottom: 2px;
+            font-weight: 300;
+            letter-spacing: 0.2em;
+            font-size: 12px;
+        }
+
+        .purple-text {
+            color: var(--purple-glow);
+        }
+
+        .green-text {
+            color: var(--neon-green);
+        }
+
+        .panel-title {
+            font-size: 24px;
+            font-weight: 300;
+            letter-spacing: 3px;
+            margin-bottom: 24px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+        }
+
+        .skill-glow {
+            position: absolute;
+            top: 24px;
+            right: -16px;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background-color: var(--purple-glow);
+            opacity: 0.05;
+            filter: blur(10px);
+        }
+
+        .green-theme .skill-glow {
+            background-color: #008000;
+        }
+
+        /* Skill metrics */
+        .skill-metrics {
+            margin-top: 8px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .skill-metric {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .metric-name {
+            font-size: 14px;
+            color: #9e9e9e;
+        }
+
+        .metric-bar {
+            width: 96px;
+            height: 3px;
+            background-color: #424242;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .metric-fill {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            background-color: var(--purple-glow);
+            transition: width 0.5s ease-out;
+        }
+
+
+        .green-theme .metric-fill {
+            background-color: var(--neon-green);
+        }
+
+        /* Tech tags in skill panels */
+        .tech-tag-container {
+            margin-top: auto;
+            padding-top: 24px;
+        }
+
+        .tech-tag-title {
+            font-size: 12px;
+            color: #757575;
+            margin-bottom: 12px;
+        }
+
+        .tech-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .tech-tag {
+            font-size: 12px;
+            padding: 4px 12px;
+            border: 1px solid var(--chrome-purple);
+            color: var(--purple-glow);
+        }
+
+        .green-theme .tech-tag {
+            border: 1px solid var(--dark-green);
+            color: var(--neon-green);
+        }
+
+        /* Animations */
+        @keyframes scrollAnimation {
+            0% { transform: translateY(0); opacity: 1; }
+            75% { transform: translateY(0.6rem); opacity: 0; }
+            100% { transform: translateY(0); opacity: 0; }
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(8px); }
+            60% { transform: translateY(4px); }
+        }
+
+        @keyframes particleAttract {
+            0% {
+                transform: translate(0, 0) scale(1);
+                opacity: 0.3;
+            }
+            100% {
+                transform: translate(0, 0) scale(1.5);
+                opacity: 0.8;
+            }
+        }
+
+        /* Media Queries - consolidated and organized by breakpoint */
         @media (max-width: 1200px) {
+            /* Header adjustments */
             .header {
                 text-align: center;
             }
@@ -795,6 +965,7 @@
                 margin-bottom: 15px;
             }
 
+            /* Interactive row adjustments */
             .interactive-row {
                 justify-content: center;
                 flex-direction: column;
@@ -810,6 +981,7 @@
                 margin-bottom: 15px;
             }
 
+            /* Section heading adjustments */
             .section-heading {
                 text-align: center;
                 padding-left: 0;
@@ -820,6 +992,7 @@
                 transform: translateX(-50%);
             }
 
+            /* Project card adjustments */
             .project-card {
                 height: 550px;
             }
@@ -847,6 +1020,7 @@
                 padding: 20px;
             }
 
+            /* Hero section adjustments */
             .hero-name {
                 font-size: 2.5rem;
             }
@@ -859,14 +1033,7 @@
                 flex-direction: column;
             }
 
-            .skill-item {
-                margin-bottom: 1.5rem;
-            }
-
-            .skill-text {
-                font-size: 2.5rem;
-            }
-
+            /* Timeline adjustments */
             .timeline-container {
                 padding-left: 30px;
             }
@@ -875,6 +1042,7 @@
                 left: -36px;
             }
 
+            /* Experience card adjustments */
             .experience-title {
                 font-size: 1.5rem;
             }
@@ -883,6 +1051,7 @@
                 font-size: 1.2rem;
             }
 
+            /* Project card adjustments */
             .project-card {
                 height: 500px;
             }
@@ -911,6 +1080,7 @@
                 left: 15px;
             }
 
+            /* Tech badge adjustments */
             .tech-badges-container {
                 margin-bottom: 30px;
             }
@@ -928,6 +1098,7 @@
                 padding: 10px;
             }
 
+            /* Timeline adjustments */
             .timeline-container {
                 padding-left: 25px;
             }
@@ -938,10 +1109,12 @@
                 height: 16px;
             }
 
+            /* Experience card adjustments */
             .experience-card {
                 padding: 20px;
             }
 
+            /* Project card adjustments */
             .project-card {
                 height: 450px;
             }
@@ -965,6 +1138,7 @@
                 margin-bottom: 8px;
             }
 
+            /* Tech badge adjustments */
             .tech-badge {
                 padding: 2px 6px;
                 margin-right: 4px;
@@ -982,17 +1156,17 @@
                 margin-bottom: 25px;
             }
         }
+
     </style>
 </head>
 <body>
 <!-- Hero Landing (Skills Showcase) -->
-    <div id="hero-landing" class="hero-landing">
+    <<div id="hero-landing" class="hero-landing">
         <!-- Background grid -->
         <div class="grid-bg"></div>
 
-        <!-- Glowing orbs -->
-        <div class="hero-orb-1"></div>
-        <div class="hero-orb-2"></div>
+        <!-- Particles will be added by JavaScript -->
+        <div id="particles-container"></div>
 
         <!-- Content container -->
         <div class="hero-content">
@@ -1002,35 +1176,158 @@
                 Mechanical Engineer with expertise in Machine Learning and Data Science
             </p>
 
-            <!-- Skills display -->
-            <div class="skills-container">
-                <div class="skill-item">
-                    <div class="skill-glow" style="color: #4A0072;"></div>
-                    <div class="skill-text single-line">
-                        Python
+            <!-- Skills panels -->
+            <div class="skills-container" style="display: flex; justify-content: center; align-items: stretch; gap: 32px; z-index: 10; position: relative;">
+                <!-- Machine Learning Panel -->
+                <div class="skill-panel" id="ml-panel">
+                    <div class="skill-panel-inner">
+                        <!-- Illuminated edges -->
+                        <div class="edge-top"></div>
+                        <div class="edge-left"></div>
+
+                        <!-- Content -->
+                        <div class="panel-content">
+                            <div class="panel-expertise purple-text">EXPERTISE</div>
+                            <h3 class="panel-title">MACHINE LEARNING</h3>
+                            <div class="skill-glow"></div>
+
+                            <div class="skill-metrics">
+                                <div class="skill-metric">
+                                    <span class="metric-name">Neural Networks</span>
+                                    <div class="metric-bar">
+                                        <div class="metric-fill" id="ml-metric-1"></div>
+                                    </div>
+                                </div>
+                                <div class="skill-metric">
+                                    <span class="metric-name">Computer Vision</span>
+                                    <div class="metric-bar">
+                                        <div class="metric-fill" id="ml-metric-2"></div>
+                                    </div>
+                                </div>
+                                <div class="skill-metric">
+                                    <span class="metric-name">Deep Learning</span>
+                                    <div class="metric-bar">
+                                        <div class="metric-fill" id="ml-metric-3"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="tech-tag-container">
+                                <div class="tech-tag-title">TECHNOLOGIES</div>
+                                <div class="tech-tags">
+                                    <span class="tech-tag">PyTorch</span>
+                                    <span class="tech-tag">TensorFlow</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Bottom illuminated edge -->
+                        <div class="edge-bottom"></div>
                     </div>
                 </div>
 
-                <div class="skill-item">
-                    <div class="skill-glow" style="color: #39FF14;"></div>
-                    <div class="skill-text">
-                        Machine<br>Learning
+                <!-- Python Panel -->
+                <div class="skill-panel green-theme" id="python-panel">
+                    <div class="skill-panel-inner">
+                        <!-- Illuminated edges -->
+                        <div class="edge-top"></div>
+                        <div class="edge-left"></div>
+
+                        <!-- Content -->
+                        <div class="panel-content">
+                            <div class="panel-expertise green-text">EXPERTISE</div>
+                            <h3 class="panel-title">PYTHON</h3>
+                            <div class="skill-glow"></div>
+
+                            <div class="skill-metrics">
+                                <div class="skill-metric">
+                                    <span class="metric-name">Data Processing</span>
+                                    <div class="metric-bar">
+                                        <div class="metric-fill" id="python-metric-1"></div>
+                                    </div>
+                                </div>
+                                <div class="skill-metric">
+                                    <span class="metric-name">Algorithms</span>
+                                    <div class="metric-bar">
+                                        <div class="metric-fill" id="python-metric-2"></div>
+                                    </div>
+                                </div>
+                                <div class="skill-metric">
+                                    <span class="metric-name">Data Structures</span>
+                                    <div class="metric-bar">
+                                        <div class="metric-fill" id="python-metric-3"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="tech-tag-container">
+                                <div class="tech-tag-title">TECHNOLOGIES</div>
+                                <div class="tech-tags">
+                                    <span class="tech-tag">NumPy</span>
+                                    <span class="tech-tag">Pandas</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Bottom illuminated edge -->
+                        <div class="edge-bottom"></div>
                     </div>
                 </div>
 
-                <div class="skill-item">
-                    <div class="skill-glow" style="color: #4A0072;"></div>
-                    <div class="skill-text">
-                        Data<br>Science
+                <!-- Data Science Panel -->
+                <div class="skill-panel" id="ds-panel">
+                    <div class="skill-panel-inner">
+                        <!-- Illuminated edges -->
+                        <div class="edge-top"></div>
+                        <div class="edge-left"></div>
+
+                        <!-- Content -->
+                        <div class="panel-content">
+                            <div class="panel-expertise purple-text">EXPERTISE</div>
+                            <h3 class="panel-title">DATA SCIENCE</h3>
+                            <div class="skill-glow"></div>
+
+                            <div class="skill-metrics">
+                                <div class="skill-metric">
+                                    <span class="metric-name">Statistical Analysis</span>
+                                    <div class="metric-bar">
+                                        <div class="metric-fill" id="ds-metric-1"></div>
+                                    </div>
+                                </div>
+                                <div class="skill-metric">
+                                    <span class="metric-name">Visualization</span>
+                                    <div class="metric-bar">
+                                        <div class="metric-fill" id="ds-metric-2"></div>
+                                    </div>
+                                </div>
+                                <div class="skill-metric">
+                                    <span class="metric-name">Modeling</span>
+                                    <div class="metric-bar">
+                                        <div class="metric-fill" id="ds-metric-3"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="tech-tag-container">
+                                <div class="tech-tag-title">TECHNOLOGIES</div>
+                                <div class="tech-tags">
+                                    <span class="tech-tag">Matplotlib</span>
+                                    <span class="tech-tag">Scikit-learn</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Bottom illuminated edge -->
+                        <div class="edge-bottom"></div>
                     </div>
                 </div>
             </div>
 
             <!-- Scroll indicator -->
-            <div class="scroll-indicator">
-                <p class="scroll-text">Scroll to explore</p>
-                <div class="scroll-icon">
-                    <div class="scroll-dot"></div>
+            <div class="new-scroll-indicator">
+                <p class="scroll-text-new">Scroll to explore</p>
+                <div class="scroll-indicator-container">
+                    <div class="scroll-dot-new"></div>
                 </div>
             </div>
         </div>
@@ -1299,6 +1596,7 @@
             setupTimelineEntries();
             setupTechIcons();
             setupCarousel();
+            setupSkillsShowcase();
 
             // Initial content management
             const allCards = document.querySelectorAll('.project-card');
@@ -1380,11 +1678,16 @@
                     mainContent.style.transform = 'translateY(0)';
                 }
 
-                if (progress >= 0.7) {
+                if (progress >= 0.5) {
+                    heroLanding.style.opacity = '0';
                     heroLanding.style.visibility = 'hidden';
+                    heroLanding.style.pointerEvents = 'none';
                 } else {
                     heroLanding.style.visibility = 'visible';
+                    heroLanding.style.pointerEvents = 'auto';
                 }
+
+
             }
 
             // Throttled scroll event
@@ -1876,6 +2179,128 @@
                         }
                     };
                 }
+            });
+        }
+        function setupSkillsShowcase() {
+            // Get panel elements
+            const mlPanel = document.getElementById('ml-panel');
+            const pythonPanel = document.getElementById('python-panel');
+            const dsPanel = document.getElementById('ds-panel');
+
+            // Create floating particles
+            generateParticles(100);
+
+            // Set up hover effects for panels
+            setupPanelHoverEffects(mlPanel, 'ml');
+            setupPanelHoverEffects(pythonPanel, 'python');
+            setupPanelHoverEffects(dsPanel, 'ds');
+        }
+
+        function generateParticles(count) {
+            const container = document.getElementById('particles-container');
+            if (!container) return;
+
+            // Get CSS variables from :root
+            const rootStyles = getComputedStyle(document.documentElement);
+            const purpleColor = rootStyles.getPropertyValue('--purple-glow').trim();
+            const greenColor = rootStyles.getPropertyValue('--neon-green').trim();
+
+            for (let i = 0; i < count; i++) {
+                const size = Math.random() * 6 + 3;
+                const rand = Math.random();
+                const isGreen = rand < 0.4;
+                const isPurple = !isGreen && rand < 0.9;
+
+
+                let color = "#333"; // fallback
+                if (isPurple) color = purpleColor;
+                if (isGreen) color = greenColor;
+
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.dataset.isPurple = isPurple;
+                particle.dataset.isGreen = isGreen;
+
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                particle.style.left = `${Math.random() * 100}%`;
+                particle.style.top = `${Math.random() * 100}%`;
+                particle.style.backgroundColor = color;
+                particle.style.opacity = (Math.random() * 0.3 + 0.1).toString();
+
+                container.appendChild(particle);
+            }
+        }
+
+
+        function setupPanelHoverEffects(panel, skillType) {
+            if (!panel) return;
+
+            panel.addEventListener('mouseenter', () => {
+                // Animate skill metrics
+                const metrics = panel.querySelectorAll('.metric-fill');
+                metrics.forEach((metric, index) => {
+                    let fillValue;
+                    switch (skillType) {
+                        case 'ml':
+                            fillValue = index === 0 ? '90%' : index === 1 ? '85%' : '80%';
+                            break;
+                        case 'python':
+                            fillValue = index === 0 ? '95%' : index === 1 ? '70%' : '65%';
+                            break;
+                        case 'ds':
+                            fillValue = index === 0 ? '92%' : index === 1 ? '88%' : '90%';
+                            break;
+                        default:
+                            fillValue = '85%';
+                    }
+                    metric.style.width = fillValue;
+                });
+
+                // Affect particles
+                const particles = document.querySelectorAll('.particle');
+                particles.forEach(particle => {
+                    const isPurple = particle.dataset.isPurple === 'true';
+                    const isGreen = particle.dataset.isGreen === 'true';
+
+                    if (skillType === 'ml' && isPurple) {
+                        const offsetX = (Math.random() - 0.5) * 40;
+                        const offsetY = (Math.random() - 0.5) * 40;
+                        const rotation = (Math.random() - 0.5) * 60; // -30 to +30 degrees
+                        particle.style.transform = `scale(1.8) translate(${offsetX}px, ${offsetY}px) rotate(${rotation}deg)`;
+                        particle.style.boxShadow = '0 0 8px rgba(128, 0, 255, 0.6)';
+                    } else if (skillType === 'python' && isGreen) {
+                        const offsetX = (Math.random() - 0.5) * 40;
+                        const offsetY = (Math.random() - 0.5) * 40;
+                        const rotation = (Math.random() - 0.5) * 60; // -30 to +30 degrees
+                        particle.style.transform = `scale(1.8) translate(${offsetX}px, ${offsetY}px) rotate(${rotation}deg)`;
+                        particle.style.boxShadow = '0 0 8px rgba(57, 255, 20, 0.6)';
+                    } else if (skillType === 'ds' && isPurple) {
+                        const offsetX = (Math.random() - 0.5) * 40;
+                        const offsetY = (Math.random() - 0.5) * 40;
+                        const rotation = (Math.random() - 0.5) * 60; // -30 to +30 degrees
+                        particle.style.transform = `scale(1.8) translate(${offsetX}px, ${offsetY}px) rotate(${rotation}deg)`;
+                        particle.style.boxShadow = '0 0 8px rgba(128, 0, 255, 0.6)';
+                    } else {
+                        particle.style.transform = 'scale(0.8)';
+                        particle.style.boxShadow = 'none';
+                    }
+                });
+            });
+
+            panel.addEventListener('mouseleave', () => {
+                // Reset skill metrics
+                const metrics = panel.querySelectorAll('.metric-fill');
+                metrics.forEach(metric => {
+                    metric.style.width = '0%';
+                });
+
+                // Reset particles
+                const particles = document.querySelectorAll('.particle');
+                particles.forEach(particle => {
+                    particle.style.transform = 'scale(1)';
+                    particle.style.boxShadow = 'none';
+                });
             });
         }
     </script>
