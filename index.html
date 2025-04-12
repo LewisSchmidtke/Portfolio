@@ -609,18 +609,7 @@
         }
 
         /* Background elements */
-        .grid-bg {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-image:
-                linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
-            background-size: 20px 20px;
-            opacity: 0.2;
-        }
+
 
         .particle {
             position: absolute;
@@ -733,7 +722,7 @@
         .skill-panel {
             width: 270px;
             height: 320px;
-            background: linear-gradient(to bottom, rgba(0,0,0,0.7), rgba(0,0,0,0.5));
+            background: var(--black);
             border: 1px solid rgba(104, 30, 184, 0.2);
             border-radius: 4px;
             overflow: hidden;
@@ -1162,8 +1151,6 @@
 <body>
 <!-- Hero Landing (Skills Showcase) -->
     <<div id="hero-landing" class="hero-landing">
-        <!-- Background grid -->
-        <div class="grid-bg"></div>
 
         <!-- Particles will be added by JavaScript -->
         <div id="particles-container"></div>
@@ -2206,7 +2193,7 @@
             const greenColor = rootStyles.getPropertyValue('--neon-green').trim();
 
             for (let i = 0; i < count; i++) {
-                const size = Math.random() * 6 + 3;
+                const size = Math.random() * 10 + 4;
                 const rand = Math.random();
                 const isGreen = rand < 0.4;
                 const isPurple = !isGreen && rand < 0.9;
@@ -2264,21 +2251,21 @@
                     const isGreen = particle.dataset.isGreen === 'true';
 
                     if (skillType === 'ml' && isPurple) {
-                        const offsetX = (Math.random() - 0.5) * 40;
-                        const offsetY = (Math.random() - 0.5) * 40;
-                        const rotation = (Math.random() - 0.5) * 60; // -30 to +30 degrees
+                        const offsetX = (Math.random() - 0.5) * 400;
+                        const offsetY = (Math.random() - 0.5) * 400;
+                        const rotation = (Math.random() - 0.5) * 400; // -30 to +30 degrees
                         particle.style.transform = `scale(1.8) translate(${offsetX}px, ${offsetY}px) rotate(${rotation}deg)`;
                         particle.style.boxShadow = '0 0 8px rgba(128, 0, 255, 0.6)';
                     } else if (skillType === 'python' && isGreen) {
-                        const offsetX = (Math.random() - 0.5) * 40;
-                        const offsetY = (Math.random() - 0.5) * 40;
-                        const rotation = (Math.random() - 0.5) * 60; // -30 to +30 degrees
+                        const offsetX = (Math.random() - 0.5) * 400;
+                        const offsetY = (Math.random() - 0.5) * 400;
+                        const rotation = (Math.random() - 0.5) * 400; // -30 to +30 degrees
                         particle.style.transform = `scale(1.8) translate(${offsetX}px, ${offsetY}px) rotate(${rotation}deg)`;
                         particle.style.boxShadow = '0 0 8px rgba(57, 255, 20, 0.6)';
                     } else if (skillType === 'ds' && isPurple) {
-                        const offsetX = (Math.random() - 0.5) * 40;
-                        const offsetY = (Math.random() - 0.5) * 40;
-                        const rotation = (Math.random() - 0.5) * 60; // -30 to +30 degrees
+                        const offsetX = (Math.random() - 0.5) * 400;
+                        const offsetY = (Math.random() - 0.5) * 400;
+                        const rotation = (Math.random() - 0.5) * 400; // -30 to +30 degrees
                         particle.style.transform = `scale(1.8) translate(${offsetX}px, ${offsetY}px) rotate(${rotation}deg)`;
                         particle.style.boxShadow = '0 0 8px rgba(128, 0, 255, 0.6)';
                     } else {
