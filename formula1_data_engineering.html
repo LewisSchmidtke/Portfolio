@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>US Stock Market Analysis and Forecasting | Lewis M. Schmidtke</title>
+    <title>Formula 1 Data Analysis and Processing Dashboard | Lewis M. Schmidtke</title>
     <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         /* Reset and base styles */
@@ -584,16 +584,15 @@
 
     <!-- Hero section with image and overlay text -->
     <section class="project-hero">
-        <img src="images/StockPriceRollingAVG(Tech).png" alt="US Stock Market Analysis and Forecasting" class="hero-image">
+        <img src="images/TGR_Intro_Img.jpg" alt="US Stock Market Analysis and Forecasting" class="hero-image">
         <div class="hero-content">
-            <h1 class="project-title">US Stock Market Analysis and Forecasting</h1>
-            <p class="project-subtitle">Analyzing and forecasting US stock market trends with a focus on tech stocks, market volatility, and price prediction</p>
+            <h1 class="project-title">"TeDMoS" - Telemetry Analysis Dashboard for Motorsport Sessions</h1>
+            <p class="project-subtitle">Processing and Analysis of motorsport data from practices, qualifying sessions and races.</p>
             <div class="hero-badges">
+                <span class="tech-badge">Automotive Engineering</span>
                 <span class="tech-badge">Python</span>
-                <span class="tech-badge">PyTorch</span>
-                <span class="tech-badge">Seaborn</span>
-                <span class="tech-badge">Data Science</span>
-                <span class="tech-badge">Machine Learning</span>
+                <span class="tech-badge">Telemetry Data</span>
+                <span class="tech-badge">Data Engineering</span>
             </div>
         </div>
     </section>
@@ -605,110 +604,115 @@
             <div class="content-section">
                 <h2 class="section-heading">Project Overview</h2>
                 <p class="content-text">
-                    This project explores US Stock market data from 2019-2024, focusing on in-depth analysis of tech stock performance, market trends, and future predictions. Using advanced data science techniques and machine learning models, I conducted holistic price development analyses of multiple tech stocks, individual comparisons between trade volume and stock prices, and volatility analyses of financial markets including selected cryptocurrencies.
+                    This Project is currently ongoing and explores the processing and analysis of various motorsport data
+                    - currently Formula 1 - provided by openF1 API endpoints. It aims to build a holistic and interactive
+                    dashboard that can be utilized to view and analyze data of any session, from any driver in any lap to
+                    gain insights into performance, lap time and on-track events.
                 </p>
                 <p class="content-text">
-                    The financial markets generate vast amounts of data every day, and making sense of these patterns requires both technical expertise and analytical insight. This project aimed to leverage data science and machine learning techniques to extract meaningful patterns from US stock market data, with a particular focus on technology stocks during the volatile 2019-2024 period.
+                    Race cars produce an incredible amount of data. Telemetry sensors, system management, gps data and
+                    much more, are all broadcast constantly throughout any session. Analyzing this data and extracting
+                    key information requires both engineering expertise and analytical insight, to derive meaningful
+                    strategies. This project aims to leverage data science techniques to extract meaningful patterns
+                    from Motorsport data, to be able to quickly gain actionable insights and improve on-track performance.
                 </p>
                 <p class="content-text">
-                    By analyzing historical price movements, trading volumes, and market volatility across different sectors, I developed models that could identify correlations between different market behaviors and potentially predict future movements. This project demonstrates the power of data-driven approaches in understanding financial markets and making informed investment decisions.
+                    Through my engineering background I was able to create meaningful graphics that are relevant for
+                    improving performance and monitoring component functionality and health. I am currently working on
+                    building the interactive dashboard around these graphics, so that a user-friendly interface exists,
+                    to quickly gain insights into these vast amounts of data.
                 </p>
             </div>
 
             <div class="content-section">
                 <h2 class="section-heading">Methodology</h2>
                 <p class="content-text">
-                    The analysis was conducted using Python with libraries including Pandas for data manipulation, Seaborn and Matplotlib for visualization, and PyTorch for building predictive models. The methodology included:
+                    The analysis was conducted using Python with libraries including openF1 for data acquisition, Pandas for data manipulation and Seaborn & Matplotlib for visualization.
+                    The methodology included:
                 </p>
                 <ul class="methodology-list">
-                    <li>Data collection to gather historical stock prices, trading volumes, and market indices</li>
-                    <li>Exploratory data analysis to identify trends, correlations, and anomalies</li>
-                    <li>Data preprocessing for the machine learning applications</li>
-                    <li>Development of machine learning models for price forecasting using PyTorch - FFNN and LSTM</li>
+                    <li>Event & Session based data collection from various openF1 API endpoints</li>
+                    <li>Exploratory data analysis to identify key metrics and graphics that are relevant for the dashboard</li>
+                    <li>Data preprocessing to merge various data sources, to optimize calculation performances</li>
+                    <li>Interactive Dashboard development using Streamlit</li>
                 </ul>
             </div>
 
             <!-- Data visualizations gallery -->
             <div class="content-section">
-                <h2 class="section-heading">Key Visualizations</h2>
+                <h2 class="section-heading">Example Visualizations</h2>
                 <p class="content-text">
-                    Visualizations played a crucial role in understanding market dynamics and communicating findings.
-                    The project produced several insightful visualizations that reveal patterns in stock market behavior.
+                    Visualizations play a crucial role in quickly understanding data and understanding critical patterns.
+                    During this project various visualizations were created, with a few examples below:
                 </p>
 
                 <div class="viz-gallery">
-                    <div class="viz-item">
-                        <img src="images/Price_vs_Volume_(Tech).png" alt="Tech Stock Price Comparison" class="viz-image">
-                        <div class="viz-caption">Comparative analysis of major tech stock price and trade movements (2019-2024)</div>
-                    </div>
-                    <div class="viz-item">
-                        <img src="images/Volatility_Tech+Crypto.png" alt="Market Volatility Analysis" class="viz-image">
-                        <div class="viz-caption">Volatility analysis of traditional financial markets compared to cryptocurrencies</div>
+                    <div class="viz-item viz-item-bottom">
+                        <img src="images/lap_telemetry.png" alt="Single Lap Telemetry" class="viz-image">
+                        <div class="viz-caption">Single Lap telemetry including throttle percentage, brake state, drs state, velocity and engine rpm.</div>
                     </div>
                     <div class="viz-item viz-item-bottom">
-                        <img src="images/risk-return_comparison.png" alt="Riks-Return Analysis" class="viz-image">
-                        <div class="viz-caption">Risk-Return analysis of all major assets in 6 month periods</div>
+                        <img src="images/catalunya_qualifying.png" alt="Qualifying times Catalunya" class="viz-image">
+                        <div class="viz-caption">Driver Lap Times of the Catalunya Qualifying, with corresponding tire compound and qualifying position.</div>
                     </div>
                     <div class="viz-item viz-item-bottom">
-                        <img src="images/S&P500_Market_Composition.png" alt="S&P Market Composition" class="viz-image">
-                        <div class="viz-caption">Price and composition analysis of the S&P 500 and the top 8 tech stocks</div>
+                        <img src="images/GearMap.png" alt="Single Lap Gear Selection Track Map" class="viz-image">
+                        <div class="viz-caption">Gear Selection visualized over a single lap at all track positions.</div>
                     </div>
                     <div class="viz-item viz-item-bottom">
-                        <img src="images/real_vs_predicted_price_nasdaq100.png" alt="NASDAQ 100 Forecast" class="viz-image">
-                        <div class="viz-caption">NASDAQ 100 forecasting model showing predicted vs. actual price movements</div>
+                        <img src="images/spielberg_p3_fastest_laps.png" alt="Practice fastest laps with tire compounds and overall Position." class="viz-image">
+                        <div class="viz-caption">Fastest laps in a given session with the corresponding tire compound and the driver position.</div>
                     </div>
                 </div>
             </div>
 
             <div class="content-section">
-                <h2 class="section-heading">Key Findings</h2>
+                <h2 class="section-heading">On the horizon</h2>
                 <p class="content-text">
-                    The analysis revealed several key insights into market behavior during the 2019-2024 period:
+                    My next goals for this project are outlined below:
                 </p>
 
                 <div class="findings-container">
                     <div class="finding-card">
                         <div class="finding-number">01</div>
-                        <h3 class="finding-title">Nvidia Growth</h3>
-                        <p class="finding-text">The Nvidia stock has yielded high returns without major risks in the analyzed time period.
-                            An increased trade volume shows the public's interest in the company.
+                        <h3 class="finding-title">Race Position graphic</h3>
+                        <p class="finding-text">Graphic that visualizes all drivers race positions across the whole race.
                         </p>
                     </div>
                     <div class="finding-card">
                         <div class="finding-number">02</div>
-                        <h3 class="finding-title">Market Volatility</h3>
-                        <p class="finding-text">Even though a general upwards trend in stock prices is noticeable,
-                            investing at the wrong time could lead to significant losses. Further underlining the
-                            importance of long term investments.
+                        <h3 class="finding-title">Stint Data</h3>
+                        <p class="finding-text">Visualize Lap time degradation across stints and show average lap times
+                            in a session, based on tire compound.
                         </p>
                     </div>
                     <div class="finding-card">
                         <div class="finding-number">03</div>
-                        <h3 class="finding-title">Cryptocurrency</h3>
-                        <p class="finding-text">Compared to traditional financial markets, cryptocurrencies have a
-                            considerably higher volatility making them higher risk investments.
+                        <h3 class="finding-title">Updated Track Map</h3>
+                        <p class="finding-text">Show the lap time, as well as the wind velocity and direction on the
+                            gear selection track map.
                         </p>
                     </div>
                     <div class="finding-card">
                         <div class="finding-number">04</div>
-                        <h3 class="finding-title">Market Composition</h3>
-                        <p class="finding-text">The S&P 500 has become more dependent on the performance of the top 8 tech stocks.
-                            The top 8 tech stocks make up 55% of the price, while only representing 1.6% of companies in the S&P500.
+                        <h3 class="finding-title">Telemetry Comparison</h3>
+                        <p class="finding-text">Provide the possibility to compare the lap telemetry from 2 previously
+                            selected laps, to compare consistency by a driver or find differences in driving style across
+                            drivers.
                         </p>
                     </div>
                     <div class="finding-card">
                         <div class="finding-number">05</div>
-                        <h3 class="finding-title">Physical Assets</h3>
-                        <p class="finding-text">Investing in physical assets can yield constant and risk-free returns.
-                            Gold and silver showed promising returns, while copper and platinum were bad investment options.
+                        <h3 class="finding-title">Pit Stop Losses</h3>
+                        <p class="finding-text">Visualize average pit stop times and check for position losses because
+                            of bad pit stops.
                         </p>
                     </div>
                     <div class="finding-card">
                         <div class="finding-number">06</div>
-                        <h3 class="finding-title">Apple stability</h3>
-                        <p class="finding-text">Apple has one of the least volatile stocks on the market, while also having valuable returns.
-                            Low price fluctuations as well as low trade volumes indicate potential long-term investments.
-                            A steady price growth without major dips are key factors when looking at long-term holding.
+                        <h3 class="finding-title">Dashboard</h3>
+                        <p class="finding-text">Wrap all functionalities in an interactive dashboard that makes the
+                            application user-friendly and easy to read.
                         </p>
                     </div>
                 </div>
@@ -717,13 +721,12 @@
             <div class="conclusion">
                 <h3>Conclusion</h3>
                 <p class="content-text" style="margin-bottom: 0;">
-                    This project demonstrates the value of applying data science techniques to financial market analysis.
-                    By combining statistical methods with machine learning approaches, it was possible to extract
-                    meaningful patterns from complex market data and build predictive models with practical applications.
-                    The insights gained from this analysis could help investors make more informed decisions and
-                    understand market dynamics in greater depth.
-                    Future work could expand this analysis to include sentiment data from news and social media to
-                    further enhance predictive capabilities.
+                    As I am currently still working on this project, the conclusion is still limited.
+                    This project demonstrates the value of applying data science techniques in motorsports.
+                    By combining data engineering methods with statistical approaches it was possible to extract
+                    meaningful patterns from complex telemetry data and derive meaningful actions.
+                    The insights gained from this analysis could help engineers make more informed decisions and
+                    understand vehicle dynamics and telemetry in greater depth.
                 </p>
             </div>
         </div>
@@ -734,20 +737,20 @@
                 <h3 class="sidebar-heading">Project Stats</h3>
                 <div class="stats-container">
                     <div class="stat-item">
-                        <div class="stat-number">4</div>
-                        <div class="stat-label">Years of Data</div>
-                    </div>
-                    <div class="stat-item">
                         <div class="stat-number">20</div>
-                        <div class="stat-label">Stocks Analyzed</div>
+                        <div class="stat-label">Unique Drivers</div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-number">45K+</div>
+                        <div class="stat-number">100+</div>
+                        <div class="stat-label">Sessions</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">100K+</div>
                         <div class="stat-label">Data Points</div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-number">2</div>
-                        <div class="stat-label">Model Types</div>
+                        <div class="stat-number">200K+</div>
+                        <div class="stat-label">Laps</div>
                     </div>
                 </div>
             </div>
@@ -756,7 +759,7 @@
                 <h3 class="sidebar-heading">Tools Used</h3>
                 <ul class="sidebar-list">
                     <li>Programming Language: Python</li>
-                    <li>PyTorch for ML model development</li>
+                    <li>openF1 for Data Acquisition</li>
                     <li>Pandas for data manipulation</li>
                     <li>NumPy for numerical calculations</li>
                     <li>Seaborn for statistical visualization</li>
@@ -767,24 +770,23 @@
             <div class="sidebar-box">
                 <h3 class="sidebar-heading">Focus Areas</h3>
                 <ul class="sidebar-list">
-                    <li>Tech Stock Performance Analysis</li>
-                    <li>Trade Volume Correlations</li>
-                    <li>Market Volatility</li>
-                    <li>Cryptocurrency Volatility</li>
-                    <li>Index Movement Forecasting</li>
+                    <li>Telemetry Analysis</li>
+                    <li>Gear Selection</li>
+                    <li>Qualifying Times</li>
+                    <li>Tire Compounds</li>
                 </ul>
             </div>
         </div>
     </div>
 
-    <!-- Project footer with links -->
+<!--     Project footer with links -->
     <div class="project-footer">
-        <div class="project-links">
-            <a href="https://github.com/LewisSchmidtke/DataScience_ML_Portfolio/blob/main/Stock_market.py" target="_blank" class="project-link-button">View Code on GitHub</a>
-        </div>
+<!--        <div class="project-links">-->
+<!--            <a href="https://github.com/LewisSchmidtke/DataScience_ML_Portfolio/blob/main/Stock_market.py" target="_blank" class="project-link-button">View Code on GitHub</a>-->
+<!--        </div>-->
         <div class="next-prev-navigation">
-            <a href="formula1_data_engineering.html" class="prev-project">← Previous: TeDMoS - Motorsport Data Dashboard</a>
-            <a href="project3.html" class="next-project">Next: Mathematical Neural Network Implementation →</a>
+            <a href="project2.html" class="prev-project">← Previous: Worldwide Cyberattack Data Analysis</a>
+            <a href="project1.html" class="next-project">Next: US Stock Market Analysis and Forecasting →</a>
         </div>
     </div>
 
@@ -867,6 +869,8 @@
 
             const animateValue = (obj, start, end, duration) => {
                 let startTimestamp = null;
+                const originalText = obj.textContent;
+
                 const step = (timestamp) => {
                     if (!startTimestamp) startTimestamp = timestamp;
                     const progress = Math.min((timestamp - startTimestamp) / duration, 1);
@@ -874,12 +878,14 @@
                     let value = Math.floor(progress * (end - start) + start);
 
                     // Add '+' to values that end with 'M' or 'K'
-                    if (obj.textContent.includes('M')) {
+                    if (originalText.includes('M')) {
                         obj.textContent = value + 'M+';
-                    } else if (obj.textContent.includes('K')) {
+                    } else if (originalText.includes('K')) {
                         obj.textContent = value + 'K+';
-                    } else if (obj.textContent.includes('%')) {
+                    } else if (originalText.includes('%')) {
                         obj.textContent = value + '%';
+                    } else if (originalText.includes('+')) {
+                        obj.textContent = value + '+';
                     } else {
                         obj.textContent = value;
                     }
