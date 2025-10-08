@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Worldwide Cyberattack Data Analysis | Lewis M. Schmidtke</title>
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Reset and base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Rajdhani', sans-serif;
+        }
+
+        :root {
+            --black: #000000;
+            --white: #FFFFFF;
+            --light-gray: #f2f2f2;
+            --mid-gray: #666666;
+            --chrome-purple: #4A0072; /* Deep chrome purple accent color */
+            --neon-green: #39FF14; /* Neon green accent color */
+        }
+
+        body {
+            background-color: var(--white);
+            color: var(--black);
+            line-height: 1.6;
+            padding: 40px;
+            max-width: 1600px;
+            margin: 0 auto;
+            letter-spacing: 0.5px;
+            position: relative;
+        }
+        footer {
+            text-align: center;
+            font-size: 14px;
+            color: var(--chrome-purple); /* Light gray to keep it subtle */
+            padding: 10px;
+            position: relative;
+            bottom: 10px;
+            width: 100%;
+        }
+
+        /* Navigation and back button */
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+        }
+
+        .back-button {
+            padding: 12px 24px;
+            border: 1px solid var(--chrome-purple);
+            background-color: var(--chrome-purple);
+            color: var(--white);
+            font-weight: 500;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .back-button:hover {
+            background-color: var(--neon-green);
+            color: var(--white);
+            border-color: var(--neon-green);
+            transform: scale(1.05) translateY(-3px);
+            box-shadow: 0 5px 15px rgba(57, 255, 20, 0.2);
+        }
+
+        /* Project header */
+        .project-header {
+            text-align: center;
+            margin-bottom: 60px;
+            padding: 40px 0;
+            position: relative;
+        }
+
+        .project-title {
+            font-size: 4rem;
+            color: var(--black);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 30px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .project-title:after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: var(--chrome-purple);
+        }
+
+        .tech-badges-container {
+            margin: 30px 0;
+            text-align: center;
+        }
+
+        .tech-badge {
+            display: inline-block;
+            border: 1px solid var(--black);
+            background-color: transparent;
+            color: var(--black);
+            padding: 8px 16px;
+            font-size: 1.1rem;
+            margin-right: 10px;
+            margin-top: 10px;
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+        }
+
+        .tech-badge:hover {
+            background-color: var(--neon-green);
+            color: var(--white);
+            border-color: var(--neon-green);
+        }
+
+        /* Project description */
+        .project-description {
+            max-width: 1000px;
+            margin: 0 auto 60px;
+            text-align: justify;
+        }
+
+        .project-description p {
+            font-size: 1.4rem;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            font-weight: 300;
+        }
+
+        /* Project image */
+        .project-image-container {
+            width: 100%;
+            margin: 0 auto 60px;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .image-wrapper {
+            position: relative;
+            display: inline-block;
+            max-width: 1200px;
+            margin-top: 10px; /* Space for the transform without clipping */
+            margin-bottom: 10px; /* Space for the shadow expansion */
+        }
+
+        .project-image {
+            display: block;
+            width: 100%;
+            max-width: 1200px;
+            border: 2px solid var(--black);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .image-wrapper:hover .project-image {
+            transform: translateY(-5px);
+            border-color: var(--neon-green);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Project content sections */
+        .project-content {
+            max-width: 1200px;
+            margin: 0 auto 80px;
+        }
+
+        .section-heading {
+            font-size: 2.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 30px;
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .section-heading:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 80px;
+            height: 3px;
+            background-color: var(--chrome-purple);
+        }
+
+        .content-text {
+            font-size: 1.3rem;
+            line-height: 1.7;
+            margin-bottom: 30px;
+            font-weight: 300;
+        }
+
+        /* Data visualization section */
+        .viz-gallery {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: auto auto;
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .viz-item {
+            border: 2px solid var(--black);
+            transition: transform 0.3s ease, border-color 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .viz-item-top-left {
+            height: 100%;
+        }
+
+        /* Image lightbox styles */
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .lightbox.active {
+            display: flex;
+        }
+
+        .lightbox-image {
+            max-width: 90%;
+            max-height: 85vh;
+            object-fit: contain;
+            border: 2px solid var(--white);
+        }
+
+        .lightbox-caption {
+            color: var(--white);
+            font-size: 1.2rem;
+            margin-top: 20px;
+            max-width: 80%;
+            text-align: center;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            font-size: 2.5rem;
+            color: var(--white);
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .lightbox-close:hover {
+            color: var(--neon-green);
+        }
+
+        .viz-image-wrapper {
+            flex-grow: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            cursor: pointer; /* Add cursor pointer to indicate clickable */
+        }
+
+        .viz-item:hover {
+            transform: translateY(-5px);
+            border-color: var(--neon-green);
+        }
+
+        .viz-item-bottom {
+            grid-column: 1 / span 2;
+            grid-row: 2;
+        }
+
+        .viz-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .viz-caption {
+            padding: 15px;
+            background-color: var(--white);
+            font-size: 1.1rem;
+            font-weight: 300;
+        }
+
+        /* Methodology list */
+        .methodology-list {
+            font-size: 1.2rem;
+            margin-left: 40px;
+            margin-bottom: 30px;
+            font-weight: 300;
+        }
+
+        .methodology-list li {
+            margin-bottom: 10px;
+        }
+
+        /* Conclusion section */
+        .conclusion {
+            background-color: var(--light-gray);
+            padding: 40px;
+            margin-top: 60px;
+            border-left: 3px solid var(--chrome-purple);
+        }
+
+        .conclusion h3 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        /* Footer section */
+        .project-footer {
+            margin-top: 80px;
+            padding-top: 40px;
+            border-top: 1px solid var(--light-gray);
+            text-align: center;
+        }
+
+        .project-links {
+            margin-bottom: 30px;
+        }
+
+        .project-link-button {
+            padding: 12px 24px;
+            border: 1px solid var(--chrome-purple);
+            background-color: var(--chrome-purple);
+            color: var(--white);
+            font-weight: 500;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin: 0 10px;
+        }
+
+        .project-link-button:hover {
+            background-color: var(--neon-green);
+            color: var(--white);
+            border-color: var(--neon-green);
+            transform: scale(1.05) translateY(-3px);
+            box-shadow: 0 5px 15px rgba(57, 255, 20, 0.2);
+        }
+
+        .next-prev-navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+
+        .prev-project, .next-project {
+            display: inline-block;
+            color: var(--black);
+            text-decoration: none;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            transition: color 0.3s;
+            font-size: 1.2rem;
+        }
+
+        .prev-project:hover, .next-project:hover {
+            color: var(--neon-green);
+        }
+
+        .prev-project:after, .next-project:after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--neon-green);
+            transform: scaleX(0);
+            transform-origin: bottom right;
+            transition: transform 0.3s;
+        }
+
+        .prev-project:hover:after, .next-project:hover:after {
+            transform: scaleX(1);
+            transform-origin: bottom left;
+        }
+
+        /* Responsive styles */
+        @media (max-width: 1200px) {
+            .project-title {
+                font-size: 3.5rem;
+            }
+
+            .viz-gallery {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .project-title {
+                font-size: 3rem;
+            }
+
+            .project-description p {
+                font-size: 1.3rem;
+            }
+
+            .section-heading {
+                font-size: 2.4rem;
+            }
+
+            .content-text {
+                font-size: 1.2rem;
+            }
+
+            .project-link-button {
+                display: block;
+                margin: 10px auto;
+                max-width: 250px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 20px;
+            }
+
+            .project-title {
+                font-size: 2.5rem;
+            }
+
+            .project-description p {
+                font-size: 1.2rem;
+            }
+
+            .tech-badge {
+                font-size: 0.9rem;
+                padding: 6px 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <div class="navigation">
+        <a href="index.html" class="back-button">← Back to Portfolio</a>
+        <div class="social-links">
+            <!-- You can add social links here if needed -->
+        </div>
+    </div>
+
+    <!-- Project header -->
+    <header class="project-header">
+        <h1 class="project-title">Worldwide Cyberattack Data Analysis</h1>
+        <div class="tech-badges-container">
+            <span class="tech-badge">Python</span>
+            <span class="tech-badge">Seaborn</span>
+            <span class="tech-badge">NumPy</span>
+            <span class="tech-badge">Data Science</span>
+        </div>
+    </header>
+
+    <!-- Project description -->
+    <section class="project-description">
+        <p>
+            This project involved a comprehensive analysis of global cyberattack data spanning from 2015 to 2024, focusing on identifying patterns, trends, and impacts across various industries and geographic regions. By leveraging data science techniques, I was able to extract valuable insights about the nature of cyber threats, their evolution over time, and their financial implications for businesses worldwide.
+        </p>
+    </section>
+
+    <!-- Project image -->
+    <div class="project-image-container">
+        <div class="image-wrapper">
+            <img src="images/cyberattacks/Cyberattack_Trends.png" alt="Worldwide Cyberattack Data Analysis" class="project-image">
+        </div>
+    </div>
+
+    <!-- Project content -->
+    <div class="project-content">
+        <h2 class="section-heading">Project Overview</h2>
+        <p class="content-text">
+            The dataset contained detailed information about thousands of cyberattack incidents, including attack types,
+            attack sources, defense mechanism, security vulnerability, target industries, geographic locations,
+            estimated financial losses and number of impacted users. Through careful analysis and visualization,
+            I was able to identify critical trends that could help organizations better prepare for and respond to
+            cyber threats in an increasingly digital business environment.
+        </p>
+        <p class="content-text">
+            This analysis was motivated by the rapid increase in both frequency and sophistication of cyberattacks worldwide,
+            and the growing economic impact these attacks have on organizations of all sizes. By understanding the patterns
+            and correlations in historical attack data, security professionals can better allocate resources and develop
+            more effective defensive strategies.
+        </p>
+
+        <h2 class="section-heading">Methodology</h2>
+        <p class="content-text">
+            The analysis was conducted using Python with libraries including Pandas for data manipulation,
+            Seaborn and Matplotlib for visualization, and NumPy for statistical calculations. The methodology included:
+        </p>
+        <ul class="methodology-list">
+            <li>Data collection and preprocessing to clean, normalize, and structure the cyberattack dataset</li>
+            <li>Time series analysis to identify trends and patterns in attack frequency</li>
+            <li>Correlation analysis between attack types and financial impact by industry</li>
+            <li>Rolling average calculations to smooth data and identify underlying trends</li>
+        </ul>
+
+        <h2 class="section-heading">Key Visualizations</h2>
+        <p class="content-text">
+            Visualizations played a crucial role in understanding the dynamics of cyberattacks and communicating findings. The project produced several insightful visualizations that revealed patterns in cybersecurity threats.
+        </p>
+
+        <div class="viz-gallery">
+            <div class="viz-item viz-item-top-left">
+                <div class="viz-image-wrapper">
+                    <img src="images/cyberattacks/CyberattackImpact2.png" alt="Cyberattack Financial Impact by Industry" class="viz-image">
+                </div>
+                <div class="viz-caption">Financial impact of different cyberattack types across major industries (2015-2019)</div>
+            </div>
+            <div class="viz-item">
+                <div class="viz-image-wrapper">
+                    <img src="images/cyberattacks/FinancialLoss_HeatMap.png" alt="Cyberattack Trends Over Time" class="viz-image">
+                </div>
+                <div class="viz-caption">Rolling average analysis of cyberattack frequency by type over the 5-year period</div>
+            </div>
+        </div>
+
+        <h2 class="section-heading">Results and Insights</h2>
+        <p class="content-text">
+            The analysis revealed several key insights into global cybersecurity threats during the 2015-2019 period:
+        </p>
+        <ul class="methodology-list">
+            <li>General upwards trend of conducted cyberattacks.</li>
+            <li>Man-in-the-Middle attacks are prone high financial losses </li>
+            <li>Most affected Users were in the IT industry, with big fluctuations between attacks</li>
+            <li>SQL Injection attacks have seen significant growth starting in 2015</li>
+        </ul>
+
+        <div class="conclusion">
+            <h3>Conclusion</h3>
+            <p class="content-text" style="margin-bottom: 0;">
+                This analysis highlights the growing sophistication and their financial impact of cyberattacks across global
+                industries. The findings suggest that organizations need to implement adaptive security strategies
+                that address the evolving nature of cyber threats, particularly in vulnerable sectors. Future work could
+                expand this analysis to include more recent data and explore the impact of emerging attack vectors
+                like AI-powered threats and supply chain vulnerabilities.
+            </p>
+        </div>
+    </div>
+
+    <!-- Project footer with links -->
+    <div class="project-footer">
+        <div class="project-links">
+            <a href="https://github.com/LewisSchmidtke/DataScience_ML_Portfolio/blob/main/cyber_security.py" target="_blank" class="project-link-button">View Code on GitHub</a>
+        </div>
+        <div class="next-prev-navigation">
+            <a href="index.html" class="prev-project">← Back to Portfolio</a>
+            <a href="tadmos.html" class="next-project">Next: TADMOS - Motorsport Data Dashboard →</a>
+        </div>
+    </div>
+
+    <!-- Lightbox for enlarged images -->
+    <div class="lightbox" id="lightbox">
+        <div class="lightbox-close" id="lightbox-close">&times;</div>
+        <img src="" alt="" class="lightbox-image" id="lightbox-image">
+        <div class="lightbox-caption" id="lightbox-caption"></div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Lightbox functionality
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImage = document.getElementById('lightbox-image');
+            const lightboxCaption = document.getElementById('lightbox-caption');
+            const lightboxClose = document.getElementById('lightbox-close');
+
+            // Get all visualization images and top project image
+            const visualizationImages = document.querySelectorAll('.viz-image-wrapper');
+            const projectImageContainer = document.querySelector('.image-wrapper');
+
+            // Add click event to each visualization image
+            visualizationImages.forEach(wrapper => {
+                wrapper.addEventListener('click', (e) => {
+                    const img = wrapper.querySelector('img');
+                    const caption = wrapper.parentElement.querySelector('.viz-caption')?.textContent || '';
+
+                    // Set lightbox content
+                    lightboxImage.src = img.src;
+                    lightboxImage.alt = img.alt;
+                    lightboxCaption.textContent = caption;
+
+                    // Show lightbox with a slight fade-in effect
+                    lightbox.classList.add('active');
+                    document.body.style.overflow = 'hidden'; // Prevent scrolling when lightbox is open
+                    e.stopPropagation(); // Prevent event bubbling
+                });
+            });
+
+            // Add click event to project image container
+            if (projectImageContainer) {
+                projectImageContainer.addEventListener('click', () => {
+                    const img = projectImageContainer.querySelector('img');
+
+                    // Set lightbox content
+                    lightboxImage.src = img.src;
+                    lightboxImage.alt = img.alt;
+                    lightboxCaption.textContent = "Worldwide Cyberattack Data Analysis Dashboard";
+
+                    // Show lightbox
+                    lightbox.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                });
+            }
+
+            // Close lightbox when clicking the close button
+            lightboxClose.addEventListener('click', () => {
+                lightbox.classList.remove('active');
+                document.body.style.overflow = ''; // Restore scrolling
+            });
+
+            // Close lightbox when clicking outside the image
+            lightbox.addEventListener('click', (e) => {
+                if (e.target === lightbox) {
+                    lightbox.classList.remove('active');
+                    document.body.style.overflow = ''; // Restore scrolling
+                }
+            });
+
+            // Close lightbox with Escape key
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && lightbox.classList.contains('active')) {
+                    lightbox.classList.remove('active');
+                    document.body.style.overflow = ''; // Restore scrolling
+                }
+            });
+        });
+    </script>
+</body>
+<footer>
+    © 2025 Lewis M. Schmidtke. All Rights Reserved.
+</footer>
+</html>
