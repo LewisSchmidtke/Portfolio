@@ -762,6 +762,14 @@
           flex-shrink: 0;
         }
 
+        .subtitle-mobile {
+            display: none;
+        }
+
+        .subtitle-desktop {
+            display: inline;
+        }
+
 
         @keyframes scrollLogos {
             0%   { transform: translateX(0); }
@@ -878,25 +886,45 @@
                 padding: 20px 10px;
             }
 
+            .hero-content {
+                max-width: 100%;
+                padding: 0 10px;
+            }
+
             .hero-name {
                 font-size: 2.2rem;
                 letter-spacing: 1px;
+                word-break: break-word;
             }
 
             .hero-subtitle {
-                font-size: 1.2rem;
-                line-height: 1.4;
+                font-size: 1.1rem;
+                line-height: 1.6;
+                white-space: normal;
+            }
+
+            /* Force subtitle to break at pipes on mobile */
+            .hero-subtitle::before {
+                content: '';
+                display: block;
             }
 
             .hero-summary {
-                font-size: 1.1rem;
+                font-size: 1rem;
                 line-height: 1.5;
                 margin: 20px auto 30px;
+                text-align: center;
+                padding: 0 5px;
             }
 
             .hero-buttons {
                 gap: 10px;
                 margin-bottom: 30px;
+                justify-content: center;
+            }
+
+            .hero-buttons .button {
+                width: auto;
             }
 
             .button {
@@ -919,25 +947,30 @@
                 margin: 0 2px;
             }
 
-            /* Top Skills section */
+            /* Top Skills section - stack vertically */
             #top-skills-container {
                 margin-top: 10px;
+                padding: 0 10px;
             }
 
             #top-skills-list {
                 gap: 10px;
+                flex-direction: column;
+                align-items: center;
             }
 
             #top-skills-list > div {
-                padding: 6px 15px !important;
+                padding: 8px 20px !important;
+                width: 90%;
+                max-width: 300px;
             }
 
             #top-skills-list .skill-name {
-                font-size: 1rem !important;
+                font-size: 1.1rem !important;
             }
 
             #top-skills-list .count-text {
-                font-size: 0.75rem !important;
+                font-size: 0.85rem !important;
             }
 
             #skill-modal {
@@ -951,7 +984,12 @@
                 font-size: 1.4rem !important;
             }
 
-            /* Company carousel */
+            /* Company intro and carousel */
+            .company-intro {
+                font-size: 1rem;
+                margin-top: 20px;
+            }
+
             .company-set img {
                 height: 35px;
             }
@@ -1049,6 +1087,14 @@
                 margin-right: 2px;
                 margin-top: 2px;
                 font-size: 0.85rem;
+            }
+
+            .subtitle-mobile {
+                display: block;
+            }
+
+            .subtitle-desktop {
+                display: none;
             }
         }
 
@@ -1173,7 +1219,14 @@
         <section class="hero-section">
           <div class="hero-content">
             <h1 class="hero-name">Lewis M. Schmidtke</h1>
-            <h2 class="hero-subtitle">Mechanical Engineer (B.Sc.) | IMSA LMDh Engineer | AI/ML Developer</h2>
+            <h2 class="hero-subtitle">
+                <span class="subtitle-desktop">Mechanical Engineer (B.Sc.) | IMSA LMDh Engineer | AI/ML Developer</span>
+                <span class="subtitle-mobile">
+                    Mechanical Engineer (B.Sc.)<br>
+                    IMSA LMDh Engineer<br>
+                    AI/ML Developer
+                </span>
+            </h2>
 
             <!-- Existing animated tech-stack -->
             <div class="tech-icons-wrapper">
