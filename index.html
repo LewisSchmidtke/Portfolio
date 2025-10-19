@@ -461,15 +461,6 @@
             color: var(--chrome-purple);
         }
 
-        /*.timeline-line {*/
-        /*    position: absolute;*/
-        /*    left: 0;*/
-        /*    top: 0;*/
-        /*    bottom: 0;*/
-        /*    width: 2px;*/
-        /*    background-color: var(--black);*/
-        /*}*/
-
         .timeline-line {
             position: absolute;
             left: 0;
@@ -686,10 +677,10 @@
           display: flex;
           align-items: center;
           justify-content: center;
-          min-height: 95vh;
+          min-height: 30vh;
           background: linear-gradient(180deg, #ffffff 0%, #f9f9f9 100%);
           text-align: center;
-          padding: 60px 5%;
+          padding: 5px;
           position: relative;
         }
 
@@ -994,7 +985,7 @@
         <section class="hero-section">
           <div class="hero-content">
             <h1 class="hero-name">Lewis M. Schmidtke</h1>
-            <h2 class="hero-subtitle">Automotive Engineer | AI Developer | Scholarship Holder</h2>
+            <h2 class="hero-subtitle">Mechanical Engineer (B.Sc.) | IMSA LMDh Engineer | AI/ML Developer</h2>
 
             <!-- Existing animated tech-stack -->
             <div class="tech-icons-wrapper">
@@ -1004,13 +995,31 @@
             </div>
 
             <p class="hero-summary">
-              Automotive Engineer with 3 years of professional experience in Data Engineering, Machine Learning and Automotive R&D at the companies below.
-                Currently pursuing my master’s degree in mechanical engineering from RWTH Aachen University with a scholarship from BMW.
+              Automotive Engineer with 3 years of professional experience in Motorsports, Data Engineering, Machine
+                Learning and Automotive R&D. Currently an interning at BMW Motorsport as an LMDh Data/Performance Engineer,
+                while pursuing my master’s degree in mechanical engineering at RWTH Aachen University. Holder of BMW's
+                Fastlane Scholarship.
             </p>
 
             <div class="hero-buttons">
               <a href="https://www.linkedin.com/in/lewis-m-schmidtke/" target="_blank" class="button">LinkedIn</a>
               <a href="https://github.com/LewisSchmidtke" target="_blank" class="button">GitHub</a>
+            </div>
+
+            <!-- Top Skills Section -->
+            <div id="top-skills-container" style="margin-top: 15px;">
+              <p style="text-align: center; margin-bottom: 10px; font-size: 1.1rem; font-weight: 500; color: var(--mid-gray); text-transform: uppercase; letter-spacing: 0.5px;">Top Skills</p>
+              <div id="top-skills-list" style="display: flex; justify-content: center; gap: 15px; flex-wrap: wrap;">
+                <!-- Will be populated by JavaScript -->
+              </div>
+              <!-- Modal for showing skill details -->
+              <div id="skill-modal" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: white; border: 3px solid var(--chrome-purple); padding: 30px; z-index: 1000; max-width: 600px; max-height: 70vh; overflow-y: auto; box-shadow: 0 10px 40px rgba(0,0,0,0.3);">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                  <h3 id="modal-title" style="font-size: 1.8rem; font-weight: 600; color: var(--chrome-purple);"></h3>
+                  <button id="close-modal" style="background: none; border: none; font-size: 2rem; cursor: pointer; color: var(--chrome-purple);">&times;</button>
+                </div>
+                <div id="modal-content"></div>
+              </div>
             </div>
 
               <p class="company-intro">Experience gained at</p>
@@ -1021,21 +1030,25 @@
                   <div class="company-set">
                       <img src="images/logos/rwth.png" alt="RWTH Aachen">
                       <img src="images/logos/bmw.png" alt="BMW">
-                      <img src="images/logos/porsche.png" alt="Porsche">
                       <img src="images/logos/ika.png" alt="IKA">
+                      <img src="images/logos/bmw_motorsport.png" alt="BMW Motorsports">
+                      <img src="images/logos/porsche.png" alt="Porsche">
                       <img src="images/logos/bosch.png" alt="Bosch">
                       <img src="images/logos/wzl.png" alt="WZL">
                       <img src="images/logos/gwb.png" alt="GWB">
+                      <img src="images/logos/man.png" alt="MAN">
                   </div>
                 <!-- duplicates for seamless loop -->
                   <div class="company-set">
                       <img src="images/logos/rwth.png" alt="RWTH Aachen">
                       <img src="images/logos/bmw.png" alt="BMW">
-                      <img src="images/logos/porsche.png" alt="Porsche">
                       <img src="images/logos/ika.png" alt="IKA">
+                      <img src="images/logos/bmw_motorsport.png" alt="BMW Motorsports">
+                      <img src="images/logos/porsche.png" alt="Porsche">
                       <img src="images/logos/bosch.png" alt="Bosch">
                       <img src="images/logos/wzl.png" alt="WZL">
                       <img src="images/logos/gwb.png" alt="GWB">
+                      <img src="images/logos/man.png" alt="MAN">
                   </div>
               </div>
             </div>
@@ -1059,10 +1072,8 @@
                             insights into the industry- and user impact to gain insight and develop solutions for the industry.
                         </p>
                         <div class="tech-badges-container">
-                            <span class="tech-badge">Python</span>
-                            <span class="tech-badge">Seaborn</span>
-                            <span class="tech-badge">NumPy</span>
                             <span class="tech-badge">Data Science</span>
+                            <span class="tech-badge">Python</span>
                         </div>
                         <a href="cyberattacks.html" class="project-link">View Project →</a>
                     </div>
@@ -1098,11 +1109,9 @@
                             analysis. Forecasted the NASDAQ 100 based on prices and volume.
                         </p>
                         <div class="tech-badges-container">
-                            <span class="tech-badge">Python</span>
-                            <span class="tech-badge">PyTorch</span>
-                            <span class="tech-badge">Seaborn</span>
                             <span class="tech-badge">Data Science</span>
                             <span class="tech-badge">Machine Learning</span>
+                            <span class="tech-badge">Python</span>
                         </div>
                         <a href="stock-market.html" class="project-link">View Project →</a>
                     </div>
@@ -1121,7 +1130,6 @@
                         <div class="tech-badges-container">
                             <span class="tech-badge">Math</span>
                             <span class="tech-badge">Python</span>
-                            <span class="tech-badge">NumPy</span>
                             <span class="tech-badge">Machine Learning</span>
                         </div>
                         <a href="neural_network.html" class="project-link">View Project →</a>
@@ -1150,7 +1158,28 @@
                     <h3 class="bucket-title">Industry Experience</h3>
                     <div class="timeline-line"></div>
 
-                    <!-- Experience Entry 5 (Most recent) -->
+                    <!-- Experience Entry 6 (Most recent) -->
+                    <div class="timeline-entry">
+                        <div class="timeline-node"></div>
+                        <div class="experience-card">
+                            <div class="experience-header">
+                                <h3 class="experience-title">LMDh Data/Performance Engineer - Intern</h3>
+                                <p class="experience-company">BMW Motorsport</p>
+                                <p class="experience-duration">Oct 2025 - Current</p>
+                            </div>
+                            <div class="experience-content">
+                                <p>Joined BMW Motorsport as an LMDh Data/Performance Engineer through BMW's Fastlane Scholarship Program.
+                                </p>
+                                <div class="tech-badges-container-timeline">
+                                    <span class="tech-badge">Motorsport</span>
+                                    <span class="tech-badge">Automotive Engineering</span>
+                                    <span class="tech-badge">Python</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Experience Entry 5 -->
                     <div class="timeline-entry">
                         <div class="timeline-node"></div>
                         <div class="experience-card">
@@ -1164,8 +1193,8 @@
                                 </p>
                                 <div class="tech-badges-container-timeline">
                                     <span class="tech-badge">Vehicle Aerodynamics</span>
-                                    <span class="tech-badge">Data Engineering</span>
                                     <span class="tech-badge">Automotive Engineering</span>
+                                    <span class="tech-badge">Python</span>
                                 </div>
                             </div>
                         </div>
@@ -1184,8 +1213,8 @@
                                 <p>Leveraged data to gain insights into the potential of Artificial Intelligence in manufacturing processes.
                                 </p>
                                 <div class="tech-badges-container-timeline">
+                                    <span class="tech-badge">Data Science</span>
                                     <span class="tech-badge">Python</span>
-                                    <span class="tech-badge">Artificial Intelligence</span>
                                     <span class="tech-badge">Machine Learning</span>
                                 </div>
                             </div>
@@ -1207,7 +1236,7 @@
                                 <div class="tech-badges-container-timeline">
                                     <span class="tech-badge">Vehicle Safety</span>
                                     <span class="tech-badge">Automotive Engineering</span>
-                                    <span class="tech-badge">Machine Learning</span>
+                                    <span class="tech-badge">Python</span>
                                 </div>
                             </div>
                         </div>
@@ -1227,7 +1256,7 @@
                                 <div class="tech-badges-container-timeline">
                                     <span class="tech-badge">Vehicle Dynamics</span>
                                     <span class="tech-badge">Automotive Engineering</span>
-                                    <span class="tech-badge">Time-Series-Data</span>
+                                    <span class="tech-badge">Python</span>
                                 </div>
                             </div>
                         </div>
@@ -1246,7 +1275,7 @@
                                     Developed custom AI object detection models improving the robot's detection accuracy by 30%.
                                 </p>
                                 <div class="tech-badges-container-timeline">
-                                    <span class="tech-badge">Computer Vision</span>
+                                    <span class="tech-badge">Robotics</span>
                                     <span class="tech-badge">Python</span>
                                     <span class="tech-badge">Machine Learning</span>
                                 </div>
@@ -1254,7 +1283,7 @@
                         </div>
                     </div>
 
-                    <!-- Experience Entry 1 (Oldest) -->
+                    <!-- Experience Entry 1 -->
                     <div class="timeline-entry">
                         <div class="timeline-node"></div>
                         <div class="experience-card">
@@ -1271,6 +1300,26 @@
                                     <span class="tech-badge">Milling</span>
                                     <span class="tech-badge">Precision Manufacturing</span>
                                     <span class="tech-badge">Component Production</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Experience Entry 0 (Oldest) -->
+                    <div class="timeline-entry">
+                        <div class="timeline-node"></div>
+                        <div class="experience-card">
+                            <div class="experience-header">
+                                <h3 class="experience-title">Pupil Internship - Turbomachinery</h3>
+                                <p class="experience-company">MAN Energy Solutions</p>
+                                <p class="experience-duration">JUL 2017 - JUL 2017</p>
+                            </div>
+                            <div class="experience-content">
+                                <p>
+                                    Failure Analysis of turbine blades and composite analysis under the scanning electron microscope.
+                                </p>
+                                <div class="tech-badges-container-timeline">
+                                    <span class="tech-badge">Material Engineering</span>
+                                    <span class="tech-badge">Turbomachinery</span>
                                 </div>
                             </div>
                         </div>
@@ -1298,7 +1347,7 @@
                                 <div class="tech-badges-container-timeline">
                                     <span class="tech-badge">Automotive Engineering</span>
                                     <span class="tech-badge">Motorsport</span>
-                                    <span class="tech-badge">Data Engineering</span>
+                                    <span class="tech-badge">Python</span>
                                 </div>
                             </div>
                         </div>
@@ -1318,9 +1367,9 @@
                                     Master of Science in Mechanical Engineering with focus on Aerodynamics, Vehicle Powertrains and Fluid Dynamics.
                                 </p>
                                 <div class="tech-badges-container-timeline">
-                                    <span class="tech-badge">Aerodynamics</span>
-                                    <span class="tech-badge">Problem-Solving</span>
                                     <span class="tech-badge">Automotive Engineering</span>
+                                    <span class="tech-badge">Aerodynamics</span>
+                                    <span class="tech-badge">Machine Learning</span>
                                 </div>
                             </div>
                         </div>
@@ -1342,7 +1391,7 @@
                                 <div class="tech-badges-container-timeline">
                                     <span class="tech-badge">Automotive Engineering</span>
                                     <span class="tech-badge">Vehicle Dynamics</span>
-                                    <span class="tech-badge">Problem Solving</span>
+                                    <span class="tech-badge">Machine Learning</span>
                                 </div>
                             </div>
                         </div>
@@ -1357,6 +1406,7 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             // Initialize all main components
+            calculateAndDisplayTopSkills();
             setupHeroLandingAnimation();
             setupTimelineEntries();
             setupTechIcons();
@@ -1636,6 +1686,7 @@
             { name: 'scikit-learn', image: 'images/logos/tech-icons/scikit-learn-icon.png' },
             { name: 'Pandas', image: 'images/logos/tech-icons/pandas-icon.png' },
             { name: 'NumPy', image: 'images/logos/tech-icons/numpy-icon.png' },
+            { name: 'Git', image: 'images/logos/tech-icons/git-icon.png' },
             { name: 'Azure', image: 'images/logos/tech-icons/azure-icon.png' },
         ];
 
@@ -1978,6 +2029,333 @@
                 }
             });
         }
+                /**
+         * Calculate top 3 tech badges from all sections
+         */
+        function calculateAndDisplayTopSkills() {
+            // Object to store badge counts
+            const badgeCounts = {};
+
+            // Get all tech badges from the entire page
+            const allBadges = document.querySelectorAll('.tech-badge:not(.more-badge)');
+
+            // Count occurrences of each badge
+            allBadges.forEach(badge => {
+                const badgeText = badge.textContent.trim();
+                if (badgeText) {
+                    badgeCounts[badgeText] = (badgeCounts[badgeText] || 0) + 1;
+                }
+            });
+
+            // Convert to array and sort by count (descending)
+            const sortedBadges = Object.entries(badgeCounts)
+                .sort((a, b) => b[1] - a[1])
+                .slice(0, 3); // Get top 3
+
+            // Display the results
+            displayTopSkills(sortedBadges);
+
+            // Log for debugging
+            console.log('Badge Counts:', badgeCounts);
+            console.log('Top 3 Badges:', sortedBadges);
+        }
+
+        /**
+         * Display top skills in the hero section
+         */
+        function displayTopSkills(topSkills) {
+            const container = document.getElementById('top-skills-list');
+            if (!container) return;
+
+            // Clear existing content
+            container.innerHTML = '';
+
+            // Create display for each top skill
+            topSkills.forEach(([skill, count], index) => {
+                const skillDiv = document.createElement('div');
+                skillDiv.style.cssText = `
+                    padding: 8px 20px;
+                    border: 2px solid var(--chrome-purple);
+                    background-color: white;
+                    text-align: center;
+                    cursor: pointer;
+                    transition: all 0.3s ease;
+                `;
+
+                // Add hover effect
+                skillDiv.addEventListener('mouseenter', function() {
+                    this.style.backgroundColor = 'var(--neon-green)';
+                    this.style.color = 'var(--white)';
+                    this.style.borderColor = 'var(--neon-green)';
+                    this.style.transform = 'scale(1.05) translateY(-3px)';
+                    this.style.boxShadow = '0 5px 15px rgba(57, 255, 20, 0.3)';
+                    const skillNameEl = this.querySelector('.skill-name');
+                    const countEl = this.querySelector('.count-text');
+                    if (skillNameEl) skillNameEl.style.color = 'var(--white)';
+                    if (countEl) countEl.style.color = 'var(--white)';
+                });
+
+                skillDiv.addEventListener('mouseleave', function() {
+                    this.style.backgroundColor = 'white';
+                    this.style.color = 'var(--black)';
+                    this.style.borderColor = 'var(--chrome-purple)';
+                    this.style.transform = 'scale(1) translateY(0)';
+                    this.style.boxShadow = 'none';
+                    const skillNameEl = this.querySelector('.skill-name');
+                    const countEl = this.querySelector('.count-text');
+                    if (skillNameEl) skillNameEl.style.color = 'var(--black)';
+                    if (countEl) countEl.style.color = 'var(--chrome-purple)';
+                });
+
+                // Add click handler to show modal
+                skillDiv.addEventListener('click', function() {
+                    showSkillModal(skill);
+                });
+
+                const skillName = document.createElement('div');
+                skillName.className = 'skill-name';
+                skillName.textContent = skill;
+                skillName.style.cssText = `
+                    font-size: 1.2rem;
+                    font-weight: 600;
+                    color: var(--black);
+                    margin-bottom: 3px;
+                    transition: color 0.3s ease;
+                `;
+
+                const countSpan = document.createElement('div');
+                countSpan.className = 'count-text';
+                countSpan.textContent = `${count} occurrences`;
+                countSpan.style.cssText = `
+                    font-size: 0.85rem;
+                    color: var(--chrome-purple);
+                    transition: color 0.3s ease;
+                `;
+
+                skillDiv.appendChild(skillName);
+                skillDiv.appendChild(countSpan);
+                container.appendChild(skillDiv);
+            });
+        }
+
+        /**
+         * Show modal with all experiences containing the selected skill
+         */
+        function showSkillModal(skillName) {
+            const modal = document.getElementById('skill-modal');
+            const modalTitle = document.getElementById('modal-title');
+            const modalContent = document.getElementById('modal-content');
+
+            if (!modal) return;
+
+            // Set title
+            modalTitle.textContent = skillName;
+
+            // Find all experiences with this skill
+            const experiences = findExperiencesWithSkill(skillName);
+
+            // Clear and populate modal content
+            modalContent.innerHTML = '';
+
+            if (experiences.length === 0) {
+                modalContent.innerHTML = '<p>No experiences found for this skill.</p>';
+            } else {
+                experiences.forEach(exp => {
+                    const expDiv = document.createElement('div');
+                    expDiv.style.cssText = `
+                        padding: 15px;
+                        margin-bottom: 10px;
+                        border: 1px solid var(--light-gray);
+                        cursor: pointer;
+                        transition: all 0.3s ease;
+                    `;
+
+                    expDiv.addEventListener('mouseenter', function() {
+                        this.style.backgroundColor = 'var(--light-gray)';
+                        this.style.borderColor = 'var(--chrome-purple)';
+                    });
+
+                    expDiv.addEventListener('mouseleave', function() {
+                        this.style.backgroundColor = 'white';
+                        this.style.borderColor = 'var(--light-gray)';
+                    });
+
+                    expDiv.addEventListener('click', function() {
+                        closeSkillModal();
+                        if (exp.type === 'Project') {
+                            // For projects, navigate to project page
+                            const projectLink = exp.element.querySelector('.project-link');
+                            if (projectLink) {
+                                window.location.href = projectLink.getAttribute('href');
+                            }
+                        } else {
+                            // For work/education, scroll to element
+                            scrollToExperience(exp.element);
+                        }
+                    });
+
+                    const title = document.createElement('div');
+                    title.textContent = exp.title;
+                    title.style.cssText = `
+                        font-size: 1.1rem;
+                        font-weight: 600;
+                        margin-bottom: 5px;
+                        color: var(--black);
+                    `;
+
+                    const company = document.createElement('div');
+                    company.textContent = exp.company;
+                    company.style.cssText = `
+                        font-size: 1rem;
+                        color: var(--mid-gray);
+                        margin-bottom: 3px;
+                    `;
+
+                    const type = document.createElement('div');
+                    type.textContent = exp.type;
+                    type.style.cssText = `
+                        font-size: 0.9rem;
+                        color: var(--chrome-purple);
+                        font-style: italic;
+                    `;
+
+                    expDiv.appendChild(title);
+                    expDiv.appendChild(company);
+                    expDiv.appendChild(type);
+                    modalContent.appendChild(expDiv);
+                });
+            }
+
+            // Show modal
+            modal.style.display = 'block';
+
+            // Setup close handlers
+            document.getElementById('close-modal').onclick = closeSkillModal;
+
+            // Close modal when clicking outside
+            document.addEventListener('click', handleOutsideClick);
+        }
+
+
+        // Add this helper function for clicking outside modal
+        function handleOutsideClick(event) {
+            const modal = document.getElementById('skill-modal');
+            if (modal && !modal.contains(event.target) && !event.target.closest('#top-skills-list')) {
+                closeSkillModal();
+            }
+        }
+
+        /**
+         * Close the skill modal
+         */
+        function closeSkillModal() {
+            const modal = document.getElementById('skill-modal');
+
+            if (modal) modal.style.display = 'none';
+
+            // Remove the outside click listener
+            document.removeEventListener('click', handleOutsideClick);
+        }
+
+        /**
+         * Find all experiences (projects, jobs, education) that contain a specific skill
+         * Returns them ordered by: Industry Experience, Education, Projects
+         */
+        function findExperiencesWithSkill(skillName) {
+            const workExperiences = [];
+            const educationExperiences = [];
+            const projectExperiences = [];
+
+            // Search in experience cards (work experience)
+            document.querySelectorAll('.experience-card:not(.education-card)').forEach(card => {
+                const badges = card.querySelectorAll('.tech-badge:not(.more-badge)');
+                const hasSkill = Array.from(badges).some(badge =>
+                    badge.textContent.trim() === skillName
+                );
+
+                if (hasSkill) {
+                    const title = card.querySelector('.experience-title')?.textContent || 'Untitled Experience';
+                    const company = card.querySelector('.experience-company')?.textContent || 'Unknown Company';
+                    workExperiences.push({
+                        title: title,
+                        company: company,
+                        type: 'Work Experience',
+                        element: card
+                    });
+                }
+            });
+
+            // Search in education cards
+            document.querySelectorAll('.education-card').forEach(card => {
+                const badges = card.querySelectorAll('.tech-badge:not(.more-badge)');
+                const hasSkill = Array.from(badges).some(badge =>
+                    badge.textContent.trim() === skillName
+                );
+
+                if (hasSkill) {
+                    const title = card.querySelector('.experience-title')?.textContent || 'Untitled Education';
+                    const company = card.querySelector('.experience-company')?.textContent || 'Unknown Institution';
+                    educationExperiences.push({
+                        title: title,
+                        company: company,
+                        type: 'Education',
+                        element: card
+                    });
+                }
+            });
+
+            // Search in project cards
+            document.querySelectorAll('.project-card').forEach(card => {
+                const badges = card.querySelectorAll('.tech-badge:not(.more-badge)');
+                const hasSkill = Array.from(badges).some(badge =>
+                    badge.textContent.trim() === skillName
+                );
+
+                if (hasSkill) {
+                    const title = card.querySelector('h3')?.textContent || 'Untitled Project';
+                    projectExperiences.push({
+                        title: title,
+                        company: 'Project',
+                        type: 'Project',
+                        element: card
+                    });
+                }
+            });
+
+            // Return in order: Work Experience, Education, Projects
+            return [...workExperiences, ...educationExperiences, ...projectExperiences];
+        }
+
+        /**
+         * Scroll to a specific experience element
+         */
+        function scrollToExperience(element) {
+            if (!element) return;
+
+            // Expand the card if it's expandable
+            if (element.classList.contains('experience-card')) {
+                element.classList.add('expanded');
+            }
+
+            // Scroll to the element
+            element.scrollIntoView({
+                behavior: 'smooth',
+                block: 'center'
+            });
+
+            // Add temporary highlight effect
+            const originalBorder = element.style.borderColor;
+            element.style.borderColor = 'var(--neon-green)';
+            element.style.boxShadow = '0 0 20px rgba(57, 255, 20, 0.5)';
+
+            setTimeout(() => {
+                element.style.borderColor = originalBorder;
+                element.style.boxShadow = '';
+            }, 2000);
+        }
+
+
+
         function setupSkillsShowcase() {
             // Get panel elements
             const mlPanel = document.getElementById('ml-panel');
