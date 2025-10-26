@@ -1,0 +1,1630 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Motorsport Engineer Portfolio</title>
+    <style>
+      * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+          }
+          body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #0d0d0d;
+            color: #e8e8e8;
+            overflow-x: hidden;
+            line-height: 1.6;
+          }
+          /* Menu Icon */
+          .menu-toggle {
+            position: fixed;
+            top: 3rem;
+            right: 3rem;
+            width: 3rem;
+            height: 3rem;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+          }
+          .menu-line {
+            width: 1.5rem;
+            height: 2px;
+            background: #e8e8e8;
+            border-radius: 2px;
+            transition: all 0.3s ease;
+          }
+          .menu-toggle.active .menu-line:nth-child(1) {
+            transform: translateY(8px) rotate(45deg);
+          }
+          .menu-toggle.active .menu-line:nth-child(2) {
+            opacity: 0;
+          }
+          .menu-toggle.active .menu-line:nth-child(3) {
+            transform: translateY(-8px) rotate(-45deg);
+          }
+          /* Menu Overlay */
+          .menu-overlay {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.4s ease;
+          }
+          .menu-overlay.active {
+            opacity: 1;
+            pointer-events: all;
+          }
+          .menu-content {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            transform: translateY(20px);
+            transition: transform 0.4s ease 0.1s;
+          }
+          .menu-overlay.active .menu-content {
+            transform: translateY(0);
+          }
+          .menu-item {
+            font-size: 3.5rem;
+            font-weight: 200;
+            letter-spacing: -0.02em;
+            color: #e8e8e8;
+            cursor: pointer;
+            position: relative;
+            transition: color 0.3s ease;
+            text-align: center;
+          }
+          .menu-item::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            width: 100%;
+            height: 1px;
+            background: #e8e8e8;
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s ease;
+          }
+          .menu-item:hover::after {
+            transform: scaleX(1);
+          }
+          .menu-item:hover {
+            color: #888;
+          }
+
+          /* Contact Modal */
+            .contact-modal {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.9);
+            width: 90%;
+            max-width: 480px;
+            background: linear-gradient(135deg, #1a1a1a 0%, #0d0d0d 100%);
+            border-radius: 24px;
+            padding: 4rem 3rem;
+            z-index: 1001;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            }
+            .contact-modal.active {
+            opacity: 1;
+            pointer-events: all;
+            transform: translate(-50%, -50%) scale(1);
+            }
+            .contact-modal-backdrop {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+            }
+            .contact-modal-backdrop.active {
+            opacity: 1;
+            pointer-events: all;
+            }
+            .contact-modal-close {
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+            width: 2rem;
+            height: 2rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s ease;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.05);
+            }
+            .contact-modal-close:hover {
+            transform: rotate(90deg);
+            background: rgba(255, 255, 255, 0.1);
+            }
+            .contact-modal-close::before,
+            .contact-modal-close::after {
+            content: '';
+            position: absolute;
+            width: 1.2rem;
+            height: 1.5px;
+            background: #888;
+            border-radius: 2px;
+            transition: background 0.3s ease;
+            }
+            .contact-modal-close:hover::before,
+            .contact-modal-close:hover::after {
+            background: #e8e8e8;
+            }
+            .contact-modal-close::before {
+            transform: rotate(45deg);
+            }
+            .contact-modal-close::after {
+            transform: rotate(-45deg);
+            }
+            .contact-modal-title {
+            font-size: 2.5rem;
+            font-weight: 200;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, #ffffff 0%, #888888 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            }
+            .contact-modal-subtitle {
+            font-size: 0.95rem;
+            color: #666;
+            font-weight: 300;
+            margin-bottom: 3rem;
+            }
+            .contact-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            }
+            .contact-button {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            padding: 1.25rem 2rem;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 16px;
+            color: #e8e8e8;
+            font-size: 1.05rem;
+            font-weight: 300;
+            letter-spacing: -0.01em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            position: relative;
+            overflow: hidden;
+            }
+            .contact-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: left 0.5s ease;
+            }
+            .contact-button:hover::before {
+            left: 100%;
+            }
+            .contact-button:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.15);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+            }
+            .contact-button-icon {
+            width: 22px;
+            height: 22px;
+            stroke: #888;
+            transition: stroke 0.3s ease;
+            flex-shrink: 0;
+            }
+            .contact-button:hover .contact-button-icon {
+            stroke: #e8e8e8;
+            }
+
+
+          /* Hero Section with 3D Parallax */
+          .hero {
+            height: 100vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            background: #0d0d0d;
+          }
+          .spline-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+          }
+          .spline-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+          }
+          .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            padding: 2rem;
+          }
+          .hero-eyebrow {
+            font-size: 0.75rem;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: #888;
+            margin-bottom: 2rem;
+            font-weight: 400;
+          }
+          .hero h1 {
+            font-size: clamp(3rem, 9vw, 7rem);
+            font-weight: 300;
+            letter-spacing: -0.02em;
+            margin-bottom: 1.5rem;
+            line-height: 1.1;
+          }
+          .hero h1 strong {
+            font-weight: 200;
+            display: block;
+            background: linear-gradient(90deg, #ffffff 0%, #888888 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-top: 1.5rem;
+          }
+          .hero-subtitle {
+            font-size: clamp(1rem, 2vw, 1.3rem);
+            color: #888;
+            font-weight: 300;
+            letter-spacing: 0.05em;
+            max-width: 600px;
+            margin: 0 auto 5rem;
+          }
+          .hero-stats {
+            display: flex;
+            gap: 4rem;
+            justify-content: center;
+            flex-wrap: wrap;
+          }
+          .stat {
+            text-align: center;
+          }
+          .stat-number {
+            font-size: 2.5rem;
+            font-weight: 200;
+            color: #fff;
+            display: block;
+          }
+          .stat-label {
+            font-size: 0.7rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: #666;
+            margin-top: 0.5rem;
+          }
+          /* Horizontal Timeline Section */
+          .timeline-wrapper {
+            height: 400vh;
+            position: relative;
+            background: #080808;
+          }
+          .timeline-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("/images/tadmos/motorsport/LMS09044.jpg");
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            opacity: 0.35;
+            z-index: 0;
+          }
+          .timeline-background::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(180deg, rgba(8, 8, 8, 0.8) 0%, rgba(8, 8, 8, 0.6) 50%, rgba(8, 8, 8, 0.8) 100%);
+          }
+          .timeline-container {
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+            z-index: 1;
+          }
+          .timeline-container::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            width: 100%;
+            height: 1px;
+            background: #2a2a2a;
+            z-index: 1;
+          }
+          .timeline-track {
+            display: flex;
+            gap: 4rem;
+            padding: 0 6rem 0 6rem;
+            will-change: transform;
+            position: relative;
+            z-index: 2;
+          }
+          .timeline-item {
+            flex-shrink: 0;
+            width: 350px;
+            height: 440px;
+            position: relative;
+            transition: transform 0.3s ease;
+          }
+          .timeline-item:nth-child(odd) {
+            transform: translateY(-120px);
+          }
+          .timeline-item:nth-child(even) {
+            transform: translateY(120px);
+          }
+          .timeline-item:hover {
+            transform: translateY(-130px) !important;
+          }
+          .timeline-item:nth-child(even):hover {
+            transform: translateY(110px) !important;
+          }
+          /* Folder Tab Shape */
+          .timeline-card {
+            width: 100%;
+            height: 100%;
+            background: rgba(26, 26, 26, 0.95);
+            position: relative;
+            clip-path: polygon(
+              0 60px,
+              120px 60px,
+              140px 0,
+              100% 0,
+              100% 100%,
+              0 100%
+            );
+            padding: 5rem 2.5rem 2.5rem 2.5rem;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+          }
+          .timeline-item:hover .timeline-card {
+            background: rgba(34, 34, 34, 0.95);
+          }
+          .timeline-tab {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 140px;
+            height: 60px;
+            background: rgba(42, 42, 42, 0.95);
+            clip-path: polygon(0 0, 120px 0, 140px 60px, 0 60px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: #888;
+            font-weight: 400;
+            backdrop-filter: blur(10px);
+          }
+          .timeline-item:hover .timeline-tab {
+            background: rgba(51, 51, 51, 0.95);
+          }
+          .timeline-logo {
+            position: absolute;
+            top: 3rem;
+            right: 3rem;
+            width: 48px;
+            height: auto;
+            opacity: 0.8;
+            filter: grayscale(100%) brightness(0.8);
+            transition: filter 0.3s ease, opacity 0.3s ease;
+          }
+          .timeline-item:hover .timeline-logo {
+            filter: grayscale(0%) brightness(1);
+            opacity: 1;
+          }
+          .logo-bmw     { width: 55px; height: auto; }
+          .logo-bosch   { width: 100px; height: auto; }
+          .logo-bmw-motorsport { width: 100px; height: auto; }
+          .logo-wzl     { width: 100px; height: auto; }
+
+          .timeline-year {
+            font-size: 2rem;
+            font-weight: 200;
+            letter-spacing: -0.02em;
+            color: #fff;
+            margin-bottom: 1rem;
+          }
+          .timeline-title {
+            font-size: 1.5rem;
+            font-weight: 300;
+            letter-spacing: -0.01em;
+            color: #fff;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+          }
+          .timeline-description {
+            font-size: 0.95rem;
+            color: #888;
+            line-height: 1.7;
+            font-weight: 300;
+            margin-bottom: 2rem;
+          }
+          .timeline-achievements {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+          }
+          .achievement-item {
+            font-size: 0.85rem;
+            color: #666;
+            padding-left: 1.5rem;
+            position: relative;
+            font-weight: 300;
+          }
+          .achievement-item::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: #444;
+          }
+          .timeline-progress {
+            position: absolute;
+            bottom: 1rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            z-index: 10;
+          }
+          .progress-line {
+            width: 200px;
+            height: 1px;
+            background: #2a2a2a;
+            position: relative;
+            overflow: hidden;
+          }
+          .progress-fill {
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            background: #fff;
+            width: 0%;
+            transition: width 0.1s linear;
+          }
+          .progress-text {
+            font-size: 0.7rem;
+            letter-spacing: 0.2em;
+            color: #666;
+            white-space: nowrap;
+          }
+
+          /* Company Carousel */
+          .company-carousel-section {
+            padding: 6rem 2rem 4rem;
+            background: #0d0d0d;
+            overflow: hidden;
+          }
+          .company-carousel-label {
+            font-size: 0.75rem;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: #666;
+            text-align: center;
+            margin-bottom: 3rem;
+            font-weight: 400;
+          }
+          .company-carousel-wrapper {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+          }
+          .company-carousel-wrapper::before,
+          .company-carousel-wrapper::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            width: 200px;
+            height: 100%;
+            z-index: 2;
+            pointer-events: none;
+          }
+          .company-carousel-wrapper::before {
+            left: 0;
+            background: linear-gradient(90deg, #0d0d0d 0%, transparent 100%);
+          }
+          .company-carousel-wrapper::after {
+            right: 0;
+            background: linear-gradient(90deg, transparent 0%, #0d0d0d 100%);
+          }
+          .company-carousel-track {
+            display: flex;
+            gap: 6rem;
+            animation: scroll-left 40s linear infinite;
+            width: fit-content;
+          }
+          @keyframes scroll-left {
+            0% {
+              transform: translateX(0);
+            }
+            100% {
+              transform: translateX(-50%);
+            }
+          }
+          .company-logo-item {
+            flex-shrink: 0;
+            width: 180px;
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+          }
+          .company-logo-item img {
+            max-width: 70%;
+            max-height: 70%;
+            object-fit: contain;
+            filter: grayscale(100%) brightness(0.7);
+            transition: filter 0.3s ease;
+          }
+          .company-logo-item:hover img {
+            filter: grayscale(0%) brightness(1);
+          }
+
+          /* 3D Carousel Projects Section */
+          .projects {
+            padding: 1rem 2rem;
+            background: #0d0d0d;
+            position: relative;
+            min-height: 103vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+          }
+          .section-header {
+            max-width: 1400px;
+            margin: 0 auto 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            border-bottom: 1px solid #2a2a2a;
+            padding-bottom: 0.5rem;
+            width: 100%;
+          }
+          .section-header-projects {
+              margin: 0 auto -3rem !important;  /* Specific spacing for projects only */
+          }
+          .section-title {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 200;
+            letter-spacing: -0.02em;
+          }
+          .section-number {
+            font-size: 1rem;
+            color: #444;
+            font-weight: 300;
+            letter-spacing: 0.1em;
+          }
+          .carousel-container {
+            position: relative;
+            width: 100%;
+            height: 650px;
+            perspective: 2000px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+          }
+          .carousel-scene {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transform-style: preserve-3d;
+            transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+          }
+          .carousel-item {
+            position: absolute;
+            width: 260px;
+            height: 300px;
+            left: 50%;
+            top: 50%;
+            transform-style: preserve-3d;
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            background: linear-gradient(135deg, #1a1a1a 0%, #0f0f0f 100%);
+            padding: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            clip-path: polygon(
+            0 30px,
+            30px 0,
+            100% 0,
+            100% calc(100% - 30px),
+            calc(100% - 30px) 100%,
+            0 100%
+            );
+            overflow: hidden;
+          }
+          .carousel-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: #fff;
+            transition: width 0.3s ease;
+          }
+          .carousel-item::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 1px;
+            height: 0;
+            background: #fff;
+            transition: height 0.3s ease 0.3s;
+          }
+          .carousel-item-outline-bottom {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 0;
+            height: 1px;
+            background: #fff;
+            transition: width 0.3s ease 0.6s;
+          }
+          .carousel-item-outline-left {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 1px;
+            height: 0;
+            background: #fff;
+            transition: height 0.3s ease 0.9s;
+          }
+          .carousel-item:hover::before {
+            width: 100%;
+          }
+          .carousel-item:hover::after {
+            height: 100%;
+          }
+          .carousel-item:hover .carousel-item-outline-bottom {
+            width: 100%;
+          }
+          .carousel-item:hover .carousel-item-outline-left {
+            height: 100%;
+          }
+          .carousel-item:hover {
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.7);
+          }
+          .carousel-item-number {
+            font-size: 0.8rem;
+            color: #444;
+            font-weight: 300;
+            letter-spacing: 0.2em;
+            margin-bottom: 0.5rem;
+          }
+          .carousel-item-title {
+            font-size: 1rem;
+            font-weight: 300;
+            letter-spacing: -0.01em;
+            color: #fff;
+            margin-bottom: 0.25rem;
+            line-height: 1;
+          }
+          .carousel-item-year {
+            font-size: 0.85rem;
+            color: #666;
+            font-weight: 300;
+            margin-bottom: 0.5rem;
+          }
+          .carousel-item-description {
+            font-size: 0.6rem;
+            color: #888;
+            line-height: 1.6;
+            font-weight: 300;
+            margin-bottom: 1.5rem;
+          }
+          .carousel-item-tags {
+            display: flex;
+            gap: 0.6rem;
+            flex-wrap: wrap;
+          }
+          .carousel-item-tag {
+            font-size: 0.6rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: #555;
+            font-weight: 400;
+            padding: 0.1rem 0.4rem;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+          }
+          .carousel-controls {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+            z-index: 10;
+          }
+          .carousel-button {
+            width: 56px;
+            height: 56px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-radius: 50%;
+          }
+          .carousel-button:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.2);
+            transform: scale(1.05);
+          }
+          .carousel-button svg {
+            width: 24px;
+            height: 24px;
+            stroke: #888;
+            transition: stroke 0.3s ease;
+          }
+          .carousel-button:hover svg {
+            stroke: #e8e8e8;
+          }
+          .carousel-indicator {
+            font-size: 0.9rem;
+            color: #666;
+            font-weight: 300;
+            letter-spacing: 0.1em;
+          }
+          /* Experience Section */
+          .experience {
+            padding: 6rem 3rem;
+            background: #000;
+          }
+          .experience-grid {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 1px;
+            background: #1a1a1a;
+            border: 1px solid #1a1a1a;
+          }
+          .experience-card {
+            background: #0d0d0d;
+            padding: 3rem;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+          }
+          .experience-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: #fff;
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+          }
+          .experience-card:hover::before {
+            transform: scaleX(1);
+          }
+          .experience-card:hover {
+            background: #111;
+          }
+          .experience-period {
+            font-size: 0.75rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: #555;
+            margin-bottom: 1.5rem;
+            font-weight: 400;
+          }
+          .experience-role {
+            font-size: 1.6rem;
+            font-weight: 300;
+            letter-spacing: -0.01em;
+            margin-bottom: 0.5rem;
+          }
+          .experience-company {
+            font-size: 1rem;
+            color: #888;
+            margin-bottom: 1.5rem;
+            font-weight: 300;
+          }
+          .experience-description {
+            font-size: 0.95rem;
+            color: #666;
+            line-height: 1.7;
+            font-weight: 300;
+          }
+          /* Scroll indicator */
+          .scroll-indicator {
+            position: absolute;
+            bottom: 0rem;
+            left: calc(50% - 4px);
+            transform: translateX(-50%);
+            width: 1px;
+            height: 80px;
+            background: linear-gradient(180deg, #444, transparent);
+            opacity: 0.5;
+          }
+          .scroll-indicator::after {
+            content: 'SCROLL';
+            position: absolute;
+            top: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.65rem;
+            letter-spacing: 0.3em;
+            color: #444;
+          }
+          @media (max-width: 768px) {
+            .menu-toggle {
+              top: 2rem;
+              right: 2rem;
+              width: 2.5rem;
+              height: 2.5rem;
+            }
+            .menu-item {
+              font-size: 2.5rem;
+            }
+            .timeline-track {
+              padding: 0 3rem 0 3rem;
+            }
+            .timeline-item {
+              width: 300px;
+              height: 450px;
+            }
+            .timeline-card {
+              padding: 4rem 2rem 2rem 2rem;
+            }
+            .projects, .experience {
+              padding: 0rem 1rem;
+            }
+            .section-header {
+              flex-direction: column;
+              align-items: flex-start;
+              gap: 1rem;
+            }
+            .hero-stats {
+              gap: 2rem;
+            }
+            .experience-grid {
+              grid-template-columns: 1fr;
+            }
+            .contact-modal {
+                padding: 3rem 2rem;
+            }
+            .contact-modal-title {
+                font-size: 2rem;
+            }
+            .carousel-item {
+              width: 85vw;
+              max-width: 300px;
+              height: 250px;
+              padding: 1.75rem;
+            }
+            .carousel-item-title {
+              font-size: 1rem;
+            }
+            .carousel-controls {
+              bottom: -4rem;
+            }
+            .company-carousel-section {
+              padding: 4rem 1rem 3rem;
+            }
+            .company-logo-item {
+              width: 140px;
+              height: 80px;
+            }
+            .company-carousel-track {
+              gap: 3rem;
+            }
+          }
+    </style>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+  </head>
+  <body>
+    <!-- Menu Toggle -->
+    <div class="menu-toggle" id="menuToggle">
+      <div class="menu-line"></div>
+      <div class="menu-line"></div>
+      <div class="menu-line"></div>
+    </div>
+
+    <!-- Menu Overlay -->
+    <div class="menu-overlay" id="menuOverlay">
+      <div class="menu-content">
+        <div class="menu-item" data-section="hero">Home</div>
+        <div class="menu-item" data-section="timeline-section">Timeline</div>
+        <div class="menu-item" data-section="projects">Projects</div>
+        <div class="menu-item" data-section="academics">Academics</div>
+        <div class="menu-item" data-action="contact">Contact</div>
+      </div>
+    </div>
+
+    <!-- Contact Modal Backdrop -->
+    <div class="contact-modal-backdrop" id="contactModalBackdrop"></div>
+
+    <!-- Contact Modal -->
+    <div class="contact-modal" id="contactModal">
+      <div class="contact-modal-close" id="contactModalClose"></div>
+      <h3 class="contact-modal-title">Get in Touch</h3>
+      <p class="contact-modal-subtitle">
+        Connect with me through these platforms
+      </p>
+      <div class="contact-buttons">
+        <a
+          href="https://www.linkedin.com/in/lewis-m-schmidtke/"
+          target="_blank"
+          class="contact-button"
+        >
+          <i data-lucide="linkedin" class="contact-button-icon"></i>
+          <span>LinkedIn</span>
+        </a>
+        <a
+          href="https://github.com/LewisSchmidtke"
+          target="_blank"
+          class="contact-button"
+        >
+          <i data-lucide="github" class="contact-button-icon"></i>
+          <span>GitHub</span>
+        </a>
+        <a href="mailto:your.email@example.com" class="contact-button">
+          <i data-lucide="mail" class="contact-button-icon"></i>
+          <span>Email</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero" id="hero">
+      <div class="spline-container">
+        <iframe
+          src="https://my.spline.design/3dgradient-AcpgG6LxFkpnJSoowRHPfcbO"
+          frameborder="0"
+          width="100%"
+          height="100%"
+        ></iframe>
+      </div>
+      <div class="hero-content">
+        <p class="hero-eyebrow">Lewis M. Schmidtke <br> LMDh Engineer | AI/ML Developer</p>
+        <h1>
+          <strong>Engineering</strong>
+          Research & Performance
+        </h1>
+        <p class="hero-subtitle">
+            Motorsport engineer specialized in LMDh data analysis, vehicle performance optimization, and AI-driven
+            insights.
+        </p>
+        <div class="hero-stats">
+          <div class="stat">
+            <span class="stat-number">3+</span>
+            <span class="stat-label">Years Experience</span>
+          </div>
+          <div class="stat">
+            <span class="stat-number">6+</span>
+            <span class="stat-label">Industry Projects <br> completed</span>
+          </div>
+          <div class="stat">
+            <span class="stat-number">4</span>
+            <span class="stat-label">Leading Companies <br> worked for </span>
+          </div>
+        </div>
+      </div>
+      <div class="scroll-indicator"></div>
+    </section>
+
+    <!-- Horizontal Timeline Section -->
+    <section class="timeline-wrapper" id="timeline-section">
+      <div class="timeline-background"></div>
+      <div class="timeline-container">
+        <div class="timeline-track" id="timeline-track">
+          <div class="timeline-item">
+            <div class="timeline-card">
+              <div class="timeline-tab">2025</div>
+              <div class="timeline-year">2025</div>
+              <img src="/images/logos/bmw_motorsport.png" alt="BMW Motorsport" class="timeline-logo logo-bmw-motorsport" />
+              <h3 class="timeline-title">The LMDH Chapter</h3>
+              <p class="timeline-description">
+                Data/Performance Engineer Intern - BMW Motorsport (10.2025 - Ongoing)
+              </p>
+              <div class="timeline-achievements">
+                <div class="achievement-item">Track, Telemetry and Weather Data Analysis</div>
+                <div class="achievement-item">Custom Tool Development for Test and Race use</div>
+                <div class="achievement-item">Trackside and Ops-Room race support</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-card">
+              <div class="timeline-tab">2025</div>
+              <div class="timeline-year">2025</div>
+              <img src="/images/logos/bmw.png" alt="BMW" class="timeline-logo logo-bmw" />
+              <h3 class="timeline-title">Aerodynamic Advances</h3>
+              <p class="timeline-description">
+                Vehicle Aerodynamicist Intern - BMW (05.2025 - 09.2025)
+              </p>
+              <div class="timeline-achievements">
+                <div class="achievement-item">Tool Development for Aero & Thermal Analysis</div>
+                <div class="achievement-item">Automation Pipeline for department-wide use</div>
+                <div class="achievement-item">Part of Special Problem Solution Team</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-card">
+              <div class="timeline-tab">2025</div>
+              <div class="timeline-year">2025</div>
+              <h3 class="timeline-title">Private Motorsport Project</h3>
+              <p class="timeline-description">
+                Data & Performance Engineering Project
+              </p>
+              <div class="timeline-achievements">
+                <div class="achievement-item">Sim-Racing Setup Optimizations</div>
+                <div class="achievement-item">F1 Race Strategy Analysis</div>
+                <div class="achievement-item">WEC Track Evolution Analysis</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-card">
+              <div class="timeline-tab">2024</div>
+              <div class="timeline-year">2024</div>
+              <img src="/images/logos/porsche.png" alt="Porsche" class="timeline-logo" />
+              <h3 class="timeline-title">Crash Safety Research</h3>
+              <p class="timeline-description">
+                Vehicle Safety Intern & Thesis - Porsche AG (04.2024-10.2024)
+              </p>
+              <div class="timeline-achievements">
+                <div class="achievement-item">Research into novel data analysis strategies</div>
+                <div class="achievement-item">Development of custom AI-Architectures</div>
+                <div class="achievement-item">Automated data processing pipelines</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-card">
+              <div class="timeline-tab">2023</div>
+              <div class="timeline-year">2023</div>
+              <img src="/images/logos/bosch.png" alt="Bosch" class="timeline-logo logo-bosch" />
+              <h3 class="timeline-title">Understanding Vehicle Dynamics</h3>
+              <p class="timeline-description">
+                Vehicle Dynamics Engineer Intern - Bosch Engineering GmbH (10.2023-03.2024)
+              </p>
+              <div class="timeline-achievements">
+                <div class="achievement-item">Telemetry Analysis with Data Clustering</div>
+                <div class="achievement-item">Foundation Model Development for Maneuvers</div>
+                <div class="achievement-item">Simulations with IPGCarMaker</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-card">
+              <div class="timeline-tab">2023</div>
+              <div class="timeline-year">2023</div>
+              <img src="/images/logos/wzl.png" alt="WZL" class="timeline-logo logo-wzl" />
+              <h3 class="timeline-title">Reinforcing AI Capabilities</h3>
+              <p class="timeline-description">
+                AI Robotic Systems Engineering Thesis - WZL (04.2023-09.2023)
+              </p>
+              <div class="timeline-achievements">
+                <div class="achievement-item">Custom Object Detection Models - 25% Improved Accuracy</div>
+                <div class="achievement-item">Integration of depth-sensing functionalities</div>
+                <div class="achievement-item">Development of path-planning algorithms</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-card">
+              <div class="timeline-tab">2022</div>
+              <div class="timeline-year">2022</div>
+              <h3 class="timeline-title">Starting in Software</h3>
+              <p class="timeline-description">
+                Private learning of programming essentials
+              </p>
+              <div class="timeline-achievements">
+                <div class="achievement-item">Developed Study Card app</div>
+                <div class="achievement-item">Created blackjack with betting</div>
+                <div class="achievement-item">Recreated the Snake game</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="timeline-progress">
+        <span class="progress-text">TIMELINE</span>
+        <div class="progress-line">
+          <div class="progress-fill" id="progress-fill"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Company Carousel Section -->
+    <section class="company-carousel-section">
+      <p class="company-carousel-label">Experience Gained at:</p>
+      <div class="company-carousel-wrapper">
+        <div class="company-carousel-track" id="companyCarouselTrack">
+          <!-- First set of logos -->
+          <div class="company-logo-item">
+            <img
+              src="/images/logos/bmw.png"
+              alt="BMW"
+            />
+          </div>
+          <div class="company-logo-item">
+            <img
+              src="/images/logos/ika.png"
+              alt="IKA"
+            />
+          </div>
+          <div class="company-logo-item">
+            <img
+              src="/images/logos/porsche.png"
+              alt="Porsche"
+            />
+          </div>
+          <div class="company-logo-item">
+            <img
+              src="/images/logos/bosch.png"
+              alt="Bosch"
+            />
+          </div>
+          <div class="company-logo-item">
+            <img
+              src="/images/logos/bmw_motorsport.png"
+              alt="BMW Motorsport"
+            />
+          </div>
+          <div class="company-logo-item">
+            <img
+              src="/images/logos/rwth.png"
+              alt="RWTH"
+            />
+          </div>
+          <div class="company-logo-item">
+            <img
+              src="/images/logos/man.png"
+              alt="MAN"
+            />
+          </div>
+          <div class="company-logo-item">
+            <img
+              src="/images/logos/wzl.png"
+              alt="WZL"
+            />
+          </div>
+          <!-- Duplicate set for seamless loop -->
+          <div class="company-logo-item">
+            <img
+              src="/images/logos/bmw.png"
+              alt="BMW"
+            />
+          </div>
+          <div class="company-logo-item">
+            <img
+              src="/images/logos/ika.png"
+              alt="IKA"
+            />
+          </div>
+          <div class="company-logo-item">
+            <img
+              src="/images/logos/porsche.png"
+              alt="Porsche"
+            />
+          </div>
+          <div class="company-logo-item">
+            <img
+              src="/images/logos/bosch.png"
+              alt="Bosch"
+            />
+          </div>
+          <div class="company-logo-item">
+            <img
+              src="/images/logos/bmw_motorsport.png"
+              alt="BMW Motorsport"
+            />
+          </div>
+          <div class="company-logo-item">
+            <img
+              src="/images/logos/rwth.png"
+              alt="RWTH"
+            />
+          </div>
+          <div class="company-logo-item">
+            <img
+              src="/images/logos/man.png"
+              alt="MAN"
+            />
+          <div class="company-logo-item">
+            <img
+              src="/images/logos/wzl.png"
+              alt="WZL"
+            />
+          </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3D Carousel Projects Section -->
+    <section class="projects" id="projects">
+      <div class="section-header section-header-projects">
+        <h2 class="section-title">Selected Projects</h2>
+        <span class="section-number"> Free Time Projects </span>
+      </div>
+      <div class="carousel-container">
+        <div class="carousel-scene" id="carouselScene">
+          <!-- Project Items will be positioned via JavaScript -->
+        </div>
+      </div>
+      <div class="carousel-controls">
+        <div class="carousel-button" id="prevBtn">
+          <i data-lucide="chevron-left"></i>
+        </div>
+        <div class="carousel-indicator">
+          <span id="currentSlide">1</span>
+          /
+          <span id="totalSlides">4</span>
+        </div>
+        <div class="carousel-button" id="nextBtn">
+          <i data-lucide="chevron-right"></i>
+        </div>
+      </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section class="experience" id="academics">
+      <div class="section-header">
+        <h2 class="section-title">Academic History</h2>
+        <span class="section-number">— Academic Timeline</span>
+      </div>
+      <div class="experience-grid">
+        <div class="experience-card">
+          <div class="experience-period">2025</div>
+          <h3 class="experience-role">Co-Authorship</h3>
+          <p class="experience-company">SAE Journal</p>
+          <p class="experience-description">
+            Still ongoing, not final yet. <br>
+            Topic: Aero & Thermal Modeling & Prediction of engine components
+          </p>
+        </div>
+
+        <div class="experience-card">
+          <div class="experience-period">10.2025 — Present</div>
+          <h3 class="experience-role">Master's Scholarship</h3>
+          <p class="experience-company">BMW Fastlane Scholarship</p>
+          <p class="experience-description">
+            Lead vehicle performance across all technical domains including
+            aerodynamics, vehicle dynamics, and race strategy. Manage
+            engineering team of 8 personnel and coordinate simulation-to-track
+            correlation programs.
+          </p>
+        </div>
+
+        <div class="experience-card">
+          <div class="experience-period">10.2025 — Present</div>
+          <h3 class="experience-role">M.Sc. Mechanical Engineering</h3>
+          <p class="experience-company">RWTH Aachen University</p>
+          <p class="experience-description">
+            Courses in: Powertrains, Aerodynamics, Fluid Dynamics, Simulation sciences and Management
+          </p>
+        </div>
+
+        <div class="experience-card">
+          <div class="experience-period">04.2024 — 10.2024</div>
+          <h3 class="experience-role">Bachelor Thesis</h3>
+          <p class="experience-company">Porsche AG</p>
+          <p class="experience-description">
+            Title: "Data Format Research for Machine Learning Based HIC Predictions in Structural Vehicle Analysis"
+          </p>
+        </div>
+
+        <div class="experience-card">
+          <div class="experience-period">04.2023 — 09.2023</div>
+          <h3 class="experience-role">Research Thesis</h3>
+          <p class="experience-company">Smart Automation Lab</p>
+          <p class="experience-description">
+              Title: Automatic Screw Detection for Collaborative Assembly Tasks
+          </p>
+        </div>
+
+        <div class="experience-card">
+          <div class="experience-period">2019 — 2025</div>
+          <h3 class="experience-role">B.Sc. Automotive Engineering</h3>
+          <p class="experience-company">RWTH Aachen University</p>
+          <p class="experience-description">
+            Courses in: Vehicle Dynamics, Vehicle Mechatronics, Simulation Science, Control Systems, Aerodynamics, Thermodynamics, Powertrains and Management
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <script>
+      // Initialize Lucide icons
+      lucide.createIcons({
+        attrs: {
+          'stroke-width': 1.5
+        }
+      });
+
+      // Menu Toggle
+      const menuToggle = document.getElementById('menuToggle');
+      const menuOverlay = document.getElementById('menuOverlay');
+      const menuItems = document.querySelectorAll('.menu-item');
+      const contactModal = document.getElementById('contactModal');
+      const contactModalBackdrop = document.getElementById('contactModalBackdrop');
+      const contactModalClose = document.getElementById('contactModalClose');
+
+      menuToggle.addEventListener('click', () => {
+        menuToggle.classList.toggle('active');
+        menuOverlay.classList.toggle('active');
+      });
+
+      // Menu Item Click
+      menuItems.forEach(item => {
+        item.addEventListener('click', () => {
+          const action = item.getAttribute('data-action');
+          const section = item.getAttribute('data-section');
+
+          if (action === 'contact') {
+            contactModal.classList.add('active');
+            contactModalBackdrop.classList.add('active');
+            menuToggle.classList.remove('active');
+            menuOverlay.classList.remove('active');
+          } else if (section) {
+            const targetSection = document.getElementById(section);
+            if (targetSection) {
+              targetSection.scrollIntoView({ behavior: 'smooth' });
+              menuToggle.classList.remove('active');
+              menuOverlay.classList.remove('active');
+            }
+          }
+        });
+      });
+
+      // Close contact modal
+      contactModalClose.addEventListener('click', () => {
+        contactModal.classList.remove('active');
+        contactModalBackdrop.classList.remove('active');
+      });
+
+      contactModalBackdrop.addEventListener('click', () => {
+        contactModal.classList.remove('active');
+        contactModalBackdrop.classList.remove('active');
+      });
+
+      menuOverlay.addEventListener('click', (e) => {
+        if (e.target === menuOverlay) {
+          menuToggle.classList.remove('active');
+          menuOverlay.classList.remove('active');
+        }
+      });
+
+      // Horizontal Timeline Scroll
+      const timelineSection = document.getElementById('timeline-section');
+      const timelineTrack = document.getElementById('timeline-track');
+      const progressFill = document.getElementById('progress-fill');
+
+      let maxHorizontalScroll = 0;
+
+      function calculateTimelineBounds() {
+        const trackWidth = timelineTrack.scrollWidth;
+        const viewportWidth = window.innerWidth;
+        maxHorizontalScroll = trackWidth - viewportWidth;
+      }
+
+      function updateTimeline() {
+        const rect = timelineSection.getBoundingClientRect();
+        const sectionHeight = timelineSection.offsetHeight;
+        const viewportHeight = window.innerHeight;
+
+        const scrollStart = -rect.top;
+        const scrollRange = sectionHeight - viewportHeight;
+        const progress = Math.max(0, Math.min(1, scrollStart / scrollRange));
+
+        const translateX = -progress * maxHorizontalScroll;
+        timelineTrack.style.transform = `translateX(${translateX}px)`;
+        progressFill.style.width = `${progress * 100}%`;
+
+      }
+
+      calculateTimelineBounds();
+      window.addEventListener('resize', () => {
+        calculateTimelineBounds();
+        updateTimeline();
+      });
+      window.addEventListener('scroll', updateTimeline);
+      updateTimeline();
+
+      // 3D Carousel
+      const projects = [
+        {
+          number: '01',
+          title: 'Telemetry Analysis Dashboard',
+          year: '',
+          description: 'Race Strategy, Telemetry, Weather and Pace Analysis using python. Defining long runs, quantifying track evolution and more.',
+          tags: ['Motorsport', 'Data Engineering', 'Telemetry']
+        },
+        {
+          number: '02',
+          title: 'US Stock Market Forecasting',
+          year: '',
+          description: 'Analyzed US Stock market data from 2019-2024. Conducted a holistic price development analysis of multiple tech stocks, individual comparisons of tech stocks, as well as a volatility analysis. Forecasted the NASDAQ 100 based on prices and volume.',
+          tags: ['Python', 'ML', 'Data Science']
+        },
+        {
+          number: '03',
+          title: 'Worldwide Cybersecurity Threat Analysis',
+          year: '',
+          description: 'Analyzed worldwide cyber criminal activity with data science techniques to present insights for prevention strategies.',
+          tags: ['Data Science', 'Python', 'Business Analytics']
+        },
+        {
+          number: '04',
+          title: 'Mathematical Neural Network',
+          year: '',
+          description: 'Developed a Multi Layer Perceptron in purely mathematical fashion without involving any higher level python libraries. Focussing on theoretical understanding and implementing Early Stopping.',
+          tags: ['Python', 'ML', 'Math']
+        }
+      ];
+
+      const carouselScene = document.getElementById('carouselScene');
+      const prevBtn = document.getElementById('prevBtn');
+      const nextBtn = document.getElementById('nextBtn');
+      const currentSlideEl = document.getElementById('currentSlide');
+      const totalSlidesEl = document.getElementById('totalSlides');
+
+      let currentIndex = 0;
+      const totalSlides = projects.length;
+      const radius = 650;
+      const angleStep = (2 * Math.PI) / totalSlides;
+
+      totalSlidesEl.textContent = totalSlides;
+
+      // Create carousel items
+      projects.forEach((project, index) => {
+        const item = document.createElement('div');
+        item.className = 'carousel-item';
+        item.innerHTML = `
+          <div class="carousel-item-number">${project.number}</div>
+          <h3 class="carousel-item-title">${project.title}</h3>
+          <div class="carousel-item-year">${project.year}</div>
+          <p class="carousel-item-description">${project.description}</p>
+          <div class="carousel-item-tags">
+            ${project.tags.map(tag => `<span class="carousel-item-tag">${tag}</span>`).join('')}
+          </div>
+        `;
+        carouselScene.appendChild(item);
+      });
+
+      const carouselItems = document.querySelectorAll('.carousel-item');
+
+      function updateCarousel() {
+        const rotation = currentIndex * angleStep;
+
+        carouselItems.forEach((item, index) => {
+          const angle = rotation + (index * angleStep);
+          const x = Math.sin(angle) * radius;
+          const z = Math.cos(angle) * radius;
+          const rotateY = -angle * (180 / Math.PI);
+
+          // Calculate scale and opacity based on z position
+          const scale = 0.7 + (z + radius) / (radius * 2) * 0.3;
+          const opacity = 0.3 + (z + radius) / (radius * 2) * 0.7;
+          const zIndex = Math.round(z);
+
+          item.style.transform = `
+            translate(-50%, -50%)
+            translate3d(${x}px, 0, ${z}px)
+            rotateY(${rotateY}deg)
+            scale(${scale})
+          `;
+          item.style.opacity = opacity;
+          item.style.zIndex = zIndex;
+
+          // Highlight the front item
+          if (Math.abs(angle % (2 * Math.PI)) < 0.1) {
+            item.style.filter = 'brightness(1.2)';
+          } else {
+            item.style.filter = 'brightness(0.8)';
+          }
+        });
+
+        // currentSlideEl.textContent = ((currentIndex % totalSlides) + totalSlides) % totalSlides + 1;
+        const visibleIndex = ((-currentIndex % totalSlides) + totalSlides) % totalSlides;
+        currentSlideEl.textContent = visibleIndex + 1;
+      }
+
+      function rotateCarousel(direction) {
+        currentIndex -= direction;
+        updateCarousel();
+      }
+
+      prevBtn.addEventListener('click', () => rotateCarousel(-1));
+      nextBtn.addEventListener('click', () => rotateCarousel(1));
+
+      // Initialize carousel
+      updateCarousel();
+
+      // Reinitialize icons after dynamic content
+      setTimeout(() => {
+        lucide.createIcons({
+          attrs: {
+            'stroke-width': 1.5
+          }
+        });
+      }, 100);
+    </script>
+  </body>
+</html>
