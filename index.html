@@ -862,9 +862,14 @@ transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 .experience-card:hover::before {
 transform: scaleX(1);
 }
-.experience-card:hover {
+.experience-card:hover .timeline-logo {
+filter: grayscale(0%) brightness(1);
+opacity: 1;
 background: #111;
 }
+/*.experience-card:hover {*/
+/*background: #111;*/
+/*}*/
 .experience-period {
 font-size: 0.75rem;
 letter-spacing: 0.2em;
@@ -1286,6 +1291,7 @@ font-size: 0.65rem;
 letter-spacing: 0.3em;
 color: #444;
 }
+
 @media (max-width: 768px) {
 .menu-toggle {
 top: 2rem;
@@ -1837,6 +1843,7 @@ aspect-ratio: 1 / 1;
 <div class="experience-grid">
     <div class="experience-card">
         <div class="experience-period">2025</div>
+        <img src="images/logos/SAE.png" alt="SAE" class="timeline-logo">
         <h3 class="experience-role">Paper Co-Authorship</h3>
         <p class="experience-company">SAE Journal</p>
         <p class="experience-description">
@@ -1847,6 +1854,7 @@ aspect-ratio: 1 / 1;
 
     <div class="experience-card">
         <div class="experience-period">10.2025 — Present</div>
+        <img src="images/logos/bmw.png" alt="BMW" class="timeline-logo">
         <h3 class="experience-role">Master's Scholarship</h3>
         <p class="experience-company">BMW Fastlane Scholarship</p>
         <p class="experience-description">
@@ -1855,6 +1863,7 @@ aspect-ratio: 1 / 1;
 
     <div class="experience-card">
         <div class="experience-period">10.2025 — Present</div>
+        <img src="images/logos/rwth.png" alt="RWTH" class="timeline-logo">
         <h3 class="experience-role">M.Sc. Mechanical Engineering</h3>
         <p class="experience-company">RWTH Aachen University</p>
         <p class="experience-description">
@@ -1864,6 +1873,7 @@ aspect-ratio: 1 / 1;
 
     <div class="experience-card">
         <div class="experience-period">04.2024 — 10.2024</div>
+        <img src="images/logos/porsche.png" alt="Porsche" class="timeline-logo">
         <h3 class="experience-role">Bachelor Thesis</h3>
         <p class="experience-company">Porsche AG</p>
         <p class="experience-description">
@@ -1873,8 +1883,9 @@ aspect-ratio: 1 / 1;
 
     <div class="experience-card">
         <div class="experience-period">04.2023 — 09.2023</div>
+        <img src="images/logos/wzl.png" alt="WZL" class="timeline-logo">
         <h3 class="experience-role">Research Thesis</h3>
-        <p class="experience-company">Smart Automation Lab</p>
+        <p class="experience-company">Smart Automation Lab, a WZL project</p>
         <p class="experience-description">
         Title: Automatic Screw Detection for Collaborative Assembly Tasks
         </p>
@@ -1882,6 +1893,7 @@ aspect-ratio: 1 / 1;
 
     <div class="experience-card">
         <div class="experience-period">2019 — 2025</div>
+        <img src="images/logos/rwth.png" alt="RWTH" class="timeline-logo">
         <h3 class="experience-role">B.Sc. Automotive Engineering</h3>
         <p class="experience-company">RWTH Aachen University</p>
         <p class="experience-description">
@@ -2095,28 +2107,32 @@ aspect-ratio: 1 / 1;
             title: 'Telemetry Analysis Dashboard',
             year: '',
             description: 'Race Strategy, Telemetry, Weather and Pace Analysis using python. Defining long runs, quantifying track evolution and more.',
-            tags: ['Motorsport', 'Data Engineering', 'Telemetry']
+            tags: ['Motorsport', 'Data Engineering', 'Telemetry'],
+            link: 'tadmos.html'
         },
         {
             number: '02',
             title: 'US Stock Market Forecasting',
             year: '',
             description: 'Analyzed US Stock market data from 2019-2024. Conducted a holistic price development analysis of multiple tech stocks, individual comparisons of tech stocks, as well as a volatility analysis. Forecasted the NASDAQ 100 based on prices and volume.',
-            tags: ['Python', 'ML', 'Data Science']
+            tags: ['Python', 'ML', 'Data Science'],
+            link: null
         },
         {
             number: '03',
             title: 'Worldwide Cybersecurity Threat Analysis',
             year: '',
             description: 'Analyzed worldwide cyber criminal activity with data science techniques to present insights for prevention strategies.',
-            tags: ['Data Science', 'Python', 'Business Analytics']
+            tags: ['Data Science', 'Python', 'Business Analytics'],
+            link: null
         },
         {
             number: '04',
             title: 'Mathematical Neural Network',
             year: '',
             description: 'Developed a Multi Layer Perceptron in purely mathematical fashion without involving any higher level python libraries. Focussing on theoretical understanding and implementing Early Stopping.',
-            tags: ['Python', 'ML', 'Math']
+            tags: ['Python', 'ML', 'Math'],
+            link: null
         }
     ];
 
@@ -2137,6 +2153,9 @@ aspect-ratio: 1 / 1;
     projects.forEach((project, index) => {
         const item = document.createElement('div');
         item.className = 'carousel-item';
+        if (project.link) {
+            item.style.cursor = 'pointer';
+        }
         item.innerHTML = `
         <div class="carousel-item-number">${project.number}</div>
         <h3 class="carousel-item-title">${project.title}</h3>
@@ -2146,6 +2165,14 @@ aspect-ratio: 1 / 1;
         ${project.tags.map(tag => `<span class="carousel-item-tag">${tag}</span>`).join('')}
         </div>
         `;
+
+        // Add click handler if link exists
+        if (project.link) {
+            item.addEventListener('click', () => {
+                window.location.href = project.link;
+            });
+        }
+
         carouselScene.appendChild(item);
     });
 
