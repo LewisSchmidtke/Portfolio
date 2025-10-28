@@ -3,760 +3,755 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Telemetry Analysis Dashboard for Motorsport Sessions | Lewis M. Schmidtke</title>
-    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <title>TADMOS - Telemetry Analysis Dashboard | Lewis M. Schmidtke</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
     <style>
-        /* Reset and base styles */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Rajdhani', sans-serif;
         }
-
-        :root {
-            --black: #000000;
-            --white: #FFFFFF;
-            --light-gray: #f2f2f2;
-            --mid-gray: #666666;
-            --chrome-purple: #4A0072; /* Deep chrome purple accent color */
-            --neon-green: #39FF14; /* Neon green accent color */
-            --light-purple: #8a2be2; /* Light purple for accent */
-        }
-
         body {
-            background-color: var(--white);
-            color: var(--black);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #0d0d0d;
+            color: #e8e8e8;
+            overflow-x: hidden;
             line-height: 1.6;
-            padding: 40px;
-            max-width: 1600px;
-            margin: 0 auto;
-            letter-spacing: 0.5px;
-            position: relative;
         }
-        footer {
-            text-align: center;
-            font-size: 14px;
-            color: var(--chrome-purple); /* Light gray to keep it subtle */
-            padding: 10px;
-            position: relative;
-            bottom: 10px;
-            width: 100%;
-        }
-
-        /* Navigation and back button */
-        .navigation {
+        .home-button {
+            position: fixed;
+            top: 3rem;
+            right: 3rem;
+            width: 40px;
+            height: 40px;
             display: flex;
-            justify-content: space-between;
             align-items: center;
-            margin-bottom: 40px;
-        }
-
-        .back-button {
-            padding: 12px 24px;
-            border: 1px solid var(--chrome-purple);
-            background-color: var(--chrome-purple);
-            color: var(--white);
-            font-weight: 500;
-            font-size: 1.1rem;
+            justify-content: center;
             cursor: pointer;
-            transition: all 0.3s;
-            text-decoration: none;
-            display: inline-block;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .back-button:hover {
-            background-color: var(--neon-green);
-            color: var(--white);
-            border-color: var(--neon-green);
-            transform: scale(1.05) translateY(-3px);
-            box-shadow: 0 5px 15px rgba(57, 255, 20, 0.2);
-        }
-
-        /* Hero section with image and title overlay */
-        .project-hero {
-            position: relative;
-            height: 500px;
-            margin-bottom: 60px;
-            overflow: hidden;
-            border: 2px solid var(--black);
-        }
-
-        .hero-image {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            filter: brightness(0.7);
-            transition: all 0.5s ease;
-        }
-
-        .project-hero:hover .hero-image {
-            filter: brightness(0.8);
-            transform: scale(1.02);
-        }
-
-        .hero-content {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            padding: 40px;
-            background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 100%);
-            color: var(--white);
-        }
-
-        .project-title {
-            font-size: 3.5rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: 20px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-        }
-
-        .project-subtitle {
-            font-size: 1.5rem;
-            font-weight: 300;
-            margin-bottom: 20px;
-            max-width: 800px;
-        }
-
-        /* Tech badges on hero */
-        .hero-badges {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin-top: 20px;
-        }
-
-        .tech-badge {
-            display: inline-block;
-            border: 1px solid var(--white);
-            background-color: rgba(0,0,0,0.3);
-            color: var(--white);
-            padding: 8px 16px;
-            font-size: 1rem;
             transition: all 0.3s ease;
+            z-index: 100;
         }
-
-        .tech-badge:hover {
-            background-color: var(--neon-green);
-            color: var(--black);
-            border-color: var(--neon-green);
-            transform: translateY(-3px);
+        .home-button:hover {
+            transform: scale(1.2);
         }
-
-        /* Main content layout */
-        .project-container {
-            display: grid;
-            grid-template-columns: 1fr 350px;
-            gap: 40px;
-            margin-bottom: 60px;
+        .home-button svg {
+            width: 24px;
+            height: 24px;
+            stroke: #888;
+            transition: stroke 0.3s ease;
         }
-
-        /* Main content area */
-        .project-content {
-            padding-right: 20px;
+        .home-button:hover svg {
+            stroke: #e8e8e8;
         }
-
-        .content-section {
-            margin-bottom: 50px;
-        }
-
-        .section-heading {
-            font-size: 2.5rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: 25px;
+        .hero-section {
+            min-height: 100vh;
             position: relative;
-            padding-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
         }
-
-        .section-heading:after {
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            background-image: url('images/tadmos/tadmos_hero_img.jpeg');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.25;
+            filter: grayscale(100%);
+            animation: slowZoom 20s ease-in-out infinite alternate;
+        }
+        @keyframes slowZoom {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.1); }
+        }
+        .hero-bg::after {
             content: '';
             position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 80px;
-            height: 3px;
-            background-color: var(--chrome-purple);
+            inset: 0;
+            background: linear-gradient(180deg, rgba(13, 13, 13, 0.8) 0%, rgba(13, 13, 13, 0.6) 50%, rgba(13, 13, 13, 0.9) 100%);
         }
-
-        .content-text {
-            font-size: 1.2rem;
-            line-height: 1.7;
-            margin-bottom: 20px;
-            font-weight: 300;
-            text-align: justify;
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            padding: 2rem;
+            max-width: 1200px;
         }
-
-        /* Sidebar area */
-        .project-sidebar {
-            position: sticky;
-            top: 40px;
-            align-self: start;
-        }
-
-        .sidebar-box {
-            border: 2px solid var(--black);
-            padding: 25px;
-            margin-bottom: 30px;
-        }
-
-        .sidebar-heading {
-            font-size: 1.8rem;
-            font-weight: 600;
-            margin-bottom: 15px;
+        .hero-eyebrow {
+            font-size: 0.75rem;
+            letter-spacing: 0.3em;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            color: #888;
+            margin-bottom: 2rem;
+            font-weight: 400;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease forwards;
         }
-
-        .sidebar-list {
-            list-style-type: none;
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
         }
-
-        .sidebar-list li {
-            margin-bottom: 10px;
-            font-size: 1.1rem;
+        .hero-title {
+            font-size: clamp(3rem, 7vw, 5.5rem);
+            font-weight: 200;
+            letter-spacing: -0.02em;
+            margin-bottom: 1.5rem;
+            line-height: 1.1;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease 0.2s forwards;
+        }
+        .hero-subtitle {
+            font-size: clamp(1rem, 2vw, 1.3rem);
+            color: #888;
             font-weight: 300;
-            padding-left: 20px;
+            letter-spacing: 0.05em;
+            max-width: 800px;
+            margin: 0 auto 3rem;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease 0.4s forwards;
+        }
+        .tech-tags {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .tech-tag {
+            font-size: 0.75rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: #666;
+            padding: 0.5rem 1rem;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            transition: all 0.3s ease;
+            opacity: 0;
+            animation: fadeInUp 0.6s ease forwards;
+        }
+        .tech-tag:nth-child(1) { animation-delay: 0.6s; }
+        .tech-tag:nth-child(2) { animation-delay: 0.7s; }
+        .tech-tag:nth-child(3) { animation-delay: 0.8s; }
+        .tech-tag:nth-child(4) { animation-delay: 0.9s; }
+        .tech-tag:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.15);
+            color: #e8e8e8;
+            transform: translateY(-3px);
+        }
+        .main-container {
+            display: flex;
+            max-width: 1600px;
+            margin: 0 auto;
+            gap: 4rem;
+            padding: 4rem 3rem;
             position: relative;
         }
-
-        .sidebar-list li:before {
+        .content-column {
+            flex: 1;
+            max-width: 900px;
+        }
+        .sidebar-column {
+            width: 320px;
+            flex-shrink: 0;
+        }
+        .sidebar-sticky {
+            position: sticky;
+            top: 4rem;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+        .stats-sidebar {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 2rem;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+        .stats-sidebar.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .sidebar-title {
+            font-size: 0.75rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: #666;
+            margin-bottom: 1.5rem;
+            font-weight: 400;
+        }
+        .stat-item {
+            padding: 1.5rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+        }
+        .stat-item:last-child {
+            border-bottom: none;
+        }
+        .stat-item:hover {
+            padding-left: 0.5rem;
+        }
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 200;
+            color: #fff;
+            margin-bottom: 0.25rem;
+        }
+        .stat-label {
+            font-size: 0.85rem;
+            color: #666;
+            font-weight: 300;
+        }
+        .tools-sidebar {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 2rem;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+        .tools-sidebar.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .tools-list {
+            list-style: none;
+        }
+        .tools-list li {
+            font-size: 0.9rem;
+            color: #888;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            font-weight: 300;
+            position: relative;
+            padding-left: 1.5rem;
+            transition: all 0.3s ease;
+        }
+        .tools-list li:last-child {
+            border-bottom: none;
+        }
+        .tools-list li::before {
             content: '→';
             position: absolute;
             left: 0;
-            color: var(--chrome-purple);
+            color: #444;
+            transition: all 0.3s ease;
         }
-
-        /* Stats counter box */
-        .stats-container {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
+        .tools-list li:hover {
+            color: #e8e8e8;
+            padding-left: 2rem;
         }
-
-        .stat-item {
-            text-align: center;
-            padding: 15px 10px;
-            border: 1px solid var(--mid-gray);
+        .tools-list li:hover::before {
+            color: #e8e8e8;
+            left: 0.5rem;
         }
-
-        .stat-number {
-            font-size: 2.2rem;
-            font-weight: 600;
-            color: var(--neon-green);
-            margin-bottom: 5px;
-        }
-
-        .stat-label {
-            font-size: 0.9rem;
-            font-weight: 500;
-            text-transform: uppercase;
-        }
-
-        /* Data visualization gallery */
-        .viz-gallery {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 30px;
-            margin-top: 40px;
-            margin-bottom: 50px;
-        }
-
-        .viz-item {
-            border: 2px solid var(--black);
-            transition: transform 0.3s ease, border-color 0.3s ease;
-            overflow: hidden;
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            border-bottom: 1px solid #2a2a2a;
+            padding-bottom: 0.5rem;
+            margin-bottom: 3rem;
             position: relative;
-            height: 300px;
-            filter: grayscale(1);
         }
-
-        .viz-item-bottom {
-            grid-column: 1 / span 2;
+        .section-header::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            height: 1px;
+            width: 0;
+            background: #e8e8e8;
+            transition: width 1s ease;
         }
-
+        .section-header.visible::after {
+            width: 100%;
+        }
+        .section-title {
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 200;
+            letter-spacing: -0.02em;
+            opacity: 0;
+            transform: translateX(-30px);
+            transition: all 0.8s ease;
+        }
+        .section-header.visible .section-title {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        .section-number {
+            font-size: 0.9rem;
+            color: #444;
+            font-weight: 300;
+            letter-spacing: 0.1em;
+            opacity: 0;
+            transform: translateX(30px);
+            transition: all 0.8s ease;
+        }
+        .section-header.visible .section-number {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        .content-text {
+            font-size: 1.05rem;
+            color: #888;
+            line-height: 1.8;
+            font-weight: 300;
+            margin-bottom: 2rem;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s ease;
+        }
+        .content-text.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .viz-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin: 4rem 0;
+        }
+        .viz-item {
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            background: linear-gradient(135deg, #1a1a1a 0%, #0f0f0f 100%);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            transition: all 0.4s ease;
+            aspect-ratio: 16 / 10;
+            opacity: 0;
+            transform: scale(0.9) translateY(30px);
+        }
+        .viz-item.visible {
+            opacity: 1;
+            transform: scale(1) translateY(0);
+        }
+        .viz-item:hover {
+            border-color: rgba(255, 255, 255, 0.15);
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+        }
         .viz-image {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: all 0.5s ease;
+            filter: grayscale(100%);
+            transition: all 0.6s ease;
         }
-
+        .viz-item:hover .viz-image {
+            filter: grayscale(0%);
+            transform: scale(1.1);
+        }
         .viz-caption {
             position: absolute;
             bottom: 0;
             left: 0;
-            width: 100%;
-            padding: 15px;
-            background-color: rgba(0,0,0,0.7);
-            color: var(--white);
-            font-size: 1rem;
-            transform: translateY(100%);
-            transition: transform 0.3s ease;
+            right: 0;
+            padding: 2rem;
+            background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, transparent 100%);
+            color: #e8e8e8;
+            font-size: 0.9rem;
+            font-weight: 300;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.4s ease;
         }
-
-        .viz-item:hover {
-            transform: translateY(-5px);
-            border-color: var(--neon-green);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-            filter: grayscale(0);
-        }
-
-        .viz-item:hover .viz-image {
-            transform: scale(1.05);
-        }
-
         .viz-item:hover .viz-caption {
+            opacity: 1;
             transform: translateY(0);
         }
-
-        /* Key findings section with cards */
-        .findings-container {
+        .goals-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin: 40px 0;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin: 4rem 0;
         }
-
-        .finding-card {
-            border: 2px solid var(--black);
-            padding: 25px;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .finding-number {
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: var(--neon-green);
-            opacity: 1;
-            margin-bottom: 15px;
-        }
-
-        .finding-title {
-            font-size: 1.4rem;
-            font-weight: 600;
-            margin-bottom: 15px;
-            text-transform: uppercase;
-        }
-
-        .finding-text {
-            font-size: 1.1rem;
-            line-height: 1.6;
-            font-weight: 300;
-        }
-
-        /* Methodology list */
-        .methodology-list {
-            font-size: 1.2rem;
-            margin-left: 40px;
-            margin-bottom: 30px;
-            font-weight: 300;
-        }
-
-        .methodology-list li {
-            margin-bottom: 10px;
-        }
-
-        /* Conclusion section */
-        .conclusion {
-            background-color: var(--light-gray);
-            padding: 40px;
-            margin: 60px 0;
-            border-left: 3px solid var(--chrome-purple);
-        }
-
-        .conclusion h3 {
-            font-size: 2rem;
-            margin-bottom: 20px;
-            font-weight: 600;
-        }
-
-        /* Footer section */
-        .project-footer {
-            margin-top: 80px;
-            padding-top: 40px;
-            border-top: 1px solid var(--light-gray);
-            text-align: center;
-        }
-
-        .project-links {
-            margin-bottom: 30px;
-        }
-
-        .project-link-button {
-            padding: 12px 24px;
-            border: 1px solid var(--chrome-purple);
-            background-color: var(--chrome-purple);
-            color: var(--white);
-            font-weight: 500;
-            font-size: 1.1rem;
-            cursor: pointer;
-            transition: all 0.3s;
-            text-decoration: none;
-            display: inline-block;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin: 0 10px;
-        }
-
-        .project-link-button:hover {
-            background-color: var(--neon-green);
-            color: var(--white);
-            border-color: var(--neon-green);
-            transform: scale(1.05) translateY(-3px);
-            box-shadow: 0 5px 15px rgba(57, 255, 20, 0.2);
-        }
-
-        .next-prev-navigation {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 30px;
-        }
-
-        .prev-project, .next-project {
-            display: inline-block;
-            color: var(--black);
-            text-decoration: none;
-            font-weight: 500;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+        .goal-card {
+            background: linear-gradient(135deg, #1a1a1a 0%, #0f0f0f 100%);
+            padding: 2.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            transition: all 0.4s ease;
+            opacity: 0;
+            transform: translateX(-30px);
             position: relative;
-            transition: color 0.3s;
-            font-size: 1.2rem;
+            overflow: hidden;
         }
-
-        .prev-project:hover, .next-project:hover {
-            color: var(--neon-green);
-        }
-
-        .prev-project:after, .next-project:after {
+        .goal-card::before {
             content: '';
             position: absolute;
-            width: 100%;
-            height: 2px;
-            bottom: -5px;
-            left: 0;
-            background-color: var(--neon-green);
-            transform: scaleX(0);
-            transform-origin: bottom right;
-            transition: transform 0.3s;
-        }
-
-        .prev-project:hover:after, .next-project:hover:after {
-            transform: scaleX(1);
-            transform-origin: bottom left;
-        }
-
-        /* Image lightbox styles */
-        .lightbox {
-            display: none;
-            position: fixed;
             top: 0;
-            left: 0;
+            left: -100%;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.9);
-            z-index: 1000;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.03), transparent);
+            transition: left 0.6s ease;
         }
-
+        .goal-card:hover::before {
+            left: 100%;
+        }
+        .goal-card.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        .goal-card:nth-child(1).visible { transition-delay: 0.1s; }
+        .goal-card:nth-child(2).visible { transition-delay: 0.2s; }
+        .goal-card:nth-child(3).visible { transition-delay: 0.3s; }
+        .goal-card:nth-child(4).visible { transition-delay: 0.15s; }
+        .goal-card:nth-child(5).visible { transition-delay: 0.25s; }
+        .goal-card:nth-child(6).visible { transition-delay: 0.35s; }
+        .goal-card:hover {
+            border-color: rgba(255, 255, 255, 0.15);
+            transform: translateY(-5px) translateX(5px);
+            background: linear-gradient(135deg, #222 0%, #111 100%);
+        }
+        .goal-number {
+            font-size: 1.5rem;
+            font-weight: 200;
+            color: #888;
+            margin-bottom: 1rem;
+            transition: all 0.4s ease;
+        }
+        .goal-card:hover .goal-number {
+            color: #e8e8e8;
+            transform: scale(1.1);
+        }
+        .goal-title {
+            font-size: 1.2rem;
+            font-weight: 300;
+            letter-spacing: -0.01em;
+            margin-bottom: 1rem;
+            transition: transform 0.3s ease;
+        }
+        .goal-card:hover .goal-title {
+            transform: translateX(5px);
+        }
+        .goal-text {
+            font-size: 0.9rem;
+            color: #666;
+            line-height: 1.7;
+            font-weight: 300;
+        }
+        .lightbox {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(20px);
+            z-index: 1000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
         .lightbox.active {
             display: flex;
+            opacity: 1;
         }
-
-        .lightbox-image {
-            max-width: 90%;
-            max-height: 85vh;
+        .lightbox-content {
+            max-width: 95vw;
+            max-height: 95vh;
+            position: relative;
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
+        }
+        .lightbox.active .lightbox-content {
+            transform: scale(1);
+        }
+        .lightbox-content img {
+            max-width: 100%;
+            max-height: 90vh;
             object-fit: contain;
-            border: 2px solid var(--white);
         }
-
-        .lightbox-caption {
-            color: var(--white);
-            font-size: 1.2rem;
-            margin-top: 20px;
-            max-width: 80%;
-            text-align: center;
-        }
-
         .lightbox-close {
             position: absolute;
-            top: 20px;
-            right: 30px;
-            font-size: 2.5rem;
-            color: var(--white);
+            top: -4rem;
+            right: 0;
+            width: 3rem;
+            height: 3rem;
             cursor: pointer;
-            transition: color 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
-
         .lightbox-close:hover {
-            color: var(--neon-green);
+            transform: rotate(90deg);
+            background: rgba(255, 255, 255, 0.1);
         }
-
-        /* Responsive styles */
+        .lightbox-close svg {
+            width: 24px;
+            height: 24px;
+            stroke: #888;
+        }
+        .lightbox-close:hover svg {
+            stroke: #e8e8e8;
+        }
+        .footer {
+            background: #000;
+            padding: 3rem 2rem;
+            border-top: 1px solid #1a1a1a;
+            text-align: center;
+        }
+        .footer-text {
+            font-size: 0.9rem;
+            color: #666;
+            font-weight: 300;
+            letter-spacing: 0.05em;
+        }
+        .conclusion-box {
+            background: rgba(255, 255, 255, 0.03);
+            border-left: 3px solid #888;
+            padding: 2.5rem;
+            margin: 2rem 0;
+            opacity: 0;
+            transform: translateX(-30px);
+            transition: all 0.6s ease;
+        }
+        .conclusion-box.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        .conclusion-box:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-left-color: #e8e8e8;
+            transform: translateX(10px);
+        }
         @media (max-width: 1200px) {
-            .project-container {
-                grid-template-columns: 1fr;
-            }
-
-            .project-sidebar {
-                position: static;
-                order: -1;
-            }
-
-            .sidebar-box {
-                margin-bottom: 30px;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .project-hero {
-                height: 400px;
-            }
-
-            .project-title {
-                font-size: 2.8rem;
-            }
-
-            .findings-container {
-                grid-template-columns: 1fr;
-            }
-
-            .viz-gallery {
-                grid-template-columns: 1fr;
-            }
-
-            .viz-item-bottom {
-                grid-column: auto;
-            }
-
-            .next-prev-navigation {
+            .main-container {
                 flex-direction: column;
-                gap: 20px;
-                align-items: center;
+                padding: 3rem 2rem;
+            }
+            .sidebar-column {
+                width: 100%;
+            }
+            .sidebar-sticky {
+                position: static;
+                flex-direction: row;
+                flex-wrap: wrap;
+            }
+            .stats-sidebar,
+            .tools-sidebar {
+                flex: 1;
+                min-width: 280px;
             }
         }
-
-        @media (max-width: 480px) {
-            body {
-                padding: 20px;
+        @media (max-width: 768px) {
+            .home-button {
+                top: 2rem;
+                right: 2rem;
+                width: 36px;
+                height: 36px;
             }
-
-            .project-hero {
-                height: 350px;
+            .main-container {
+                padding: 2rem 1.5rem;
             }
-
-            .project-title {
-                font-size: 2.2rem;
+            .viz-grid {
+                grid-template-columns: 1fr;
             }
-
-            .hero-content {
-                padding: 20px;
+            .section-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
             }
-
-            .sidebar-box {
-                padding: 15px;
-            }
-
-            .stat-number {
-                font-size: 1.8rem;
+            .sidebar-sticky {
+                flex-direction: column;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Navigation -->
-    <div class="navigation">
-        <a href="index_old.html" class="back-button">← Back to Portfolio</a>
-        <div class="social-links">
-            <!-- You can add social links here if needed -->
-        </div>
-    </div>
+    <!-- Home Button -->
+    <a href="index.html#projects" class="home-button">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+    </a>
 
-    <!-- Hero section with image and overlay text -->
-    <section class="project-hero">
-        <img src="images/tadmos/tadmos_hero_img.jpeg" alt="Dashboard Motorsport Analysis" class="hero-image">
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="hero-bg"></div>
         <div class="hero-content">
-            <h1 class="project-title">"TADMOS" - Telemetry Analysis Dashboard for Motorsport Sessions</h1>
-            <p class="project-subtitle">Processing and Analysis of motorsport data from practices, qualifying sessions and races.</p>
-            <div class="hero-badges">
-                <span class="tech-badge">Motorsport</span>
-                <span class="tech-badge">Python</span>
-                <span class="tech-badge">Automotive Engineering</span>
-                <span class="tech-badge">Data Engineering</span>
+            <p class="hero-eyebrow">Project 01 — Motorsport Data Engineering</p>
+            <h1 class="hero-title">TADMOS<br>Telemetry Analysis Dashboard</h1>
+            <p class="hero-subtitle">
+                Data analysis of different motorsport series. Extracting key metrics for potential performance
+                improvements and the understanding of competitor differences.
+            </p>
+            <div class="tech-tags">
+                <span class="tech-tag">Motorsport</span>
+                <span class="tech-tag">Python</span>
+                <span class="tech-tag">Data Engineering</span>
+                <span class="tech-tag">Telemetry</span>
             </div>
         </div>
     </section>
 
-    <!-- Main content grid with sidebar -->
-    <div class="project-container">
-        <!-- Main content area -->
-        <div class="project-content">
-            <div class="content-section">
-                <h2 class="section-heading">Project Overview</h2>
+    <!-- Main Content -->
+    <div class="main-container">
+        <!-- Content Column -->
+        <div class="content-column">
+            <!-- Overview Section -->
+            <section>
+                <div class="section-header">
+                    <h2 class="section-title">Project Overview</h2>
+                    <span class="section-number">— Context</span>
+                </div>
                 <p class="content-text">
-                    !!!Currently Working on Data Analysis for WEC Races!!!
-                    <br>
-                    This Project is currently ongoing and explores the processing and analysis of various motorsport data
-                    provided by openF1 API endpoints and "alkamelsystems". It aims to build a holistic and interactive
-                    dashboard that can be utilized to view and analyze data of any session, from any driver in any lap to
-                    gain insights into performance, lap time and on-track events.
+                    This project is currently on-hold as I am working officially for BMW Motorsport.
                 </p>
                 <p class="content-text">
-                    Race cars produce an incredible amount of data. Telemetry sensors, system management, gps data and
-                    much more, are all broadcast constantly throughout any session. Analyzing this data and extracting
-                    key information requires both engineering expertise and analytical insight, to derive meaningful
-                    strategies. This project aims to leverage data science techniques to extract meaningful patterns
-                    from Motorsport data, to be able to quickly gain actionable insights and improve on-track performance.
+                    This project explores the processing and analysis of various motorsport data sources like the openF1 API endpoints and WEC data by alkamelsystems. It aims to visualize the data relations to analyze data from any session, driver, and lap to gain insights into performance, lap times, and on-track events.
                 </p>
                 <p class="content-text">
-                    Through my engineering background I was able to create meaningful graphics that are relevant for
-                    improving performance and monitoring component functionality and health. I am currently working on
-                    building the interactive dashboard around these graphics, so that a user-friendly interface exists,
-                    to quickly gain insights into these vast amounts of data.
+                    Race cars produce an incredible amount of data. Telemetry sensors, system management, GPS data and much more are all constantly broadcasted throughout any session. Analyzing this data and extracting key information requires both engineering expertise and analytical insights to derive meaningful strategies. This project leverages data science techniques to extract meaningful patterns from motorsport data, enabling quick and actionable insights for improved on-track performance.
                 </p>
-            </div>
+                <p class="content-text">
+                    With my engineering background, I was able to create meaningful visualizations that are relevant for improving performance and monitoring component functionality and health. The plan was to create an interactive dashboard, however like mentioned above is currently on hold.
+                </p>
+            </section>
 
-            <div class="content-section">
-                <h2 class="section-heading">Methodology</h2>
+            <!-- Methodology Section -->
+            <section style="margin-top: 6rem;">
+                <div class="section-header">
+                    <h2 class="section-title">Methodology</h2>
+                    <span class="section-number">— Approach</span>
+                </div>
                 <p class="content-text">
-                    The analysis was conducted using Python with libraries including openF1 for data acquisition, Pandas for data manipulation and Seaborn & Matplotlib for visualization.
-                    The methodology included:
+                    For this project the data was either directly acquired through openF1 API endpoints or manually downloaded in the case of the WEC Data.
+                    The analysis was conducted using Python with Pandas for data manipulation and Seaborn & Matplotlib for visualization purposes.
+                    Key calculations were either done driver-specific, car-specific (WEC), team-specific or holistically, to provide a range of performance potentials.
                 </p>
-                <ul class="methodology-list">
-                    <li>Event & Session based data collection from various openF1 API endpoints</li>
-                    <li>Exploratory data analysis to identify key metrics and graphics that are relevant for the dashboard</li>
-                    <li>Data preprocessing to merge various data sources, to optimize calculation performances</li>
-                    <li>Interactive Dashboard development using Streamlit</li>
-                </ul>
-            </div>
+            </section>
 
-            <!-- Data visualizations gallery -->
-            <div class="content-section">
-                <h2 class="section-heading">Example Visualizations</h2>
+            <!-- Visualizations Section -->
+            <section style="margin-top: 6rem;">
+                <div class="section-header">
+                    <h2 class="section-title">Visualizations</h2>
+                    <span class="section-number">— Data Graphics</span>
+                </div>
                 <p class="content-text">
-                    Visualizations play a crucial role in quickly understanding data and understanding critical patterns.
-                    During this project various visualizations were created, with a few examples below:
+                    Visualizations play a crucial role in quickly understanding data and identifying critical patterns. During this project, various visualizations were created to extract meaningful insights from telemetry data.
                 </p>
 
-
-                <div class="viz-gallery">
-                    <div class="viz-item viz-item-bottom">
+                <div class="viz-grid">
+                     <div class="viz-item">
                         <img src="images/tadmos/qualifying_head_to_head.png" alt="Verstappen vs. Piastri: Qualifying Head to Head at Silverstone" class="viz-image">
                         <div class="viz-caption">Single Lap telemetry dashboard comparing the qualifying laps of Verstappen and Piastri at Silverstone.</div>
                     </div>
-                    <div class="viz-item viz-item-bottom">
+                    <div class="viz-item">
                         <img src="images/tadmos/albon_vs_hamilton_stint2.png" alt="Albon vs. Hamilton Dry Stint Spa 2025" class="viz-image">
                         <div class="viz-caption">Lap Time, Consistency and Time Delta comparison for the dry stint of Albon and Hamilton during Spa 2025.</div>
                     </div>
-                    <div class="viz-item viz-item-bottom">
+                    <div class="viz-item">
                         <img src="images/tadmos/hulkenberg_race_strategy.png" alt="Hulkenberg Strategy Silverstone" class="viz-image">
                         <div class="viz-caption">Race Strategy of Nico Hulkenberg at Silverstone.</div>
                     </div>
-                    <div class="viz-item viz-item-bottom">
+                    <div class="viz-item">
                         <img src="images/tadmos/catalunya_qualifying.png" alt="Qualifying times Catalunya" class="viz-image">
                         <div class="viz-caption">Driver Lap Times of the Catalunya Qualifying, with corresponding tire compound and qualifying position.</div>
                     </div>
-                    <div class="viz-item viz-item-bottom">
+                    <div class="viz-item">
                         <img src="images/tadmos/lap_telemetry.png" alt="Single lap Telemetry data from Max Verstappen" class="viz-image">
                         <div class="viz-caption">Single lap Telemetry of Max Verstappen during free Practice 3 in Spielberg.</div>
                     </div>
-                    <div class="viz-item viz-item-bottom">
+                    <div class="viz-item">
                         <img src="images/tadmos/GearMap.png" alt="Gear Selection at track position" class="viz-image">
                         <div class="viz-caption">Location based gear selection during a single lap.</div>
                     </div>
-                    <div class="viz-item viz-item-bottom">
+                    <div class="viz-item">
                         <img src="images/tadmos/spa_francorchamps_strategy_ham_oco_alb.png" alt="Cross-Over point wet-dry 3 Strategies" class="viz-image">
                         <div class="viz-caption">3 Different pit strategies for the cross-over point from Wet-Dry during Spa 2025.</div>
                     </div>
-                    <div class="viz-item viz-item-bottom">
+                    <div class="viz-item">
                         <img src="images/tadmos/spielberg_p3_fastest_laps.png" alt="Practice fastest laps with tire compounds and overall Position." class="viz-image">
                         <div class="viz-caption">Fastest laps in a given session with the corresponding tire compound and the driver position.</div>
                     </div>
                 </div>
-            </div>
+            </section>
 
-            <div class="content-section">
-                <h2 class="section-heading">On the horizon</h2>
-                <p class="content-text">
-                    My next goals for this project are outlined below:
-                </p>
+            <!-- Future Goals Section -->
+            <section style="margin-top: 6rem;">
+                <div class="section-header">
+                    <h2 class="section-title">On the Horizon</h2>
+                    <span class="section-number">— Future Development</span>
+                </div>
 
-                <div class="findings-container">
-                    <div class="finding-card">
-                        <div class="finding-number">01</div>
-                        <h3 class="finding-title">Race Position graphic</h3>
-                        <p class="finding-text">Graphic that visualizes all drivers race positions across the whole race.
-                        </p>
+                <div class="goals-grid">
+                    <div class="goal-card">
+                        <div class="goal-number">01</div>
+                        <h3 class="goal-title">Track Evo</h3>
+                        <p class="goal-text">Better Track evolution metrics, to visualize performance differences based on track temperature deltas.</p>
                     </div>
-                    <div class="finding-card">
-                        <div class="finding-number">02</div>
-                        <h3 class="finding-title">Stint Data</h3>
-                        <p class="finding-text">Visualize Lap time degradation across stints and show average lap times
-                            in a session, based on tire compound.
-                        </p>
+                    <div class="goal-card">
+                        <div class="goal-number">02</div>
+                        <h3 class="goal-title">Driver Clustering</h3>
+                        <p class="goal-text">Apply a clustering on driver-based lap times to identify overall driver performance.</p>
                     </div>
-                    <div class="finding-card">
-                        <div class="finding-number">03</div>
-                        <h3 class="finding-title">Updated Track Map</h3>
-                        <p class="finding-text">Show the lap time, as well as the wind velocity and direction on the
-                            gear selection track map.
-                        </p>
+                    <div class="goal-card">
+                        <div class="goal-number">03</div>
+                        <h3 class="goal-title">Updated Track Map</h3>
+                        <p class="goal-text">Display lap time, wind velocity, and direction on the gear selection track map.</p>
                     </div>
-                    <div class="finding-card">
-                        <div class="finding-number">04</div>
-                        <h3 class="finding-title">Telemetry Comparison</h3>
-                        <p class="finding-text">Provide the possibility to compare the lap telemetry from 2 previously
-                            selected laps, to compare consistency by a driver or find differences in driving style across
-                            drivers.
-                        </p>
+                    <div class="goal-card">
+                        <div class="goal-number">04</div>
+                        <h3 class="goal-title">Telemetry Comparison</h3>
+                        <p class="goal-text">Compare lap telemetry from two selected laps to analyze consistency and driving style differences.</p>
                     </div>
-                    <div class="finding-card">
-                        <div class="finding-number">05</div>
-                        <h3 class="finding-title">Pit Stop Losses</h3>
-                        <p class="finding-text">Visualize average pit stop times and check for position losses because
-                            of bad pit stops.
-                        </p>
+                    <div class="goal-card">
+                        <div class="goal-number">05</div>
+                        <h3 class="goal-title">Pit Stop Losses</h3>
+                        <p class="goal-text">Visualize average pit stop times and identify position losses due to suboptimal pit stops.</p>
                     </div>
-                    <div class="finding-card">
-                        <div class="finding-number">06</div>
-                        <h3 class="finding-title">Dashboard</h3>
-                        <p class="finding-text">Wrap all functionalities in an interactive dashboard that makes the
-                            application user-friendly and easy to read.
-                        </p>
+                    <div class="goal-card">
+                        <div class="goal-number">06</div>
+                        <h3 class="goal-title">Interactive Dashboard</h3>
+                        <p class="goal-text">Wrap all functionalities in a user-friendly interactive dashboard for easy data exploration.</p>
                     </div>
                 </div>
-            </div>
+            </section>
 
-            <div class="conclusion">
-                <h3>Conclusion</h3>
-                <p class="content-text" style="margin-bottom: 0;">
-                    As I am currently still working on this project, the conclusion is still limited.
-                    This project demonstrates the value of applying data science techniques in motorsports.
-                    By combining data engineering methods with statistical approaches it was possible to extract
-                    meaningful patterns from complex telemetry data and derive meaningful actions.
-                    The insights gained from this analysis could help engineers make more informed decisions and
-                    understand vehicle dynamics and telemetry in greater depth.
-                </p>
-            </div>
+            <!-- Conclusion Section -->
+            <section style="margin-top: 6rem;">
+                <div class="section-header">
+                    <h2 class="section-title">Conclusion</h2>
+                    <span class="section-number">— Key Insights</span>
+                </div>
+                <div class="conclusion-box">
+                    <p class="content-text" style="margin-bottom: 0;">
+                        This project demonstrates the value of applying data science techniques in motorsports. By combining data engineering methods with statistical approaches, it has become possible to extract meaningful patterns from complex telemetry data and derive actionable insights. The findings from this analysis can help engineers make more informed decisions and understand vehicle dynamics and telemetry in greater depth.
+                    </p>
+                </div>
+            </section>
         </div>
 
-        <!-- Sidebar area -->
-        <div class="project-sidebar">
-            <div class="sidebar-box">
-                <h3 class="sidebar-heading">Project Stats</h3>
-                <div class="stats-container">
+        <!-- Sidebar Column -->
+        <aside class="sidebar-column">
+            <div class="sidebar-sticky">
+                <!-- Stats Sidebar -->
+                <div class="stats-sidebar">
+                    <h3 class="sidebar-title">Key Metrics</h3>
                     <div class="stat-item">
-                        <div class="stat-number">20</div>
+                        <div class="stat-number">2</div>
+                        <div class="stat-label">Racing Series</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">4</div>
+                        <div class="stat-label">Motorsport Divisions</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">50+</div>
                         <div class="stat-label">Unique Drivers</div>
                     </div>
                     <div class="stat-item">
@@ -769,175 +764,99 @@
                     </div>
                     <div class="stat-item">
                         <div class="stat-number">200K+</div>
-                        <div class="stat-label">Laps</div>
+                        <div class="stat-label">Laps Analyzed</div>
                     </div>
                 </div>
-            </div>
 
-            <div class="sidebar-box">
-                <h3 class="sidebar-heading">Tools Used</h3>
-                <ul class="sidebar-list">
-                    <li>Programming Language: Python</li>
-                    <li>openF1 for Data Acquisition</li>
-                    <li>Pandas for data manipulation</li>
-                    <li>NumPy for numerical calculations</li>
-                    <li>Seaborn for statistical visualization</li>
-                    <li>Matplotlib for custom plotting</li>
-                </ul>
+                <!-- Tools Sidebar -->
+                <div class="tools-sidebar">
+                    <h3 class="sidebar-title">Tools & Technologies</h3>
+                    <ul class="tools-list">
+                        <li>Python</li>
+                        <li>openF1 API</li>
+                        <li>AlkamelSystems</li>
+                        <li>Pandas</li>
+                        <li>NumPy</li>
+                        <li>Seaborn</li>
+                        <li>Matplotlib</li>
+                        <li>Streamlit</li>
+                    </ul>
+                </div>
             </div>
-
-            <div class="sidebar-box">
-                <h3 class="sidebar-heading">Focus Areas</h3>
-                <ul class="sidebar-list">
-                    <li>Telemetry Analysis</li>
-                    <li>Gear Selection</li>
-                    <li>Qualifying Times</li>
-                    <li>Tire Compounds</li>
-                </ul>
-            </div>
-        </div>
+        </aside>
     </div>
 
-<!--     Project footer with links -->
-    <div class="project-footer">
-<!--        <div class="project-links">-->
-<!--            <a href="https://github.com/LewisSchmidtke/DataScience_ML_Portfolio/blob/main/Stock_market.py" target="_blank" class="project-link-button">View Code on GitHub</a>-->
-<!--        </div>-->
-        <div class="next-prev-navigation">
-            <a href="cyberattacks.html" class="prev-project">← Previous: Worldwide Cyberattack Data Analysis</a>
-            <a href="stock-market.html" class="next-project">Next: US Stock Market Analysis and Forecasting →</a>
-        </div>
-    </div>
+    <!-- Footer -->
+    <footer class="footer">
+        <p class="footer-text">© 2025 Lewis M. Schmidtke. All rights reserved.</p>
+        <p class="footer-text" style="margin-top: 0.5rem; font-size: 0.75rem; color: #444;">All data engineering by Lewis M. Schmidtke</p>
+    </footer>
 
-    <!-- Lightbox for enlarged images -->
+    <!-- Lightbox -->
     <div class="lightbox" id="lightbox">
-        <div class="lightbox-close" id="lightbox-close">&times;</div>
-        <img src="" alt="" class="lightbox-image" id="lightbox-image">
-        <div class="lightbox-caption" id="lightbox-caption"></div>
+        <div class="lightbox-content">
+            <div class="lightbox-close" id="lightboxClose">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+            </div>
+            <img src="" alt="Enlarged view" id="lightboxImage">
+        </div>
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            // Lightbox functionality
-            const lightbox = document.getElementById('lightbox');
-            const lightboxImage = document.getElementById('lightbox-image');
-            const lightboxCaption = document.getElementById('lightbox-caption');
-            const lightboxClose = document.getElementById('lightbox-close');
+        // Initialize Lucide icons
+        lucide.createIcons({attrs: {'stroke-width': 1.5}});
 
-            // Get all visualization images and hero image
-            const vizItems = document.querySelectorAll('.viz-item');
-            const heroSection = document.querySelector('.project-hero');
+        // Intersection Observer for scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
 
-            // Add click event to each visualization item
-            vizItems.forEach(item => {
-                item.addEventListener('click', () => {
-                    const img = item.querySelector('.viz-image');
-                    const caption = item.querySelector('.viz-caption').textContent;
-
-                    // Set lightbox content
-                    lightboxImage.src = img.src;
-                    lightboxImage.alt = img.alt;
-                    lightboxCaption.textContent = caption;
-
-                    // Show lightbox
-                    lightbox.classList.add('active');
-                    document.body.style.overflow = 'hidden'; // Prevent scrolling when lightbox is open
-                });
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
             });
+        }, observerOptions);
 
-            // Add click event for hero image
-            if (heroSection) {
-                heroSection.addEventListener('click', () => {
-                    const img = heroSection.querySelector('.hero-image');
+        // Observe all animated elements
+        document.querySelectorAll('.section-header, .content-text, .viz-item, .goal-card, .stats-sidebar, .tools-sidebar, .conclusion-box').forEach(el => {
+            observer.observe(el);
+        });
 
-                    // Set lightbox content
-                    lightboxImage.src = img.src;
-                    lightboxImage.alt = img.alt;
-                    lightboxCaption.textContent = "US Stock Market Analysis Dashboard";
+        // Lightbox functionality
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImage = document.getElementById('lightboxImage');
+        const lightboxClose = document.getElementById('lightboxClose');
+        const vizItems = document.querySelectorAll('.viz-item');
 
-                    // Show lightbox
-                    lightbox.classList.add('active');
-                    document.body.style.overflow = 'hidden';
-                });
-            }
+        vizItems.forEach(item => {
+            item.addEventListener('click', () => {
+                const img = item.querySelector('.viz-image');
+                lightboxImage.src = img.src;
+                lightbox.classList.add('active');
+            });
+        });
 
-            // Close lightbox when clicking the close button
-            lightboxClose.addEventListener('click', () => {
+        lightboxClose.addEventListener('click', () => {
+            lightbox.classList.remove('active');
+        });
+
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox) {
                 lightbox.classList.remove('active');
-                document.body.style.overflow = ''; // Restore scrolling
-            });
-
-            // Close lightbox when clicking outside the image
-            lightbox.addEventListener('click', (e) => {
-                if (e.target === lightbox) {
-                    lightbox.classList.remove('active');
-                    document.body.style.overflow = ''; // Restore scrolling
-                }
-            });
-
-            // Close lightbox with Escape key
-            document.addEventListener('keydown', (e) => {
-                if (e.key === 'Escape' && lightbox.classList.contains('active')) {
-                    lightbox.classList.remove('active');
-                    document.body.style.overflow = ''; // Restore scrolling
-                }
-            });
-
-            // Animate stats counting when they come into view
-            const statNumbers = document.querySelectorAll('.stat-number');
-
-            const animateValue = (obj, start, end, duration) => {
-                let startTimestamp = null;
-                const originalText = obj.textContent;
-
-                const step = (timestamp) => {
-                    if (!startTimestamp) startTimestamp = timestamp;
-                    const progress = Math.min((timestamp - startTimestamp) / duration, 1);
-
-                    let value = Math.floor(progress * (end - start) + start);
-
-                    // Add '+' to values that end with 'M' or 'K'
-                    if (originalText.includes('M')) {
-                        obj.textContent = value + 'M+';
-                    } else if (originalText.includes('K')) {
-                        obj.textContent = value + 'K+';
-                    } else if (originalText.includes('%')) {
-                        obj.textContent = value + '%';
-                    } else if (originalText.includes('+')) {
-                        obj.textContent = value + '+';
-                    } else {
-                        obj.textContent = value;
-                    }
-
-                    if (progress < 1) {
-                        window.requestAnimationFrame(step);
-                    }
-                };
-                window.requestAnimationFrame(step);
-            };
-
-            // Intersection Observer to trigger animations when the stats come into view
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        statNumbers.forEach(statNumber => {
-                            const endValue = parseInt(statNumber.textContent);
-                            animateValue(statNumber, 0, endValue, 1500);
-                        });
-                        observer.unobserve(entry.target);
-                    }
-                });
-            }, { threshold: 0.5 });
-
-            // Observe the stats container
-            const statsContainer = document.querySelector('.stats-container');
-            if (statsContainer) {
-                observer.observe(statsContainer);
             }
         });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                lightbox.classList.remove('active');
+            }
+        });
+
+        // Reinitialize icons
+        setTimeout(() => {lucide.createIcons({attrs: {'stroke-width': 1.5}});}, 100);
     </script>
 </body>
-<footer>
-    © 2025 Lewis M. Schmidtke. All Rights Reserved.
-</footer>
 </html>
